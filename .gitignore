@@ -23,6 +23,8 @@ server/assets
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 client/dist/bundle.*
+build/
+dist/
 !.gitignore
 
 # Dependency directorys
@@ -30,3 +32,7 @@ client/dist/bundle.*
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules/
 bower_components/
+
+.DS_Store
+client/public/bundle.js
+client/public/bundle.js.map
