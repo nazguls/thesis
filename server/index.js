@@ -7,7 +7,7 @@ app.use('/',
   express.static('/Users/michaelcomes/Desktop/HR52/Thesis/thesis/')
 );
 
-  //express.static(__dirname +'../index.html'));
+  //express.static(__dirname +'../'));
 
 app.listen(3000, function() {
   console.log('listening on port 3000');
