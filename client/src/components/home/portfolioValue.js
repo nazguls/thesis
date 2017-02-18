@@ -12,9 +12,7 @@ class PortfolioValue extends Component {
 const styles = {
 	viewStyle: {
 		marginTop: 10,
-		// marginBottom: 10,
 		borderWidth: 2,
-		// justifyContent: 'center',
 		alignItems: 'center',
 		paddingTop: 5,
 		position: 'relative'

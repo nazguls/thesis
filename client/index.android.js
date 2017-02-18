@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class client extends Component {
+class client extends Component {
   render() {
     return (
       <View style={styles.container}>
