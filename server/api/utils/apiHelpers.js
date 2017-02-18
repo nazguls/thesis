@@ -1,13 +1,12 @@
 const axios = require('axios');
 
-// http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=AAPL&callback=myFunction
-
-//
 
 exports.getStockPrice = (ticker) => {
-  axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=AAPL')
+  console.log('11', ticker);
+  return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json', {
+    params: {
+      symbol: ticker}})
       .then((response) => {
-        console.log('response', response.data);
         return response.data;
-      }).catch((err) => console.log('dondondon'))
+      }).catch((err) => console.log(err))
   }

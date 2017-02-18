@@ -2,15 +2,13 @@ var fetchStock = require('../utils/apiHelpers.js').getStockPrice;
 
 
 exports.get = (req, res) => {
-  const stock = req.params;
+  const stock = req.params.stock;
   //const transact = req.query;
   fetchStock(stock).then((data) => {
-    console.log('8 ------- from stocksController')
     res.status(200).send(data);
   }).catch((err) => {
     res.status(404).send('Your fetch failed')
   });
-
 }
 
 exports.post = (req, res) => {
