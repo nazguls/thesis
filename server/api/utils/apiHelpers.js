@@ -5,10 +5,9 @@ const axios = require('axios');
 //
 
 exports.getStockPrice = (ticker) => {
-
-  axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json',
-    { params: { symbol:ticker }})
+  axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=AAPL')
       .then((response) => {
-        return response;
-      }).catch((err) => console.log(err))
+        console.log('response', response.data);
+        return response.data;
+      }).catch((err) => console.log('dondondon'))
   }
