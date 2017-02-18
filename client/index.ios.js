@@ -6,7 +6,8 @@ import { AppRegistry, Navigator, Text, View } from 'react-native';
 
 //keep track of all the pages
 import Index from './src/components/home/index';
-import IndStock from './src/components/indStock/index'
+import IndStock from './src/components/indStock/index';
+import Buy from './src/components/indStock/buy'
 
 
 class App extends Component {
@@ -14,7 +15,6 @@ class App extends Component {
   //function that renderscene is using
   constructor() {
     super()
-
     this.renderScene= this.renderScene.bind(this);
   }
 
@@ -25,6 +25,8 @@ class App extends Component {
         return (<Index navigator={navigator} title = "index" />);
       case 'indStock':
         return (<IndStock navigator={navigator} title = 'indStock' />);
+      case 'buy':
+        return (<Buy navigator={navigator} title = 'buy' />)
     }
     // if(route.id === 'index'){
     //   return <Index navigator={navigator} />;

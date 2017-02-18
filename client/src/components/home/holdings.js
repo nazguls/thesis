@@ -3,8 +3,8 @@ import { Text, View, Button, TouchableHighlight } from 'react-native';
 
 class Holdings extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.navigate = this.navigate.bind(this);
 	}
