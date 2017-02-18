@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import { AppRegistry, View } from 'react-native';
+
 import Header from './header';
-import Price from './Price';
+import Price from './price';
+import Chart from './chart'
+import Periodic from './periodic'
 
 const stockObj = {
   name: 'AAPL',
@@ -17,7 +20,7 @@ class Index extends Component {
 		    <Header headerText = { stockObj }/>
 		    <Price Price = { stockObj.price } Chart = { stockObj.chart }/>
 		    <Chart />
-		    <Periodic />
+
 		  </View>
 	  )
 	}

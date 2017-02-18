@@ -6,8 +6,8 @@ class Holdings extends Component {
 	render(){
 		const { viewStyle, textStyle } = styles;
 		return (
-			<View style = {styles.viewStyle} onPress={()=>Actions.indStock()}>
-				<Text> AAPL </Text>
+			<View style = {styles.viewStyle} >
+				<Text onPress={()=>Actions.indStock()}> AAPL </Text>
 				<Text> .25% </Text>
 			</View>
 		)

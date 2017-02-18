@@ -6,6 +6,7 @@ import { Router, Scene } from 'react-native-router-flux';
 
 //keep track of all the pages
 import Index from './src/components/home/index';
+import indStock from './src/components/indStock/index'
 
 class App extends Component {
   render() {
@@ -18,7 +19,10 @@ class App extends Component {
             component = {Index}
             initial
           />
-
+          <Scene
+            key = "indStock"
+            component = {indStock}
+          />
         </Scene>
       </Router>
     )
