@@ -1,14 +1,16 @@
-var express = require('express');
+const express = require('express');
+const app = express();
+const api = require('./api/api');
 
-app = express();
 
 //route to the landing page
-app.use('/',
-  express.static('/Users/michaelcomes/Desktop/HR52/Thesis/thesis/')
-);
 
-  //express.static(__dirname +'../'));
 
-app.listen(3000, function() {
-  console.log('listening on port 3000');
-});
+//instance middleware
+require('./middleware/middleware')(app);
+
+app.use('/api', api);
+
+app.use('/', express.static('.'));
+
+app.listen(3000, function() { console.log('listening on port 3000'); });
