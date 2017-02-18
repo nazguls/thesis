@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, Menu } from 'react-native';
+import React, {Component} from 'react';
+import { Text, View } from 'react-native';
 
 ////////////////import all the pages/////////////////////////
 import Nav from './nav';
@@ -8,8 +8,6 @@ import Chart from './chart';
 import Periodic from './periodic';
 import Holdings from './holdings';
 /////////////////////////////////////////////////////////////
-const SideMenu = require('react-native-side-menu');
-
 
 const stockObj =
 {
@@ -20,31 +18,27 @@ const stockObj =
 }
 
 
-const Index = (props) => {
-	const menu = <Menu navigator={navigator}/>;
+class Index extends Component {
 
-    return (
-      <SideMenu menu={menu}>
-        <ContentView/>
-      </SideMenu>
-    );
-  }
-
-
-class ContentView extends React.Component {
-  render() {
-	const { textStyle, viewStyle } = styles;
-	return (
-		<View style={styles.viewStyle}>
-			<Nav />
-			<PortfolioValue />
-			<Chart Chart={stockObj.chart}/>
-			<Periodic />
-			<Holdings />
-		</View>
-		);
+	constructor() {
+		super()
 	}
+
+	render() {
+
+		const { textStyle, viewStyle } = styles;
+		return (
+			<View style={styles.viewStyle}>
+				<Nav />
+				<PortfolioValue />
+				<Chart Chart={stockObj.chart}/>
+				<Periodic />
+				<Holdings navigator={this.props.navigator}/>
+			</View>
+		);
+	};
 }
+
 
 const styles = {
 	viewStyle: {

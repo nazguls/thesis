@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { Text, View, Button, TouchableHighlight } from 'react-native';
 
 class Holdings extends Component {
+
+	constructor() {
+		super();
+
+		this.navigate = this.navigate.bind(this);
+	}
+
+	navigate(routeName){
+		console.log(routeName);
+		this.props.navigator.push({
+			id: routeName
+		})
+	}
+
+
 	render(){
 		const { viewStyle, textStyle } = styles;
 		return (
 			<View style = {styles.viewStyle} >
-				<Text onPress={()=>Actions.indStock()}> AAPL </Text>
-				<Text> .25% </Text>
+				<TouchableHighlight onPress={this.navigate.bind(this, 'indStock')}>
+					<Text> AAPL </Text>
+				</TouchableHighlight>
+					<Text> .25% </Text>
 			</View>
 		)
 	}
