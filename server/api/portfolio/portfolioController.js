@@ -1,11 +1,7 @@
 const utility = require('../utils/helpers.js')
 
 
-exports.post = (req, res) => {
 
-  console.log('stock post request');
-
-}
 
 
 exports.get = (req, res) => {
