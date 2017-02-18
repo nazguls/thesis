@@ -33,6 +33,9 @@ dist/
 node_modules/
 bower_components/
 
+# API Keys
+server/api/config/config.js
+
 .DS_Store
 client/public/bundle.js
 client/public/bundle.js.map
