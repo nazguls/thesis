@@ -1,5 +1,6 @@
 const User = require('../../../db/dbModels').User;
 const Stock = require('../../../db/dbModels').Stock;
+<<<<<<< 0756b143dd336f9cc93c87937f334f7e5321583e
 
 exports.transact = (tradeData) => {
   const userId = tradeData.userId;
@@ -60,4 +61,5 @@ exports.fetchHoldings = (username) =>
        Stock.findAll({ where: { userID: user.id } })
     )
     .catch(err => console.log(err));
+
 

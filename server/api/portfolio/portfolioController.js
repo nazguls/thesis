@@ -15,3 +15,4 @@ exports.get = (req, res) => {
       ).then(portfolio => res.send(portfolio));
   }
 };
+
