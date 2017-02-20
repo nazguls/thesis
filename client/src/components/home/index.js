@@ -30,7 +30,7 @@ class Index extends Component {
 		const { textStyle, viewStyle } = styles;
 		return (
 			<View style={styles.viewStyle}>
-				<Nav />
+
 				<PortfolioValue />
 				<Chart Chart={stockObj.chart}/>
 				<Periodic />
@@ -93,7 +93,7 @@ class Index extends Component {
 
 const styles = {
 	viewStyle: {
-		marginTop: 70,
+		marginTop: 10,
 		// borderWidth: 5,
 		backgroundColor: '#F8F8F8',
 		alignItems: 'center',
