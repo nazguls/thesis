@@ -1,20 +1,46 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
+import { Card, CardSection, Input, Button } from '../common/'
 
 
 class Buy extends Component {
 
 	constructor (props) {
-		super(props)
+		super(props);
 	}
 
-	render(){
+	render() {
 		const { viewStyle, textStyle } = styles;
 		return (
-			<View style = {styles.viewStyle}>
-				<Text> Market Buy </Text>
-			</View>
-	  )
+			<Card>
+				<CardSection>
+					<Input
+						label="Shares"
+						placeholder="0"
+					/>
+				</CardSection>
+
+				<CardSection>
+					<Input
+						label="MKT Price"
+						placeholder="100"
+					/>
+				</CardSection>
+
+				<CardSection>
+					<Input
+						label="EST Cost"
+						placeholder="500"
+					/>
+				</CardSection>
+
+				<CardSection>
+					<Button>
+						Confirm
+					</Button>
+				</CardSection>
+			</Card>
+	  );
 	}
 }
 
@@ -36,6 +62,6 @@ const styles = {
 	textStyle: {
 		fontSize: 20
 	}
-}
+};
 
 export default Buy;

@@ -6,15 +6,15 @@ class Periodic extends Component {
 		const {textStyle} = styles;
 
 		return (
-			<View style = {styles.viewStyle}>
-				<Text style = {styles.textStyle}> 1D </Text>
-				<Text style = {styles.textStyle}> 1M </Text>
-				<Text style = {styles.textStyle}> 3M </Text>
-				<Text style = {styles.textStyle}> 6M </Text>
-				<Text style = {styles.textStyle}> 1Y </Text>
-				<Text style = {styles.textStyle}> ALL </Text>
+			<View style={styles.viewStyle}>
+				<Text style={styles.textStyle}> 1D </Text>
+				<Text style={styles.textStyle}> 1M </Text>
+				<Text style={styles.textStyle}> 3M </Text>
+				<Text style={styles.textStyle}> 6M </Text>
+				<Text style={styles.textStyle}> 1Y </Text>
+				<Text style={styles.textStyle}> ALL </Text>
 			</View>
-		)
+		);
 	}
 }
 
@@ -30,6 +30,6 @@ const styles = {
 		color: 'grey',
 
 	}
-}
+};
 
 export default Periodic;

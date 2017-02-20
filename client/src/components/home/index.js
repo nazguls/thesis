@@ -16,28 +16,27 @@ const stockObj =
   description: 'Apple Inc. - Common Stock',
   price: '$135.21',
   chart: 'https://i.stack.imgur.com/KRxDx.png'
-}
+};
 
 
 class Index extends Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 	}
 
 	render() {
-
-		const { textStyle, viewStyle } = styles;
+		// const { textStyle, viewStyle } = styles;
 		return (
 			<View style={styles.viewStyle}>
-				<Nav />
+
 				<PortfolioValue />
-				<Chart Chart={stockObj.chart}/>
+				<Chart Chart={stockObj.chart} />
 				<Periodic />
-				<Holdings navigator={this.props.navigator}/>
+				<Holdings navigator={this.props.navigator} />
 			</View>
 		);
-	};
+	}
 }
 
 
@@ -93,7 +92,7 @@ class Index extends Component {
 
 const styles = {
 	viewStyle: {
-		marginTop: 70,
+		marginTop: 10,
 		// borderWidth: 5,
 		backgroundColor: '#F8F8F8',
 		alignItems: 'center',

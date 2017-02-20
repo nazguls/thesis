@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Text } from 'react-native';
 
 class PortfolioValue extends Component {
-	render(){
-		const { textStyle } = styles;
+	render() {
+		const {textStyle} = styles;
 		return (
-			<Text style={ styles.textStyle }> 3200.70 </Text>
-		)
+			<Text style={styles.textStyle}> 3200.70 </Text>
+		);
 	}
 }
 const styles = {
@@ -20,6 +20,6 @@ const styles = {
 	textStyle: {
 		fontSize: 40
 	}
-}
+};
 
 export default PortfolioValue;

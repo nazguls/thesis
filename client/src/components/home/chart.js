@@ -7,14 +7,12 @@ class Chart extends Component {
 	}
 
 	render() {
-
 		console.log('from charts component', this.props);
 		return (
 			<View>
-				<Image source ={{ uri: this.props.Chart }} style={{'width': 350 , 'height': 150, marginTop: 50}}/>
+				<Image source={{ uri: this.props.Chart }} style={{ "width": 350, "height": 150, marginTop: 50 }} />
 			</View>
-		)
+		);
 	}
 }
-
 export default Chart;
