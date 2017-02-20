@@ -16,28 +16,27 @@ const stockObj =
   description: 'Apple Inc. - Common Stock',
   price: '$135.21',
   chart: 'https://i.stack.imgur.com/KRxDx.png'
-}
+};
 
 
 class Index extends Component {
 
 	constructor(props) {
-		super(props)
+		super(props);
 	}
 
 	render() {
-
-		const { textStyle, viewStyle } = styles;
+		// const { textStyle, viewStyle } = styles;
 		return (
 			<View style={styles.viewStyle}>
 
 				<PortfolioValue />
-				<Chart Chart={stockObj.chart}/>
+				<Chart Chart={stockObj.chart} />
 				<Periodic />
-				<Holdings navigator={this.props.navigator}/>
+				<Holdings navigator={this.props.navigator} />
 			</View>
 		);
-	};
+	}
 }
 
 

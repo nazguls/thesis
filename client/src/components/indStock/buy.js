@@ -6,31 +6,31 @@ import { Card, CardSection, Input, Button } from '../common/'
 class Buy extends Component {
 
 	constructor (props) {
-		super(props)
+		super(props);
 	}
 
-	render(){
+	render() {
 		const { viewStyle, textStyle } = styles;
 		return (
 			<Card>
 				<CardSection>
 					<Input
-						label = "Shares"
-						placeholder = "0"
+						label="Shares"
+						placeholder="0"
 					/>
 				</CardSection>
 
 				<CardSection>
 					<Input
-						label = "MKT Price"
-						placeholder = "100"
+						label="MKT Price"
+						placeholder="100"
 					/>
 				</CardSection>
 
 				<CardSection>
 					<Input
-						label = "EST Cost"
-						placeholder = "500"
+						label="EST Cost"
+						placeholder="500"
 					/>
 				</CardSection>
 
@@ -40,7 +40,7 @@ class Buy extends Component {
 					</Button>
 				</CardSection>
 			</Card>
-	  )
+	  );
 	}
 }
 
@@ -62,6 +62,6 @@ const styles = {
 	textStyle: {
 		fontSize: 20
 	}
-}
+};
 
 export default Buy;

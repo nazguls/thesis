@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native'
+import { Text } from 'react-native';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, loginUser } from '../actions'
+import { emailChanged, passwordChanged, loginUser } from '../actions';
 
 class LoginForm extends Component {
 
-	onEmailChange(text){
+	onEmailChange(text) {
 		this.props.emailChanged(text);
 	}
 
@@ -15,20 +15,20 @@ class LoginForm extends Component {
 		this.props.passwordChanged(text);
 	}
 
-	onButtonPress(){
+	onButtonPress() {
 		const { email, password } = this.props;
-		this.props.loginUser({ email, password })
+		this.props.loginUser({ email, password });
 	}
 
 	renderButton() {
 		if (this.props.loading) {
-			return <Spinner size="large"/>
+			return <Spinner size="large" />;
 		}
 		return (
 			<Button onPress={this.onButtonPress.bind(this)}>
 				Login
 			</Button>
-		)
+		);
 	}
 
 	render() {
@@ -37,10 +37,10 @@ class LoginForm extends Component {
 				<CardSection>
 					<Input
 						label="Email"
-						placeholder = "email@gmail.com"
-						onChangeText = {this.onEmailChange.bind(this)}
+						placeholder="email@gmail.com"
+						onChangeText={this.onEmailChange.bind(this)}
 						//this value was given this.props.email
-						value = {this.props.email}
+						value={this.props.email}
 					/>
 				</CardSection>
 
@@ -49,13 +49,13 @@ class LoginForm extends Component {
 						//prop to say text in there display as props
 						label="Password"
 						secureTextEntry
-						placeholder = "password"
-						onChangeText = {this.onPasswordChange.bind(this)}
-						value = {this.props.password}
+						placeholder="password"
+						onChangeText={this.onPasswordChange.bind(this)}
+						value={this.props.password}
 					/>
 				</CardSection>
 
-				<Text style ={style.errorTextStyle}>
+				<Text style={style.errorTextStyle}>
 					{this.props.error}
 				</Text>
 
@@ -73,15 +73,15 @@ const style = {
 		alignSelf: 'center',
 		color: 'red'
 	}
-}
+};
 
-const mapStateToProps = ({auth}) => {
-	const {email, password, error, loading } = auth;
+const mapStateToProps = ({ auth }) => {
+	const { email, password, error, loading } = auth;
 	return {
-		email: email,
-		password: password,
-		error: error,
-		loading: loading
+		email,
+		password,
+		error,
+		loading
 	};
 };
 

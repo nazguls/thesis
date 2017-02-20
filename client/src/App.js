@@ -11,13 +11,13 @@ import Router from './Router';
 class App extends Component {
 
 	componentWillMount() {
-	  const config = {
-	    apiKey: 'AIzaSyCAHvzL4hxUvEzY7ZuuZby9snaQNZw1cto',
-	    authDomain: 'manager-e9f84.firebaseapp.com',
-	    databaseURL: 'https://manager-e9f84.firebaseio.com',
-	    storageBucket: 'manager-e9f84.appspot.com',
-	    messagingSenderId: '968270480798'
-  	};
+		const config = {
+			apiKey: 'AIzaSyCAHvzL4hxUvEzY7ZuuZby9snaQNZw1cto',
+			authDomain: 'manager-e9f84.firebaseapp.com',
+			databaseURL: 'https://manager-e9f84.firebaseio.com',
+			storageBucket: 'manager-e9f84.appspot.com',
+			messagingSenderId: '968270480798'
+  };
   	firebase.initializeApp(config);
 	}
 
@@ -29,10 +29,8 @@ class App extends Component {
 			<Provider store={store}>
 				<Router />
 			</Provider>
-		)
+		);
 	}
 }
 
 export default App;
-
-

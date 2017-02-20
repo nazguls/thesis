@@ -5,7 +5,7 @@ import Header from './header';
 import Price from './price';
 import Chart from './chart';
 import BuySell from './buySell';
-import Periodic from './periodic'
+import Periodic from './periodic';
 
 const SideMenu = require('react-native-side-menu');
 
@@ -24,14 +24,13 @@ class Index extends Component {
 	render(){
 		return (
 		  <View>
-		    <Header headerText = { stockObj }/>
-		    <Price Price = { stockObj.price } />
-		    <Chart Chart = { stockObj.chart}/>
+		    <Header headerText={ stockObj } />
+		    <Price Price={ stockObj.price } />
+		    <Chart Chart={ stockObj.chart } />
 		    <Periodic />
 		    <BuySell />
-
 		  </View>
-	  )
+	  );
 	}
 }
 
