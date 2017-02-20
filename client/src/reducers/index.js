@@ -3,4 +3,4 @@ import AuthReducer from './AuthReducer';
 
 export default combineReducers ({
 	auth: AuthReducer
-})
+});
