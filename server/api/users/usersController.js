@@ -11,8 +11,6 @@ exports.get = ((req, res) => {
 exports.post = ((req, res) => {
   const userData = req.body;
   const username = req.params.user;
-  // console.log('userData: ', userData);
-  //   console.log('username: ', username);
 
   dbHelper.addUser(username, userData)
   .then((user) => res.send(user))

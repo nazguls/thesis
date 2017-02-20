@@ -2,25 +2,38 @@ const User = require('../../../db/dbModels').User;
 const Stock = require('../../../db/dbModels').Stock;
 const Portfolio = require('../../../db/dbModels').Portfolio;
 
-
-
 exports.transact = (tradeData) => {
   const userId = tradeData.userId;
-  console.log('19 tradeData', tradeData);
   if(tradeData.transact === 'buy') {
     return User.findOne({where: {id: userId}})
        .then(user => {
+        if(user) {
         return Stock.create({
           stockSymbol: tradeData.stock,
           type:'hold',
           purchaseDate: new Date(),
           purchasePrice: tradeData.price,
           numOfShares: tradeData.shares,
-          id:userId
+          userID:userId
         })
+      }
       })
        .catch(err => console.log(err));
   } else if(tradeData.transact === 'sell') {
+    return User.findOne({where: {id: tradeData.userId}}).then((user) => {
+      if(user) {
+        return Stock.findOne({where: {
+          stockSymbol:tradeData.stock,
+          userID: tradeData.userId
+        }})
+          .then(stock => {
+            const numShares = stock.numOfShares - tradeData.shares;
+            stock.updateAttributes({
+              numOfShares:numShares
+            })
+          })
+      }
+    })
   }
 }
 
