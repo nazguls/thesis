@@ -1,15 +1,15 @@
-var Sequelize = require('sequelize');
-var connection = require('./dbConnect');
-var User = require('./userModel');
-var Stock = require('./stockModel');
-var Portfolio = require('./portfolioModel');
+//const Sequelize = require('sequelize');
+const connection = require('./dbConnect');
+const User = require('./userModel');
+const Stock = require('./stockModel');
+const Portfolio = require('./portfolioModel');
 
-Stock.belongsToMany(User, {through: 'UserStock'});
-Portfolio.belongsToMany(User, {through: 'UserPortfolio'});
+Stock.belongsToMany(User, { through: 'UserStock' });
+Portfolio.belongsToMany(User, { through: 'UserPortfolio' });
 connection.sync();
 
 module.exports = {
-  User: User,
-  Stock: Stock,
-  Portfolio: Portfolio
+  User,
+  Stock,
+  Portfolio
 };
