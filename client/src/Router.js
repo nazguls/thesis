@@ -6,6 +6,12 @@ import IndStock from './components/indStock/index'
 import buy from './components/indStock/buy'
 import sell from './components/indStock/sell'
 
+////////////////////////////////////////////////////////////////////////
+//icons//
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Search from 'react-native-vector-icons/Foundation'
+////////////////////////////////////////////////////////////////////////
+
 const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 65 }}>
@@ -13,9 +19,17 @@ const RouterComponent = () => {
 				<Scene key='login' component ={LoginForm} title ="Please Login" />
 			</Scene>
 
-			<Scene key="main">
-				<Scene key='home' component = { Home } title = "DashBoard"/>
-				<Scene key='indStock' component = {IndStock} title = "Stock Description"  />
+			<Scene key="main" >
+				<Scene
+					key='home'
+					component = { Home }
+					title = "DashBoard"
+					rightTitle="search"
+					onRight={()=> console.log('right')}
+					leftTitle="profile"
+					onLeft={()=>console.log('left')}
+				/>
+				<Scene key='indStock' component = {IndStock} title = "Stock Description" />
 				<Scene key= 'buy' component = {buy} title= "Market Buy"/>
 				<Scene key= 'sell' component = {sell} title= "Market Sell"/>
 			</Scene>
