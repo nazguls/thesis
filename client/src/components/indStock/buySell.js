@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, Image, TouchableHighlight } from 'react-native';
-
+import { Actions } from 'react-native-router-flux';
 
 class BuySell extends Component {
 
@@ -21,10 +21,10 @@ class BuySell extends Component {
 		const { viewStyle, buttonStyle, textStyle } = styles;
 		return (
 			<View style = {styles.viewStyle}>
-				<TouchableHighlight style={styles.buttonStyle} onPress={this.navigate.bind(this, 'buy')}>
+				<TouchableHighlight style={styles.buttonStyle} onPress={()=> Actions.buy()}>
 					<Text>Buy</Text>
 				</TouchableHighlight>
-				<TouchableHighlight style={styles.buttonStyle} onPress={this.navigate.bind(this, 'sell')}>
+				<TouchableHighlight style={styles.buttonStyle} >
 					<Text>Sell</Text>
 				</TouchableHighlight>
 			</View>

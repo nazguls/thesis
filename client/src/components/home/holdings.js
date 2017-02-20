@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Button, TouchableHighlight } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 class Holdings extends Component {
 
@@ -24,7 +25,7 @@ class Holdings extends Component {
 		const { viewStyle, textStyle } = styles;
 		return (
 			<View style = {styles.viewStyle} >
-				<TouchableHighlight onPress={this.navigate.bind(this, 'indStock')}>
+				<TouchableHighlight onPress={()=>Actions.indStock()}>
 					<Text> AAPL </Text>
 				</TouchableHighlight>
 					<Text> .25% </Text>

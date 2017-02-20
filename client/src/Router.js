@@ -1,6 +1,11 @@
 import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
+import Home from './components/home/index'
+import IndStock from './components/indStock/index'
+import buy from './components/indStock/buy'
+import sell from './components/indStock/sell'
+
 const RouterComponent = () => {
 	return (
 		<Router sceneStyle={{ paddingTop: 65 }}>
@@ -8,6 +13,11 @@ const RouterComponent = () => {
 				<Scene key='login' component ={LoginForm} title ="Please Login" />
 			</Scene>
 
+			<Scene key="main">
+				<Scene key='home' component = { Home } title = "DashBoard"/>
+				<Scene key='indStock' component = {IndStock} title = "Stock Description"  />
+				<Scene key= 'buy' component = {buy} title= "Market Buy"/>
+			</Scene>
 
 		</Router>
 	);
