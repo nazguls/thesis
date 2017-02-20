@@ -1,7 +1,7 @@
-var Sequelize = require('sequelize');
-var connection = require('./dbConnect');
+const Sequelize = require('sequelize');
+const connection = require('./dbConnect');
 
-var User = connection.define('Users', {
+const User = connection.define('Users', {
   username: Sequelize.STRING,
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,

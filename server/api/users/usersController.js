@@ -15,5 +15,4 @@ exports.post = ((req, res) => {
   dbHelper.addUser(username, userData)
   .then((user) => res.send(user))
   .catch((err) => res.send(err));
-
 });

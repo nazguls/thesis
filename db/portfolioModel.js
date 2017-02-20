@@ -1,7 +1,7 @@
-var Sequelize = require('sequelize');
-var connection = require('./dbConnect');
+const Sequelize = require('sequelize');
+const connection = require('./dbConnect');
 
-var Portfolio = connection.define('portfolios', {
+const Portfolio = connection.define('portfolios', {
   date: Sequelize.DATE,
   portfolioValue: Sequelize.FLOAT,
 });
