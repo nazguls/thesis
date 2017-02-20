@@ -17,6 +17,7 @@ const RouterComponent = () => {
 				<Scene key='home' component = { Home } title = "DashBoard"/>
 				<Scene key='indStock' component = {IndStock} title = "Stock Description"  />
 				<Scene key= 'buy' component = {buy} title= "Market Buy"/>
+				<Scene key= 'sell' component = {sell} title= "Market Sell"/>
 			</Scene>
 
 		</Router>

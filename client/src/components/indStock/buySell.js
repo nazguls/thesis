@@ -24,7 +24,7 @@ class BuySell extends Component {
 				<TouchableHighlight style={styles.buttonStyle} onPress={()=> Actions.buy()}>
 					<Text>Buy</Text>
 				</TouchableHighlight>
-				<TouchableHighlight style={styles.buttonStyle} >
+				<TouchableHighlight style={styles.buttonStyle} onPress={()=> Actions.sell()}>
 					<Text>Sell</Text>
 				</TouchableHighlight>
 			</View>
