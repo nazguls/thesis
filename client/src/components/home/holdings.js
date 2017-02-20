@@ -12,7 +12,10 @@ class Holdings extends Component {
 	navigate(routeName){
 		console.log(routeName);
 		this.props.navigator.push({
-			id: routeName
+			id: routeName,
+			props: {
+				navigator: this.props.navigator
+			}
 		})
 	}
 
