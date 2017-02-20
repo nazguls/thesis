@@ -1,10 +1,11 @@
 import React from 'react';
-import { Scene, Router } from 'react-native-router-flux';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import Home from './components/home/index';
 import IndStock from './components/indStock/index';
 import buy from './components/indStock/buy';
 import sell from './components/indStock/sell';
+import userProfile from './components/home/slideUserProfile';
 
 ////////////////////////////////////////////////////////////////////////
 //icons//
@@ -25,13 +26,14 @@ const RouterComponent = () => {
 					component={Home}
 					title="DashBoard"
 					rightTitle="search"
-					onRight={() => console.log('right')}
+					onRight={() => console.log('left')}
 					leftTitle="profile"
-					onLeft={() => console.log('left')}
+					onLeft={() => Actions.userProfile()}
 				/>
 				<Scene key='indStock' component={IndStock} title="Stock Description" />
 				<Scene key='buy' component={buy} title="Market Buy" />
 				<Scene key='sell' component={sell} title="Market Sell" />
+        <Scene key='userProfile' component={userProfile} title="User Profile" />
 			</Scene>
 
 		</Router>
