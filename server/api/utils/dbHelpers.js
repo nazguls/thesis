@@ -14,7 +14,7 @@ exports.transact = (tradeData) => {
         }).then(stock => {
           console.log('line 10 buy', stock);
             if (stock) {
-              const shs = stock.numOfShares + parseInt(tradeData.shares);
+              const shs = stock.numOfShares + parseInt(tradeData.shares, 10);
               stock.update({ numOfShares: shs });
             } else {
           Stock.create({
@@ -38,16 +38,16 @@ exports.transact = (tradeData) => {
           userID: tradeData.userId
         } })
           .then(stock => {
-            const numShares = stock.numOfShares - parseInt(tradeData.shares);
+            const numShares = stock.numOfShares - parseInt(tradeData.shares, 10);
             stock.updateAttributes({
               numOfShares: numShares
-            }).then(stock => {
-              if (stock.numOfShares === 0) {
-                stock.destroy();
+            }).then(holding => {
+              if (holding.numOfShares === 0) {
+                holding.destroy();
               }
           });
       });
-    }
+     }
     });
   }
 };
