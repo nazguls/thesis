@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import { AppRegistry, View } from 'react-native';
+import { AppRegistry, View, Text, ScrollView } from 'react-native';
+import { Card, CardSection } from '../common';
+import { connect } from 'react-redux';
+
 
 import Header from './header';
 import Price from './price';
@@ -14,24 +17,86 @@ const stockObj = {
   description: 'Apple Inc. - Common Stock',
   price: '$135.21',
   chart: 'https://i.stack.imgur.com/KRxDx.png'
-}
+};
 
 class Index extends Component {
 	constructor () {
 		super();
 	}
 
-	render(){
+	render() {
+		const { stockRes } = this.props;
+		console.log('from indSTock', stockRes.data);
+		const { viewStyle, textStyle } = styles;
+
 		return (
-		  <View>
-		    <Header headerText={ stockObj } />
-		    <Price Price={ stockObj.price } />
-		    <Chart Chart={ stockObj.chart } />
-		    <Periodic />
-		    <BuySell />
-		  </View>
+			<ScrollView>
+			<View>
+				<Header headerText={stockRes.data} />
+				<Price Price={stockRes.data} />
+				<Chart Chart={stockObj.chart} />
+				<Periodic />
+				<BuySell />
+
+				<View Style={viewStyle}>
+					<CardSection>
+						<Text> OPEN </Text>
+						<Text> {stockRes.data.Open} </Text>
+					</CardSection>
+
+					<CardSection>
+						<Text> HIGH </Text>
+						<Text> {stockRes.data.High} </Text>
+					</CardSection>
+				</View>
+
+				<CardSection>
+					<Text> LOW </Text>
+					<Text> {stockRes.data.Low} </Text>
+				</CardSection>
+
+				<CardSection>
+					<Text> CHANGE </Text>
+					<Text> {stockRes.data.Change} </Text>
+				</CardSection>
+
+				<CardSection>
+					<Text> CHANGE YTD </Text>
+					<Text> {stockRes.data.ChangeYTD} </Text>
+				</CardSection>
+
+				<CardSection>
+					<Text> MKT CAP </Text>
+					<Text> {stockRes.data.MarketCap} </Text>
+				</CardSection>
+
+				<CardSection>
+					<Text> VOL </Text>
+					<Text> {stockRes.data.Volume} </Text>
+				</CardSection>
+				</View>
+				</ScrollView>
+
 	  );
 	}
 }
+const styles = {
 
-export default Index;
+	viewStyle: {
+		alignSelf: 'stretch',
+		justifyContent: 'space-between',
+		flex: 2,
+		borderwidth: 1,
+		flexDirection: 'row'
+	}
+};
+
+const mapStateToProps = ({ search }) => {
+	console.log('from indPage', search);
+	const { stockRes } = search;
+	return {
+		stockRes
+	};
+};
+
+export default connect(mapStateToProps, {})(Index);

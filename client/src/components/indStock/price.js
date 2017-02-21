@@ -12,7 +12,7 @@ class Price extends Component {
 		const { viewStyle, textStyle } = styles;
 		return (
 			<View style={styles.viewStyle}>
-				<Text style={styles.textStyle}>{this.props.Price}</Text>
+				<Text style={styles.textStyle}>{this.props.Price.LastPrice}</Text>
 			</View>
 		);
 	}

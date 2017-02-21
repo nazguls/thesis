@@ -5,7 +5,8 @@ import Home from './components/home/index';
 import IndStock from './components/indStock/index';
 import buy from './components/indStock/buy';
 import sell from './components/indStock/sell';
-import userProfile from './components/home/slideUserProfile';
+import userProfile from './components/home/slideUserProfile'
+import search from './components/home/search';
 
 ////////////////////////////////////////////////////////////////////////
 //icons//
@@ -20,13 +21,15 @@ const RouterComponent = () => {
 				<Scene key='login' component={LoginForm} title="Please Login" />
 			</Scene>
 
-			<Scene key="main" >
+			<Scene key="main" initial >
 				<Scene
 					key='home'
 					component={Home}
 					title="DashBoard"
 					rightTitle="search"
-					onRight={() => console.log('left')}
+
+					onRight={() => Actions.search()}
+
 					leftTitle="profile"
 					onLeft={() => Actions.userProfile()}
 				/>
@@ -34,7 +37,10 @@ const RouterComponent = () => {
 				<Scene key='buy' component={buy} title="Market Buy" />
 				<Scene key='sell' component={sell} title="Market Sell" />
         <Scene key='userProfile' component={userProfile} title="User Profile" />
+
+        <Scene key='search' component={search} title="Search" />
 			</Scene>
+
 
 		</Router>
 	);
