@@ -1,17 +1,15 @@
 const axios = require('axios');
 
 
-exports.getStockPrice = (ticker) =>
+const getStockPrice = (ticker) =>
   axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json', {
     params: {
       symbol: ticker } })
       .then((response) =>
-        //console.log(response.data);
          response.data
-
       ).catch((err) => console.log(err));
 
-  exports.getBulkStockPrices = (portfolio) => {
+ const getBulkStockPrices = (portfolio) => {
     const holdings = portfolio.map(stock => stock.dataValues.stockSymbol);
     const stocks = [];
 
@@ -25,7 +23,7 @@ exports.getStockPrice = (ticker) =>
         return results;
       }
 
-      return exports.getStockPrice(port[counter])
+      return getStockPrice(port[counter])
         .then(stock => {
           results = results.concat(stock);
           return fetchPrices(port, counter, results);
@@ -34,3 +32,4 @@ exports.getStockPrice = (ticker) =>
       return fetchPrices(holdings, null, stocks);
     };
 
+module.exports = { getBulkStockPrices, getStockPrice };
