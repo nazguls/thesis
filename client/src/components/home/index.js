@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Text, View, SideMenu, List, ListItem } from 'react-native';
 
 ////////////////import all the pages/////////////////////////
