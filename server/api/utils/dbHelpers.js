@@ -60,5 +60,3 @@ exports.fetchHoldings = (username) =>
        Stock.findAll({ where: { userID: user.id } })
     )
     .catch(err => console.log(err));
-
-
