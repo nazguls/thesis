@@ -2,11 +2,12 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 const Header = (props) => {
+	console.log(props.headerText);
 	const { textStyle, viewStyle } = styles;
 		return (
 			<View style={viewStyle}>
-				<Text style={textStyle}>{props.headerText.name}</Text>
-				<Text> {props.headerText.description} </Text>
+				<Text style={textStyle}>{props.headerText.Name}</Text>
+				<Text> {props.headerText.Symbol} </Text>
 			</View>
 		);
 };

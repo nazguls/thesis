@@ -5,8 +5,12 @@ import {
 	PASSWORD_CHANGED,
 	LOGIN_USER_SUCCESS,
 	LOGIN_USER_FAIL,
-	LOGIN_USER
+	LOGIN_USER,
+	SEARCH_CHANGED,
+	SEARCH_STOCK,
+	STOCK_RESULT
 } from './types';
+import axios from 'axios';
 
 export const emailChanged = (text) => {
 	return {
@@ -21,6 +25,32 @@ export const passwordChanged = (text) => {
 		payload: text
 	};
 };
+
+export const searchChanged = (text) => {
+	return {
+		type: SEARCH_CHANGED,
+		payload: text
+	};
+};
+
+export const searchStock = ({ search }) => {
+	console.log('from search stock' , search);
+	return (dispatch) => {
+		axios.get('http://localhost:3000/api/stocks/'+ search)
+		.then((stockInfo) => indStockFetched(dispatch, stockInfo))
+		.catch((error) => console.log(error));
+	};
+};
+
+const indStockFetched = (dispatch, stockInfo) => {
+	console.log('stockInfo fetched', stockInfo);
+	dispatch({
+		type: STOCK_RESULT,
+		payload: stockInfo
+	});
+	Actions.indStock();
+};
+
 
 export const loginUser = ({ email, password }) => {
 	return (dispatch) => {
