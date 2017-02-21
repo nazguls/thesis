@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { AppRegistry, View, Text } from 'react-native';
+import { AppRegistry, View, Text, ScrollView } from 'react-native';
 import { Card, CardSection } from '../common';
 import { connect } from 'react-redux';
 
@@ -27,51 +27,69 @@ class Index extends Component {
 	render() {
 		const { stockRes } = this.props;
 		console.log('from indSTock', stockRes.data);
+		const { viewStyle, textStyle } = styles;
+
 		return (
+			<ScrollView>
 			<View>
-		  	<Header headerText={stockRes.data} />
-		  	<Price Price={stockRes.data} />
-		  	<Chart Chart={stockObj.chart} />
-		  	<Periodic />
-		  	<BuySell />
-		  	<CardSection>
-		  		<Text> OPEN </Text>
-		  		<Text> {stockRes.data.Open} </Text>
+				<Header headerText={stockRes.data} />
+				<Price Price={stockRes.data} />
+				<Chart Chart={stockObj.chart} />
+				<Periodic />
+				<BuySell />
+
+				<View Style={viewStyle}>
+					<CardSection>
+						<Text> OPEN </Text>
+						<Text> {stockRes.data.Open} </Text>
+					</CardSection>
+
+					<CardSection>
+						<Text> HIGH </Text>
+						<Text> {stockRes.data.High} </Text>
+					</CardSection>
+				</View>
+
+				<CardSection>
+					<Text> LOW </Text>
+					<Text> {stockRes.data.Low} </Text>
 				</CardSection>
 
-		  	<CardSection>
-		  		<Text> HIGH </Text>
-		  		<Text> {stockRes.data.High} </Text>
-		  	</CardSection>
+				<CardSection>
+					<Text> CHANGE </Text>
+					<Text> {stockRes.data.Change} </Text>
+				</CardSection>
 
-		  	<CardSection>
-		  		<Text> LOW </Text>
-		  		<Text> {stockRes.data.Low} </Text>
-		  	</CardSection>
+				<CardSection>
+					<Text> CHANGE YTD </Text>
+					<Text> {stockRes.data.ChangeYTD} </Text>
+				</CardSection>
 
-		  	<CardSection>
-		  		<Text> CHANGE </Text>
-		  		<Text> {stockRes.data.Change} </Text>
-		  	</CardSection>
+				<CardSection>
+					<Text> MKT CAP </Text>
+					<Text> {stockRes.data.MarketCap} </Text>
+				</CardSection>
 
-		  	<CardSection>
-		  		<Text> CHANGE YTD </Text>
-		  		<Text> {stockRes.data.ChangeYTD} </Text>
-		  	</CardSection>
+				<CardSection>
+					<Text> VOL </Text>
+					<Text> {stockRes.data.Volume} </Text>
+				</CardSection>
+				</View>
+				</ScrollView>
 
-		  	<CardSection>
-		  		<Text> MKT CAP </Text>
-		  		<Text> {stockRes.data.MarketCap} </Text>
-		  	</CardSection>
-
-		  	<CardSection>
-		  		<Text> VOL </Text>
-		  		<Text> {stockRes.data.Volume} </Text>
-		  	</CardSection>
-		  </View>
 	  );
 	}
 }
+const styles = {
+
+	viewStyle: {
+		alignSelf: 'stretch',
+		justifyContent: 'space-between',
+		flex: 2,
+		borderwidth: 1,
+		flexDirection: 'row'
+	}
+};
 
 const mapStateToProps = ({ search }) => {
 	console.log('from indPage', search);
