@@ -7,7 +7,17 @@ exports.transact = (tradeData) => {
     return User.findOne({ where: { id: userId } })
        .then(user => {
         if (user) {
-        return Stock.create({
+          console.log('line 10 buy');
+        return Stock.findOne({ where: {
+          stockSymbol: tradeData.stock,
+          userID: userId }
+        }).then(stock => {
+          console.log('line 10 buy', stock);
+            if (stock) {
+              const shs = stock.numOfShares + parseInt(tradeData.shares);
+              stock.update({ numOfShares: shs });
+            } else {
+          Stock.create({
           stockSymbol: tradeData.stock,
           type: 'hold',
           purchaseDate: new Date(),
@@ -15,8 +25,10 @@ exports.transact = (tradeData) => {
           numOfShares: tradeData.shares,
           userID: userId
         });
+        }
+      });
       }
-      })
+    })
        .catch(err => console.log(err));
   } else if (tradeData.transact === 'sell') {
     return User.findOne({ where: { id: tradeData.userId } }).then((user) => {
@@ -26,15 +38,20 @@ exports.transact = (tradeData) => {
           userID: tradeData.userId
         } })
           .then(stock => {
-            const numShares = stock.numOfShares - tradeData.shares;
+            const numShares = stock.numOfShares - parseInt(tradeData.shares);
             stock.updateAttributes({
               numOfShares: numShares
-            });
+            }).then(stock => {
+              if (stock.numOfShares === 0) {
+                stock.destroy();
+              }
           });
-      }
+      });
+    }
     });
   }
 };
+
 
 exports.getUser = (username) =>
   User.findOne({ where: { username } })

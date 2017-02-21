@@ -5,7 +5,7 @@ exports.get = (req, res) => {
   const username = req.params.username;
   const period = req.query.period;
   if (period === 'historical') {
-     console.log('historical');
+    //
   } else if (period === 'current') {
     dbHelper.fetchHoldings(username)
       .then(holdings =>
@@ -13,4 +13,3 @@ exports.get = (req, res) => {
       ).then(portfolio => res.send(portfolio));
   }
 };
-
