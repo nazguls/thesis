@@ -1,7 +1,6 @@
 const apiHelper = require('../utils/apiHelpers');
 const dbHelper = require('../utils/dbHelpers');
 
-
 exports.get = (req, res) => {
   const stock = req.params.stock;
   apiHelper.getStockPrice(stock).then((data) => {

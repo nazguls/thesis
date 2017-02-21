@@ -6,13 +6,11 @@ exports.get = (req, res) => {
   const period = req.query.period;
   if (period === 'historical') {
 
-    //get historical portfolio values
   } else if (period === 'current') {
-    console.log('11');
     dbHelper.fetchHoldings(username)
       .then(holdings =>
        fetchPorfolioPrices(holdings)
-      ).then(portfolio => res.send(portfolio));
+      ).then(portfolio => {console.log('13', portfolio); res.send(portfolio)});
   }
 };
 
