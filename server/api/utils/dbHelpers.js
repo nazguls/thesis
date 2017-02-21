@@ -7,12 +7,10 @@ exports.transact = (tradeData) => {
     return User.findOne({ where: { id: userId } })
        .then(user => {
         if (user) {
-          console.log('line 10 buy');
         return Stock.findOne({ where: {
           stockSymbol: tradeData.stock,
           userID: userId }
         }).then(stock => {
-          console.log('line 10 buy', stock);
             if (stock) {
               const shs = stock.numOfShares + parseInt(tradeData.shares, 10);
               stock.update({ numOfShares: shs });
