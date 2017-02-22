@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, CardSection, Input, Header } from '../actions';
+import { Button, Card, CardSection, Input } from './common';
 import axios from 'axios';
 
 class Deposit extends Component {
@@ -12,7 +12,7 @@ class Deposit extends Component {
 	}
 
 	UserDeposit(text) {
-		this.setState({DepositInput: text});
+		this.setState({ DepositInput: text });
 	}
 
 	buttonPressed() {
@@ -25,16 +25,11 @@ class Deposit extends Component {
 	render() {
 		return (
 			<Card>
-				<Header>
-					Transfer to RobinHood
-				</Header>
-
 				<CardSection>
 					<Input
-						label="Shares"
+						label="Amount"
 						placeholder="0"
 						onChangeText={this.UserDeposit.bind(this)}
-						value={this.props.stockShare}
 					/>
 				</CardSection>
 
@@ -44,7 +39,7 @@ class Deposit extends Component {
 					</Button>
 				</CardSection>
 			</Card>
-		)
+		);
 	}
 }
 
