@@ -1,4 +1,3 @@
-const apiHelper = require('../utils/apiHelpers');
 const dbHelper = require('../utils/dbHelpers');
 
 exports.post = (req, res) => {
@@ -11,4 +10,4 @@ exports.post = (req, res) => {
   //console.log(depositData, params, url);
   dbHelper.deposit(depositData, user).then(data =>
   res.send(data));
-}
+};
