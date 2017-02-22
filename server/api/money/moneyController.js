@@ -4,10 +4,11 @@ const dbHelper = require('../utils/dbHelpers');
 exports.post = (req, res) => {
   let user = req.params.user;
   let depositData = req.body;
+  console.log(user);
+  console.log(depositData);
   //req.body = {amount: DECIMAL_NUMBER, type:DEPOSIT | WITHDRAWAL}
   //req.params = { user: 'comesm' }
-  console.log(body, params, url);
+  //console.log(depositData, params, url);
   dbHelper.deposit(depositData, user).then(data =>
-  res.send('success', data));
-
+  res.send(data));
 }
