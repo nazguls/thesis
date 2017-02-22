@@ -2,6 +2,7 @@ const apiHelper = require('../utils/apiHelpers');
 const dbHelper = require('../utils/dbHelpers');
 
 exports.get = (req, res) => {
+  console.log('is it getting here?')
   const stock = req.params.stock;
   const period = req.query.period;
   if (period === 'historic') {
@@ -20,7 +21,7 @@ exports.get = (req, res) => {
 
 exports.post = (req, res) => {
   const order = req.query;
-  const tradeData = Object.assign(req.query, req.params);
+  const tradeData = Object.assign(req.query, req.body);
   console.log(order);
   dbHelper.transact(tradeData)
     .then(data => res.status(200).send(data))
