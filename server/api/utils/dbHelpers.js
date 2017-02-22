@@ -64,7 +64,7 @@ exports.deposit = (depositData, username) => {
    -depositData.amount : depositData.amount;
   User.findOne({ where: { username } })
     .then(user => {
-      let cash = user.cash + amount;
+      const cash = user.cash + amount;
       user.updateAttributes({ cash });
     });
 };
