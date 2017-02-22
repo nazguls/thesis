@@ -2,7 +2,6 @@ const apiHelper = require('../utils/apiHelpers');
 const dbHelper = require('../utils/dbHelpers');
 
 exports.get = (req, res) => {
-  console.log('is it getting here?')
   const stock = req.params.stock;
   const period = req.query.period;
   if (period === 'historic') {
