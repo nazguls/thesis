@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Text } from 'react-native';
 import { Card, CardSection, Input, Button } from '../common/';
 import { updateStockShare } from '../../actions';
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 
 class Buy extends Component {
@@ -36,6 +37,7 @@ class Buy extends Component {
 		}).catch(function(error) {
 			console.log(error)
 		});
+		Actions.indStock();
 	}
 
 	render() {
