@@ -19,16 +19,17 @@ class Buy extends Component {
 		console.log('stockShare', this.props.stockShare);
 		console.log('stockPrice', this.props.stockRes.data.LastPrice)
 		console.log('stockTicker', this.props.stockRes.data.Symbol)
-
+		const context = this;
 		axios({
 			method: 'post',
 			url: 'http://localhost:3000/api/stocks/' + 'nflx',
 			data: {
-				// stock: this.props.stockRes.data.Symbol,
+				stock: context.props.stockRes.data.Symbol,
 				transact: 'buy',
 				userId: 1,
-				price: 13,
-				shares: 3
+				price: context.props.stockRes.data.LastPrice,
+				shares: context.props.stockShare,
+
 			}
 		}).then(function(response) {
 			console.log(response);
