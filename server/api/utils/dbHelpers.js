@@ -51,6 +51,7 @@ exports.transact = (tradeData) => {
 };
 
 
+
 exports.getUser = (username) =>
   User.findOne({ where: { username } })
   .catch(err => console.log(err));
