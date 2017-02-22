@@ -31,7 +31,7 @@ const RouterComponent = () => {
 					title="DashBoard"
 					rightTitle="search"
           leftButtonImage={accountIcon}
-					onRight={() => Actions.deposit()}
+					onRight={() => Actions.search()}
           onLeft={() => Actions.refresh({ key: 'drawer', open: value => !value })}
         />
         <Scene
