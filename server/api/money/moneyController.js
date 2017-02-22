@@ -2,12 +2,12 @@ const apiHelper = require('../utils/apiHelpers');
 const dbHelper = require('../utils/dbHelpers');
 
 exports.post = (req, res) => {
-
-  let body = req.body;
-  let params = req.params;
-  let url = req.url;
+  let user = req.params.user;
+  let depositData = req.body;
+  //req.body = {amount: DECIMAL_NUMBER, type:DEPOSIT | WITHDRAWAL}
+  //req.params = { user: 'comesm' }
   console.log(body, params, url);
-
-  res.send('success');
+  dbHelper.deposit(depositData, user).then(data =>
+  res.send('success', data));
 
 }

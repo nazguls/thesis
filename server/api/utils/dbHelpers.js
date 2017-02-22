@@ -1,11 +1,16 @@
 const User = require('../../../db/dbModels').User;
 const Stock = require('../../../db/dbModels').Stock;
 
+
+//sending price and shares
 exports.transact = (tradeData) => {
   const userId = tradeData.userId;
   if (tradeData.transact === 'buy') {
     return User.findOne({ where: { id: userId } })
        .then(user => {
+        const buyAmount = tradeData.price * tradeData.shares;
+        const newCashBal = user.cash - buyAmount;
+        user.updateAttributes({ cash: newCashBal });
         if (user) {
         return Stock.findOne({ where: {
           stockSymbol: tradeData.stock,
@@ -31,6 +36,9 @@ exports.transact = (tradeData) => {
   } else if (tradeData.transact === 'sell') {
     return User.findOne({ where: { id: tradeData.userId } }).then((user) => {
       if (user) {
+        const sellAmount = tradeData.price * tradeData.shares;
+        const newCashBal = user.cash + sellAmount;
+        user.updateAttributes({ cash: newCashBal });
         return Stock.findOne({ where: {
           stockSymbol: tradeData.stock,
           userID: tradeData.userId
@@ -50,6 +58,16 @@ exports.transact = (tradeData) => {
   }
 };
 
+exports.deposit = (depositData, username) => {
+  const type = depositData.type;
+  const amount = type === 'WITHDRAWAL' ?
+   -depositData.amount : depositData.amount;
+  User.findOne({ where: { username } })
+    .then(user => {
+      let cash = user.cash + amount;
+      user.updateAttributes({ cash });
+    });
+};
 
 
 exports.getUser = (username) =>
@@ -59,6 +77,7 @@ exports.getUser = (username) =>
 
 exports.addUser = (username, userData) =>
     User.create({
+    cash: 0,
     username,
     firstName: userData.firstName,
     lastName: userData.lastName,
