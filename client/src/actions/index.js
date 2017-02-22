@@ -8,9 +8,17 @@ import {
 	LOGIN_USER,
 	SEARCH_CHANGED,
 	SEARCH_STOCK,
-	STOCK_RESULT
+	STOCK_RESULT,
+	STOCK_SHARE_CHANGED
 } from './types';
 import axios from 'axios';
+
+export const updateStockShare = (text) => {
+	return {
+		type: STOCK_SHARE_CHANGED,
+		payload: text
+	};
+};
 
 export const emailChanged = (text) => {
 	return {

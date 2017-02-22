@@ -9,7 +9,6 @@ class Chart extends Component {
 	}
 
 	render() {
-		console.log('from charts', this.props);
 		return (
 			<Image source ={{ uri: this.props.Chart }} style={{'width': 350 , 'height': 150, marginTop: 50 }} />
 	  );

@@ -1,11 +1,13 @@
 import {
 	SEARCH_CHANGED,
-	STOCK_RESULT
+	STOCK_RESULT,
+	STOCK_SHARE_CHANGED
 } from '../actions/types';
 
 const INITIAL_STATE = {
 	search: '',
-	stockRes: {}
+	stockRes: {},
+	stockShare: ''
 
 };
 
@@ -16,7 +18,9 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, search: action.payload };
 		case STOCK_RESULT:
 			return { ...state, stockRes: action.payload };
+		case STOCK_SHARE_CHANGED:
+			return { ...state, stockShare: action.payload };
 		default:
 			return state;
 	}
-}
+};

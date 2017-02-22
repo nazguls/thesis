@@ -25,56 +25,48 @@ class Index extends Component {
 	}
 
 	render() {
+		console.log('from index.js', this.props.stockRes)
 		const { stockRes } = this.props;
 		console.log('from indSTock', stockRes.data);
 		const { viewStyle, textStyle } = styles;
 
 		return (
 			<ScrollView>
-			<View>
-				<Header headerText={stockRes.data} />
-				<Price Price={stockRes.data} />
-				<Chart Chart={stockObj.chart} />
-				<Periodic />
-				<BuySell />
+				<View>
+					<Header headerText />
+					<Price Price />
+					<Chart Chart={stockObj.chart} />
+					<Periodic />
+					<BuySell />
 
-				<View Style={viewStyle}>
+					<View Style={viewStyle}>
+						<CardSection>
+							<Text> OPEN </Text>
+							<Text> {stockRes.data.Open} </Text>
+							<Text> HIGH </Text>
+							<Text> {stockRes.data.High} </Text>
+						</CardSection>
+					</View>
+
 					<CardSection>
-						<Text> OPEN </Text>
-						<Text> {stockRes.data.Open} </Text>
+						<Text> LOW </Text>
+						<Text> {stockRes.data.Low} </Text>
+						<Text> CHANGE </Text>
+						<Text> {stockRes.data.Change} </Text>
 					</CardSection>
 
 					<CardSection>
-						<Text> HIGH </Text>
-						<Text> {stockRes.data.High} </Text>
+						<Text> CHANGE YTD </Text>
+						<Text> {stockRes.data.ChangeYTD} </Text>
+						<Text> MKT CAP </Text>
+						<Text> {Math.round(stockRes.data.MarketCap/1000000000)} Bil </Text>
 					</CardSection>
-				</View>
 
-				<CardSection>
-					<Text> LOW </Text>
-					<Text> {stockRes.data.Low} </Text>
-				</CardSection>
-
-				<CardSection>
-					<Text> CHANGE </Text>
-					<Text> {stockRes.data.Change} </Text>
-				</CardSection>
-
-				<CardSection>
-					<Text> CHANGE YTD </Text>
-					<Text> {stockRes.data.ChangeYTD} </Text>
-				</CardSection>
-
-				<CardSection>
-					<Text> MKT CAP </Text>
-					<Text> {stockRes.data.MarketCap} </Text>
-				</CardSection>
-
-				<CardSection>
-					<Text> VOL </Text>
-					<Text> {stockRes.data.Volume} </Text>
-				</CardSection>
-				</View>
+					<CardSection>
+						<Text> VOL </Text>
+						<Text> {stockRes.data.Volume} </Text>
+					</CardSection>
+					</View>
 				</ScrollView>
 
 	  );
@@ -92,7 +84,6 @@ const styles = {
 };
 
 const mapStateToProps = ({ search }) => {
-	console.log('from indPage', search);
 	const { stockRes } = search;
 	return {
 		stockRes

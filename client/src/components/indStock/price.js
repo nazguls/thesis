@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+
 
 
 class Price extends Component {
 
-	constructor (props) {
-		super(props);
-	}
-
 	render() {
 		const { viewStyle, textStyle } = styles;
+		const { stockRes } = this.props;
+
 		return (
 			<View style={styles.viewStyle}>
-				<Text style={styles.textStyle}>{this.props.Price.LastPrice}</Text>
+				<Text style={styles.textStyle}>{stockRes.data.LastPrice}</Text>
 			</View>
 		);
 	}
@@ -32,4 +32,12 @@ const styles = {
 	}
 };
 
-export default Price;
+const mapStateToProps = ({ search }) => {
+
+	const { stockRes } = search;
+	return {
+		stockRes
+	};
+};
+
+export default connect(mapStateToProps, {})(Price);

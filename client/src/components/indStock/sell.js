@@ -10,7 +10,6 @@ class Sell extends Component {
 	}
 
 	render() {
-		const { viewStyle, textStyle } = styles;
 		return (
 			<Card>
 				<CardSection>
