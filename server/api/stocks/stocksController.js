@@ -4,9 +4,9 @@ const dbHelper = require('../utils/dbHelpers');
 exports.get = (req, res) => {
   const stock = req.params.stock;
   const period = req.query.period;
-  if (period === 'historic') {
+  if (period === 'historical') {
     apiHelper.getHistoricalPrices(stock)
-      .then(data => res.send(data))
+      .then(data => {console.log('9---------------', data.data); res.send(data.data)})
       .catch(err => res.status(404).send(err));
   }
   if (period === 'current') {
