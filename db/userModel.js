@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const connection = require('./dbConnect');
 
 const User = connection.define('Users', {
+  cash: Sequelize.DECIMAL,
   username: Sequelize.STRING,
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,

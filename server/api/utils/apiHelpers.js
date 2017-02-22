@@ -5,21 +5,27 @@ const getStockPrice = (ticker) =>
   axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json', {
     params: {
       symbol: ticker } })
-      .then((response) => {
-           return response.data;
-         }
-      ).catch((err) => console.log('12', err));
+      .then((response) =>
+            response.data
+      ).catch((err) => console.log(err));
 
- const getHistoricalPrices = (ticker) => console.log('getHistoricalPrices', ticker);
+ const getHistoricalPrices = (ticker) => {
 
+ const options = { params:
+  { parameters: { "Normalized": false, "NumberOfDays": 2, "DataPeriod":"Minute", "Elements":[{"Symbol": ticker, "Type": "price", "Params":["c"]}]}}}
+
+  return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', options)
+  .catch(err => console.log('20', err));
+};
 
 // http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters={"Normalized":false,"NumberOfDays":365,"DataPeriod":"Day","Elements":[{"Symbol":"AAPL","Type":"price","Params":["c"]}]}
 
  const getBulkStockPrices = (portfolio) => {
-    const holdings = portfolio.map(stock =>
-       { return  { 'symbol' : stock.dataValues.stockSymbol,
+    const holdings = portfolio.map(stock => {
+      return { 'symbol': stock.dataValues.stockSymbol,
         'numOfShares': stock.dataValues.numOfShares, 'currentPrice': null, 'marketValue': null}
       }
+
     );
     const stocks = [];
     const fetchPrices = (port, counter, results) => {
