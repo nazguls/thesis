@@ -7,7 +7,6 @@ class BuySell extends Component {
 	constructor (props) {
 		super(props);
 		this.navigate = this.navigate.bind(this);
-		console.log('from buySell props', props);
 	}
 
 	navigate(routeName) {

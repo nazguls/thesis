@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
-const Header = (props) => {
-	console.log(props.headerText);
-	const { textStyle, viewStyle } = styles;
+
+class Header extends Component {
+	render() {
+		const { textStyle, viewStyle } = styles;
+		const { stockRes } = this.props;
 		return (
-			<View style={viewStyle}>
-				<Text style={textStyle}>{props.headerText.Name}</Text>
-				<Text> {props.headerText.Symbol} </Text>
-			</View>
+
+				<View style={viewStyle}>
+					<Text style={textStyle}>{stockRes.data.Name}</Text>
+					<Text>{stockRes.data.Symbol}</Text>
+				</View>
 		);
-};
+	};
+}
 
 const styles = {
 	viewStyle: {
@@ -32,4 +37,12 @@ const styles = {
 
 };
 
-export default Header;
+const mapStateToProps = ({ search }) => {
+	const { stockRes } = search;
+	return {
+		stockRes
+	};
+};
+
+
+export default connect(mapStateToProps, {})(Header);
