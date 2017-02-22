@@ -5,31 +5,46 @@ const getStockPrice = (ticker) =>
   axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json', {
     params: {
       symbol: ticker } })
-      .then((response) =>
-         response.data
-      ).catch((err) => console.log(err));
+      .then((response) => {
+           return response.data;
+         }
+      ).catch((err) => console.log('12', err));
+
+ const getHistoricalPrices = (ticker) => console.log('getHistoricalPrices', ticker);
+
+
+// http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters={"Normalized":false,"NumberOfDays":365,"DataPeriod":"Day","Elements":[{"Symbol":"AAPL","Type":"price","Params":["c"]}]}
 
  const getBulkStockPrices = (portfolio) => {
-    const holdings = portfolio.map(stock => stock.dataValues.stockSymbol);
+    const holdings = portfolio.map(stock =>
+       { return  { 'symbol' : stock.dataValues.stockSymbol,
+        'numOfShares': stock.dataValues.numOfShares, 'currentPrice': null, 'marketValue': null}
+      }
+    );
     const stocks = [];
-
     const fetchPrices = (port, counter, results) => {
-      if (counter === null) {
-        counter = 0;
+      let increment = counter;
+      let resultArray = results;
+      if (increment === null) {
+        increment = 0;
       } else {
-        counter++;
+        increment++;
       }
-      if (counter === port.length) {
-        return results;
+      if (increment === port.length) {
+        return resultArray;
       }
-
-      return getStockPrice(port[counter])
+      return getStockPrice(port[increment].symbol)
         .then(stock => {
-          results = results.concat(stock);
-          return fetchPrices(port, counter, results);
+          port[increment].currentPrice = stock.LastPrice;
+          port[increment].marketValue = stock.LastPrice *
+          port[increment].numOfShares;
+          console.log('38', port);
+          resultArray = port;
+          return fetchPrices(port, increment, resultArray);
         });
       };
+      console.log('44', holdings);
       return fetchPrices(holdings, null, stocks);
     };
 
-module.exports = { getBulkStockPrices, getStockPrice };
+module.exports = { getBulkStockPrices, getStockPrice, getHistoricalPrices };
