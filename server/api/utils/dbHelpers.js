@@ -61,7 +61,7 @@ exports.transact = (tradeData) => {
 exports.deposit = (depositData, username) => {
   const type = depositData.type;
   const amount = type === 'WITHDRAWAL' ?
-   - depositData.amount : depositData.amount;
+   -depositData.amount : depositData.amount;
    console.log(amount);
   return User.findOne({ where: { username } })
     .then(user => {
@@ -70,11 +70,9 @@ exports.deposit = (depositData, username) => {
     });
 };
 
-
 exports.getUser = (username) =>
   User.findOne({ where: { username } })
   .catch(err => console.log(err));
-
 
 exports.addUser = (username, userData) =>
     User.create({
