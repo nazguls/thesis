@@ -1,7 +1,7 @@
 var Models = require('./dbModels');
 
 Models.User.build({
-  username:'isaac123',
+  username:'isaac1',
   firstName:'isaac',
   lastName:'yoon',
   cash:3000,
@@ -29,7 +29,7 @@ Models.Stock.build({
   type: 'hold',
   purchaseDate: new Date(),
   purchasePrice: 123,
-  numOfShares: 10
+  numOfShares: 10,
   userID: 1
 }).save();
 
@@ -38,7 +38,7 @@ Models.Stock.build({
   type: 'hold',
   purchaseDate: new Date(),
   purchasePrice: 400,
-  numOfShares: 10
+  numOfShares: 10,
   userID: 1
 }).save();
 
@@ -47,7 +47,7 @@ Models.Stock.build({
   type: 'hold',
   purchaseDate: new Date(),
   purchasePrice: 123,
-  numOfShares: 10
+  numOfShares: 10,
   userID: 2
 }).save();
 
@@ -56,7 +56,7 @@ Models.Stock.build({
   type: 'hold',
   purchaseDate: new Date(),
   purchasePrice: 400,
-  numOfShares: 10
+  numOfShares: 10,
   userID: 2
 }).save();
 
@@ -129,3 +129,4 @@ Models.UserPortfolio.build({
   UserId: 1,
   PortfolioId: 5
 }).save();
+
