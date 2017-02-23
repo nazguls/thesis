@@ -42,6 +42,7 @@ export const searchChanged = (text) => {
 };
 
 export const searchStock = ({ search }) => {
+	console.log('search from index', search)
 	console.log('from search stock' , search);
 	return (dispatch) => {
 		axios.get('http://localhost:3000/api/stocks/'+ search +'?period=current')
