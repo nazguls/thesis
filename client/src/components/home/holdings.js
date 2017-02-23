@@ -39,13 +39,13 @@ class Holdings extends Component {
 			return <View></View>;
 		}
 		const { data } = this.state.portfolio;
-		const { viewStyle, container } = styles;
+		const { viewStyle, container, textStyle } = styles;
 		const stockData = data.map((stock, key)=> {
 			return (
 				<TouchableHighlight onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
-					<Text> {stock.symbol} </Text>
-					<Text> {stock.marketValue} </Text>
+					<Text style={textStyle}> {stock.symbol} </Text>
+					<Text style={textStyle}> {Math.round(stock.marketValue*100)/100} </Text>
 					</View>
 				</TouchableHighlight>
 			)}
@@ -69,9 +69,10 @@ const styles = {
 		// paddingRight: 10,
 		// paddingLeft: 10,
 		marginTop: 10,
-		marginLeft: 10,
-		marginRight: 10,
-		borderWidth: 1,
+		marginLeft: 20,
+		marginRight: 20,
+		borderColor: '#ddd',
+    borderBottomWidth: 1,
 		alignSelf: 'stretch',
 		backgroundColor: '#F8F8F8',
 		flexDirection: 'row',
@@ -84,7 +85,7 @@ const styles = {
 		alignSelf: 'stretch'
 	},
 	textStyle: {
-		fontSize: 20
+		fontSize: 17
 	}
 
 };

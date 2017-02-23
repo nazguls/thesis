@@ -23,7 +23,6 @@ const RouterComponent = () => {
         initial
       >
 			<Scene key="main" >
-
         <Scene
           sceneStyle={{ paddingTop: 60 }}
 					key='home'
