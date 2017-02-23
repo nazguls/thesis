@@ -10,25 +10,49 @@ const getStockPrice = (ticker) =>
       ).catch((err) => console.log(err));
 
  const getHistoricalPrices = (ticker, options) => {
- //day month week
+
 let currentDate = new Date();
-let endDate = new Date();
+let startDate = new Date();
 let numPeriods = options.numperiods;
 if(options.type === 'day') {
-  endDate.setDate(endDate.getDate() - numPeriods);
+  startDate.setDate(startDate.getDate() - numPeriods);
 }
 else if(options.type === 'month') {
-  endDate.setMonth(endDate.getMonth() - numPeriods);
+  startDate.setMonth(startDate.getMonth() - numPeriods);
 }
 else if(options.type === 'year') {
-  endDate.setFullYear(endDate.getFullYear() - numPeriods);
+  startDate.setFullYear(startDate.getFullYear() - numPeriods);
 }
 else if(options.type === 'week') {
-  endDate.setDate(endDate.getDate() - (numPeriods * 7));
+  startDate.setDate(startDate.getDate() - (numPeriods * 7));
 }
+
+let startMonth = startDate.getMonth()+1;
+let endMonth = currentDate.getMonth()+1;
+
+let startMonthFormatted = startMonth + 1 > 9 ? startMonth :
+  '0' + startMonth;
+
+  let startDayFormatted = startDate.getDate() > 9 ? startDate.getDate() :
+  '0' + startDate.getDate();
+
+let formattedStart = startDate.getFullYear()+'-'+startMonthFormatted+'-'+startDayFormatted+'T00:00:00-00';
+
+
+let currentMonth = endMonth + 1 > 9 ? endMonth :
+  '0' + endMonth;
+
+let formatCurrentDay = currentDate.getDate() > 9 ? currentDate.getDate() : '0' + currentDate.getDate();
+
+let formattedCurrent = currentDate.getFullYear()+'-'+currentMonth+'-'+formatCurrentDay+'T00:00:00-00';
+//2011-03-01T00:00:00-00
+console.log('start: ', formattedStart);
+console.log('end: ', formattedCurrent);
+console.log('type: ', options.type);
+
 // > a.getFullYear()
 // 2017
-// > a.setFullYear(a.getFullYear() - 2)
+ // startDate.setFullYear(startDate.getFullYear() - 2)
 
 // var d = new Date();
 // d.setDate(d.getDate() - 2);
@@ -38,14 +62,17 @@ else if(options.type === 'week') {
 // 1482455475157
 
  //{ period: 'historical', numperiods: '55', type: 'day' }
- const inputOptions = { params:
-  { parameters: { "Normalized": false, "StartDate": currentDate , "EndDate": endDate, "DataPeriod": options.type, "Elements":[{"Symbol": ticker, "Type": "price", "Params":["c"]}]}}}
+  const inputOptions = { params:
+  { parameters: { "Normalized": false, "StartDate":
+    formattedStart , "EndDate": formattedCurrent,
+    "DataPeriod": options.type, "Elements":[ {"Symbol": ticker, "Type": "price", "Params":["c"]}]}}}
 
-  return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', options)
+  return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
   .catch(err => console.log('20', err));
 };
 
 // http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json?parameters={"Normalized":false,"NumberOfDays":365,"DataPeriod":"Day","Elements":[{"Symbol":"AAPL","Type":"price","Params":["c"]}]}
+
 
  const getBulkStockPrices = (portfolio) => {
     const holdings = portfolio.map(stock => {
@@ -71,12 +98,10 @@ else if(options.type === 'week') {
           port[increment].currentPrice = stock.LastPrice;
           port[increment].marketValue = stock.LastPrice *
           port[increment].numOfShares;
-          console.log('38', port);
           resultArray = port;
           return fetchPrices(port, increment, resultArray);
         });
       };
-      console.log('44', holdings);
       return fetchPrices(holdings, null, stocks);
     };
 

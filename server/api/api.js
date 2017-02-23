@@ -3,7 +3,7 @@ const stocks = require('./stocks/stocksRoutes');
 const portfolio = require('./portfolio/portfolioRoutes');
 const users = require('./users/usersRoutes');
 const money = require('./money/moneyRoutes');
-const test = require('./test');
+// const test = require('./test');
 
 router.use('/portfolio', portfolio);
 router.use('/stocks', stocks);
