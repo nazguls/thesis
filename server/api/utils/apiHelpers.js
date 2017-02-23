@@ -13,6 +13,7 @@ const getStockPrice = (ticker) =>
  //day month week
 let currentDate = new Date();
 let endDate = new Date();
+let numPeriods = options.numperiods;
 if(options.type === 'day') {
   endDate.setDate(endDate.getDate() - numPeriods);
 }
