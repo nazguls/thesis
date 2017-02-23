@@ -9,50 +9,32 @@ const getStockPrice = (ticker) =>
             response.data
       ).catch((err) => console.log(err));
 
- const getHistoricalPrices = (ticker, options) => {
-
-let currentDate = new Date();
-//let startDate = new Date();
-let numPeriods = options.numperiods;
-let period = options.type;
-// if(options.type === 'day') {
-//   startDate.setDate(startDate.getDate() - numPeriods);
-// }
-// else if(options.type === 'month') {
-//   startDate.setMonth(startDate.getMonth() - numPeriods);
-// }
-// else if(options.type === 'year') {
-//   startDate.setFullYear(startDate.getFullYear() - numPeriods);
-// }
-// else if(options.type === 'week') {
-//   startDate.setDate(startDate.getDate() - (numPeriods * 7));
-// }
-
-let startDate = calculateStart(options.type, numPeriods)
-
-let formattedStart = formatDate(startDate);
-let formattedCurrentDate = formatDate(currentDate);
+const getHistoricalPrices = (ticker, options) => {
+  const currentDate = new Date();
+  const numPeriods = options.numperiods;
+  const period = options.type;
+  const startDate = calculateStart(options.type, numPeriods);
+  const formattedStart = formatDate(startDate);
+  const formattedCurrentDate = formatDate(currentDate);
 
   const inputOptions = { params:
   { parameters: { "Normalized": false, "StartDate":
     formattedStart , "EndDate": formattedCurrentDate,
-    "DataPeriod": period, "Elements":[ {"Symbol": ticker, "Type": "price", "Params":["c"]}]}}}
+    "DataPeriod": period, "Elements":[ {"Symbol": ticker, "Type": options.attribute, "Params":["c"]}]}}};
 
   return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
   .catch(err => console.log('20', err));
 };
 
  const formatDate = (date) => {
-
    const month = date.getMonth() + 1;
    const monthFormatted = month + 1 > 9 ? month :
      '0' + month;
    const dayFormatted = date.getDate() > 9 ? date.getDate() :
      '0' + date.getDate();
-
    const formattedDate = date.getFullYear()+'-'+monthFormatted+'-'+dayFormatted+'T00:00:00-00';
    return formattedDate;
- };
+  };
 
  const calculateStart = (period, numPeriods) => {
     const start = new Date();
