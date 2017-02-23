@@ -9,10 +9,36 @@ const getStockPrice = (ticker) =>
             response.data
       ).catch((err) => console.log(err));
 
- const getHistoricalPrices = (ticker) => {
+ const getHistoricalPrices = (ticker, options) => {
+ //day month week
+let currentDate = new Date();
+let endDate = new Date();
+if(options.type === 'day') {
+  endDate.setDate(endDate.getDate() - numPeriods);
+}
+else if(options.type === 'month') {
+  endDate.setMonth(endDate.getMonth() - numPeriods);
+}
+else if(options.type === 'year') {
+  endDate.setFullYear(endDate.getFullYear() - numPeriods);
+}
+else if(options.type === 'week') {
+  endDate.setDate(endDate.getDate() - (numPeriods * 7));
+}
+// > a.getFullYear()
+// 2017
+// > a.setFullYear(a.getFullYear() - 2)
 
- const options = { params:
-  { parameters: { "Normalized": false, "NumberOfDays": 2, "DataPeriod":"Minute", "Elements":[{"Symbol": ticker, "Type": "price", "Params":["c"]}]}}}
+// var d = new Date();
+// d.setDate(d.getDate() - 2);
+// > a.getMonth()
+// 1
+// > a.setMonth(a.getMonth() - 2)
+// 1482455475157
+
+ //{ period: 'historical', numperiods: '55', type: 'day' }
+ const inputOptions = { params:
+  { parameters: { "Normalized": false, "StartDate": currentDate , "EndDate": endDate, "DataPeriod": options.type, "Elements":[{"Symbol": ticker, "Type": "price", "Params":["c"]}]}}}
 
   return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', options)
   .catch(err => console.log('20', err));
