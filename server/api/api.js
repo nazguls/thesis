@@ -10,7 +10,7 @@ router.use('/stocks', stocks);
 router.use('/users', users);
 router.use('/money', money);
 
-router.use('/test', test);
+// router.use('/test', test);
 
 // });
 

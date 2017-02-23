@@ -1,7 +1,7 @@
 var Models = require('./dbModels');
 
 Models.User.build({
-  username:'isaac123',
+  username:'isaac1',
   firstName:'isaac',
   lastName:'yoon',
   cash:3000,
