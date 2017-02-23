@@ -16,9 +16,18 @@ class Deposit extends Component {
 	}
 
 	buttonPressed() {
-		console.log(this.state.DepositInput);
-		axios.post('/', {
-			deposit: this.state.DepositInput
+		const context = this;
+		axios({
+			method: 'post',
+			url: 'http://localhost:3000/api/money/' + 'mike',
+			data: {
+				amount: parseInt(context.state.DepositInput),
+				type: 'DEPOSIT',
+			}
+		}).then(function(response) {
+			console.log(response);
+		}).catch(function(error) {
+			console.log(error);
 		});
 	}
 

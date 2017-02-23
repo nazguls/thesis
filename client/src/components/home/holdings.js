@@ -1,34 +1,61 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
+import { Card, CardSection } from '../common';
 import { Actions } from 'react-native-router-flux';
+import axios from 'axios';
+import { searchStock } from '../../actions';
+import { connect } from 'react-redux';
 
 class Holdings extends Component {
 
 	constructor(props) {
 		super(props);
 
-		this.navigate = this.navigate.bind(this);
+		this.state = {
+			portfolio: []
+		};
 	}
 
-	navigate(routeName) {
-		console.log(routeName);
-		this.props.navigator.push({
-			id: routeName,
-			props: {
-				navigator: this.props.navigator
-			}
+	componentWillMount() {
+		const context = this;
+		axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=current')
+		.then(function(response) {
+			context.setState({
+				portfolio: response
+			});
+		}).catch(function(error) {
+			console.log(error);
 		});
 	}
 
+	onButtonPress(text) {
+		const searchQuery = text.symbol;
+		console.log('searchQuery', searchQuery);
+		this.props.searchStock( {search: searchQuery} );
+	}
 
 	render() {
-		const { textStyle } = styles;
-		return (
-			<View style={styles.viewStyle} >
-				<TouchableHighlight onPress={() => Actions.indStock()}>
-					<Text> AAPL </Text>
+		if (this.state.portfolio.length === 0) {
+			return <View></View>;
+		}
+		const { data } = this.state.portfolio;
+		const { viewStyle, container } = styles;
+		const stockData = data.map((stock, key)=> {
+			return (
+				<TouchableHighlight onPress={this.onButtonPress.bind(this, stock)}>
+					<View style={viewStyle} >
+					<Text> {stock.symbol} </Text>
+					<Text> {stock.marketValue} </Text>
+					</View>
 				</TouchableHighlight>
-					<Text> .25% </Text>
+			)}
+		);
+
+		return (
+			<View style={container} >
+				<ScrollView>
+					{stockData}
+				</ScrollView>
 			</View>
 		);
 	}
@@ -39,8 +66,8 @@ const styles = {
 		// marginBottom: 10,
 		paddingTop: 20,
 		paddingBottom: 20,
-		paddingRight: 10,
-		paddingLeft: 10,
+		// paddingRight: 10,
+		// paddingLeft: 10,
 		marginTop: 10,
 		marginLeft: 10,
 		marginRight: 10,
@@ -52,11 +79,23 @@ const styles = {
 		alignItems: 'center',
 		position: 'relative'
 	},
+	container:{
+		flex: 1,
+		alignSelf: 'stretch'
+	},
 	textStyle: {
 		fontSize: 20
 	}
 
 };
 
+	// return (
+	// 			<View style={styles.viewStyle} >
+	// 				<TouchableHighlight onPress={() => Actions.indStock()}>
+	// 					<Text> AAPL </Text>
+	// 				</TouchableHighlight>
+	// 					<Text> .25% </Text>
+	// 			</View>
+	// 		);
 
-export default Holdings;
+export default connect(null, { searchStock })(Holdings);

@@ -12,8 +12,7 @@ class Search extends Component {
 
 	onButtonPress() {
 		const { search } = this.props;
-		console.log('button pressed', search);
-		this.props.searchStock({ search })
+		this.props.searchStock({ search });
 	}
 
 
