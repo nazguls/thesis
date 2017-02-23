@@ -21,6 +21,7 @@ class Buy extends Component {
 		console.log('stockPrice', this.props.stockRes.data.LastPrice)
 		console.log('stockTicker', this.props.stockRes.data.Symbol)
 		const context = this;
+
 		axios({
 			method: 'post',
 			url: 'http://localhost:3000/api/stocks/' + 'nflx',
@@ -33,18 +34,16 @@ class Buy extends Component {
 
 			}
 		}).then(function(response) {
-			console.log(response);
+			Actions.home();
+			Actions.refresh();
 		}).catch(function(error) {
 			console.log(error)
 		});
-		Actions.indStock();
 	}
 
 	render() {
 
-		console.log('from buy' , this.props);
-		const { viewStyle, textStyle } = styles;
-		const {stockRes, stockShare} = this.props;
+		const { stockRes, stockShare } = this.props;
 		return (
 			<Card>
 				<CardSection>
