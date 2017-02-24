@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import {
 	EMAIL_CHANGED,
@@ -9,9 +10,25 @@ import {
 	SEARCH_CHANGED,
 	SEARCH_STOCK,
 	STOCK_RESULT,
-	STOCK_SHARE_CHANGED
+	STOCK_SHARE_CHANGED,
+	MARKET_VALUE,
+	CASH_VALUE
 } from './types';
-import axios from 'axios';
+
+
+export const updateMarketValue = (text) => {
+	return {
+		type: MARKET_VALUE,
+		payload: text
+	};
+};
+
+export const updateCashValue = (text) => {
+	return {
+		type: CASH_VALUE,
+		payload: text
+	};
+};
 
 export const updateStockShare = (text) => {
 	return {

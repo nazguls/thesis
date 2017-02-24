@@ -1,4 +1,4 @@
-//const Sequelize = require('sequelize');
+const Sequelize = require('sequelize');
 const connection = require('./dbConnect');
 const User = require('./userModel');
 const Stock = require('./stockModel');

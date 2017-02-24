@@ -7,3 +7,5 @@ export const SEARCH_CHANGED = 'search_changed';
 export const SEARCH_STOCK = 'search_stock';
 export const STOCK_RESULT = 'stock_result';
 export const STOCK_SHARE_CHANGED = 'stock_share_changed';
+export const MARKET_VALUE = 'market_value';
+export const CASH_VALUE = 'cash_value';

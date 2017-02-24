@@ -71,9 +71,11 @@ exports.deposit = (depositData, username) => {
     });
 };
 
-exports.getUser = (username) =>
-  User.findOne({ where: { username } })
+exports.getUser = (usernameInput) => {
+  const username = usernameInput.user;
+  return User.findOne({ where: { username } })
   .catch(err => console.log(err));
+};  
 
 exports.addUser = (username, userData) =>
     User.create({

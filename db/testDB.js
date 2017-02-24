@@ -1,25 +1,25 @@
-var Models = require('./dbModels');
+const Models = require('./dbModels');
 
 Models.User.build({
-  username:'isaac1',
-  firstName:'isaac',
-  lastName:'yoon',
-  cash:3000,
-  address:'123 Sycamore',
-  city:'SF',
-  state:'CA',
+  username: 'isaac1',
+  firstName: 'isaac',
+  lastName: 'yoon',
+  cash: 3000,
+  address: '123 Sycamore',
+  city: 'SF',
+  state: 'CA',
   zipCode: '34236'
 
 }).save();
 
 Models.User.build({
-  username:'adamw',
-  firstName:'adam',
-  lastName:'watt',
-  cash:4000,
-  address:'944 Market',
-  city:'SF',
-  state:'CA',
+  username: 'adamw',
+  firstName: 'adam',
+  lastName: 'watt',
+  cash: 4000,
+  address: '944 Market',
+  city: 'SF',
+  state: 'CA',
   zipCode: '34236'
 
 }).save();
@@ -85,6 +85,11 @@ Models.Portfolio.build({
   portfolioValue: 6000
 }).save();
 
+Models.Portfolio.build({
+  date: new Date(2017, 1, 23),
+  portfolioValue: 1638.36
+}).save();
+
 Models.UserStock.build({
   UserId: 1,
   StockId: 1
@@ -130,3 +135,7 @@ Models.UserPortfolio.build({
   PortfolioId: 5
 }).save();
 
+Models.UserPortfolio.build({
+  UserId: 1,
+  PortfolioId: 6
+}).save();
