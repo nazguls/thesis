@@ -3,9 +3,10 @@ import {
 	View,
 	Text 
 } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-class SlideUserProfile extends Component {
+class UserProfile extends Component {
 	
   render() {
 		const styles = {
@@ -28,16 +29,17 @@ class SlideUserProfile extends Component {
 				fontWeight: 'bold',
       },
 		};
+		console.log(this.props);
 		return (
       <View style={styles.controlPanel}>
         <Text style={styles.controlPanelWelcome}>
-					ISAAC YOON
+					{this.props.user.name}
         </Text>
         <Text style={styles.navItems}>
-					MARKET VALUE: 
+					MARKET VALUE: {this.props.user.mktValue}
         </Text>
         <Text style={styles.navItems}>
-					CASH:
+					CASH: {this.props.user.cash}
         </Text>
         <Text style={styles.navItems}>
 					<Icon name='account-balance' size={20} />  ACCOUNT
@@ -57,4 +59,8 @@ class SlideUserProfile extends Component {
   }
 }
 
-export default SlideUserProfile;
+const mapStateToProps = (state) => {
+	return { user: state.user };
+};
+
+export default connect(mapStateToProps, {})(UserProfile);
