@@ -42,7 +42,7 @@ class Holdings extends Component {
 		const { viewStyle, container, textStyle } = styles;
 		const stockData = data.map((stock, key)=> {
 			return (
-				<TouchableHighlight onPress={this.onButtonPress.bind(this, stock)}>
+				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
 					<Text style={textStyle}> {stock.symbol} </Text>
 					<Text style={textStyle}> {Math.round(stock.marketValue*100)/100} </Text>
@@ -66,15 +66,13 @@ const styles = {
 		// marginBottom: 10,
 		paddingTop: 20,
 		paddingBottom: 20,
-		// paddingRight: 10,
-		// paddingLeft: 10,
+		backgroundColor: 'transparent',
 		marginTop: 10,
 		marginLeft: 20,
 		marginRight: 20,
 		borderColor: '#ddd',
     borderBottomWidth: 1,
 		alignSelf: 'stretch',
-		backgroundColor: '#F8F8F8',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -85,7 +83,9 @@ const styles = {
 		alignSelf: 'stretch'
 	},
 	textStyle: {
-		fontSize: 17
+		fontSize: 17,
+		color: '#42f4c2'
+
 	}
 
 };

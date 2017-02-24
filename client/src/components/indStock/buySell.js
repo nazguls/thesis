@@ -21,10 +21,10 @@ class BuySell extends Component {
 		return (
 			<View style={styles.viewStyle}>
 				<TouchableHighlight style={styles.buttonStyle} onPress={() => Actions.buy()}>
-					<Text>Buy</Text>
+					<Text style={{ color: '#42f4c2' }}>Buy</Text>
 				</TouchableHighlight>
 				<TouchableHighlight style={styles.buttonStyle} onPress={() => Actions.sell()}>
-					<Text>Sell</Text>
+					<Text style={{ color: '#42f4c2' }}>Sell</Text>
 				</TouchableHighlight>
 			</View>
 		);
@@ -39,13 +39,15 @@ const styles = {
 		alignSelf: 'stretch',
 		justifyContent: 'space-around',
 		flexDirection: 'row',
-		backgroundColor: '#F8F8F8',
+		backgroundColor: 'transparent',
 		alignItems: 'center',
 		paddingTop: 5,
 		position: 'relative'
 	},
 	buttonStyle: {
 		borderWidth: 1,
+		borderRadius: 200,
+		borderColor: '#42f4c2',
 		flex: 1,
 		alignItems: 'center',
 		padding: 10,
@@ -53,7 +55,9 @@ const styles = {
 		marginLeft: 10
 	},
 	textStyle: {
-		fontSize: 20
+		fontSize: 20,
+		color: '#42f4c2'
+
 	}
 
 };

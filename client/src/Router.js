@@ -13,15 +13,22 @@ import deposit from './components/Deposit';
 const RouterComponent = () => {
 	return (
 		<Router >
-			<Scene key="auth">
-				<Scene key='login' component={LoginForm} title="Please Login" />
+			<Scene key="auth"  >
+				<Scene
+        key='login'
+        component={LoginForm}
+        title="Please Login"
+        hideNavBar='false'
+        />
 			</Scene>
+
       <Scene
         key="drawer"
         component={drawer}
         open={false}
         initial
       >
+
 			<Scene key="main" >
         <Scene
           sceneStyle={{ paddingTop: 60 }}
@@ -33,19 +40,22 @@ const RouterComponent = () => {
 					onRight={() => Actions.search()}
           onLeft={() => Actions.refresh({ key: 'drawer', open: value => !value })}
         />
+
         <Scene
           key='indStock'
           component={IndStock}
           title="Stock Description"
+          leftTitle="Home"
+          onLeft={() => Actions.home()}
           sceneStyle={{ paddingTop: 60 }}
         />
-				<Scene key='buy' component={buy} title="Market Buy" sceneStyle={{ paddingTop: 60 }} />
-				<Scene key='sell' component={sell} title="Market Sell" sceneStyle={{ paddingTop: 60 }} />
+        <Scene key='buy' component={buy} title="Market Buy" sceneStyle={{ paddingTop: 60 }} />
+        <Scene key='sell' component={sell} title="Market Sell" sceneStyle={{ paddingTop: 60 }} />
 
 
         <Scene key='search' component={search} title="Search" sceneStyle={{ paddingTop: 60 }} />
          <Scene key="deposit" component={deposit} title='Deposit' sceneStyle={{ paddingTop: 60 }} />
-			</Scene>
+      </Scene>
       </Scene>
     </Router>
 	);

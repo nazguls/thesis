@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
-import { Card, CardSection, Input, Button } from '../common/';
+import { Background, CardSection, Input, Button } from '../common/';
 import { updateStockShare } from '../../actions';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -37,7 +37,7 @@ class Sell extends Component {
 	render() {
 		const { stockRes, stockShare } = this.props;
 		return (
-			<Card>
+			<Background>
 				<CardSection>
 					<Input
 						label="Shares"
@@ -50,16 +50,15 @@ class Sell extends Component {
 				<CardSection>
 					<Input
 						label="MKT Price"
+						placeholder={JSON.stringify(stockRes.data.LastPrice)}
 					/>
-					<Text>{stockRes.data.LastPrice}</Text>
 				</CardSection>
 
 				<CardSection>
 					<Input
 						label="EST Cost"
-						placeholder="500"
+						placeholder={JSON.stringify(Math.round(stockRes.data.LastPrice * stockShare*100)/100)}
 					/>
-					<Text>{stockRes.data.LastPrice * stockShare}</Text>
 				</CardSection>
 
 				<CardSection>
@@ -67,7 +66,7 @@ class Sell extends Component {
 						Confirm
 					</Button>
 				</CardSection>
-			</Card>
+			</Background>
 	  );
 	}
 }

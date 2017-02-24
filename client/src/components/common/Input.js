@@ -21,7 +21,7 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
 
 const styles = {
   inputStyle: {
-    color: '#000',
+    color: '#42f4c2',
     paddingRight: 5,
     paddingLeft: 5,
     fontSize: 18,
@@ -31,13 +31,17 @@ const styles = {
   labelStyle: {
     fontSize: 18,
     paddingLeft: 20,
-    flex: 1
+    flex: 1,
+    color: '#42f4c2',
+
   },
   containerStyle: {
     height: 40,
     flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'transparent'
+
   }
 };
 
