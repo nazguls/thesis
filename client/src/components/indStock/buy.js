@@ -67,8 +67,9 @@ class Buy extends Component {
 						label="EST Cost"
 						placeholder="500"
 					/>
-					<Text>{stockRes.data.LastPrice * stockShare}</Text>
+					<Text>{Math.round((stockRes.data.LastPrice * stockShare)*100)/100}</Text>
 				</CardSection>
+
 
 				<CardSection>
 					<Button onPress={this.onButtonPress.bind(this)}>

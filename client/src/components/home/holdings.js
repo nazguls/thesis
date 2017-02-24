@@ -42,7 +42,7 @@ class Holdings extends Component {
 		const { viewStyle, container, textStyle } = styles;
 		const stockData = data.map((stock, key)=> {
 			return (
-				<TouchableHighlight onPress={this.onButtonPress.bind(this, stock)}>
+				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
 					<Text style={textStyle}> {stock.symbol} </Text>
 					<Text style={textStyle}> {Math.round(stock.marketValue*100)/100} </Text>

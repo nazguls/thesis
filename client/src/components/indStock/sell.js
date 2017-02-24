@@ -59,7 +59,8 @@ class Sell extends Component {
 						label="EST Cost"
 						placeholder="500"
 					/>
-					<Text>{stockRes.data.LastPrice * stockShare}</Text>
+					<Text>{Math.round(stockRes.data.LastPrice * stockShare*100)/100}</Text>
+					Math.round(stock.marketValue*100)/100
 				</CardSection>
 
 				<CardSection>

@@ -9,20 +9,36 @@ import drawer from './components/home/drawerComponent';
 import search from './components/home/search';
 import accountIcon from './components/assets/ic_account_circle.png';
 import deposit from './components/Deposit';
+import welcome from './components/Welcome';
 
 const RouterComponent = () => {
 	return (
 		<Router >
-			<Scene key="auth">
-				<Scene key='login' component={LoginForm} title="Please Login" />
+
+      <Scene key="welcome" initial>
+        <Scene
+        key="welcomePage"
+        component={welcome}
+        hideNavBar='false'
+
+        />
+      </Scene>
+
+			<Scene key="auth"  >
+				<Scene
+        key='login'
+        component={LoginForm}
+        title="Please Login"
+        sceneStyle={{ paddingTop: 60 }} />
 			</Scene>
+
       <Scene
         key="drawer"
         component={drawer}
         open={false}
-        initial
       >
-			<Scene key="main" >
+			<Scene key="main"  >
+
         <Scene
           sceneStyle={{ paddingTop: 60 }}
 					key='home'
