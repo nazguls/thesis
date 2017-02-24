@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
+import { connect } from 'react-redux';
 
 class PortfolioValue extends Component {
 	render() {
 		const { textStyle } = styles;
 		return (
-			<Text style={styles.textStyle}> 3200.70 </Text>
+			<Text style={styles.textStyle}> ${Math.round((this.props.mktValue + this.props.cashValue) * 100) / 100 } </Text>
 		);
 	}
 }
@@ -20,4 +21,13 @@ const styles = {
 	}
 };
 
-export default PortfolioValue;
+const mapStateToProps = ({ user }) => {
+	const { mktValue, cashValue } = user;
+	return ({
+		mktValue,
+		cashValue
+	});
+};
+
+
+export default connect(mapStateToProps, {})(PortfolioValue);

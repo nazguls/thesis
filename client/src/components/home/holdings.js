@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
-import { Card, CardSection } from '../common';
+import { CardSection } from '../common';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
-import { searchStock } from '../../actions';
+import { searchStock, updateMarketValue } from '../../actions';
 import { connect } from 'react-redux';
 
 class Holdings extends Component {
@@ -19,19 +19,25 @@ class Holdings extends Component {
 	componentWillMount() {
 		const context = this;
 		axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=current')
-		.then(function(response) {
+		.then(response => {
 			context.setState({
 				portfolio: response
 			});
-		}).catch(function(error) {
+			let total = 0;
+			for (let i = 0; i < response.data.length; i++) {
+				total += response.data[i].marketValue;
+			}
+			console.log('total', total);
+
+			context.props.updateMarketValue(total);
+		}).catch(error => {
 			console.log(error);
 		});
 	}
 
 	onButtonPress(text) {
 		const searchQuery = text.symbol;
-		console.log('searchQuery', searchQuery);
-		this.props.searchStock( {search: searchQuery} );
+		this.props.searchStock({ search: searchQuery });
 	}
 
 	render() {
@@ -45,7 +51,7 @@ class Holdings extends Component {
 				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
 					<Text style={textStyle}> {stock.symbol} </Text>
-					<Text style={textStyle}> {Math.round(stock.marketValue*100)/100} </Text>
+					<Text style={textStyle}> $ {Math.round(stock.currentPrice * 100) / 100} </Text>
 					</View>
 				</TouchableHighlight>
 			)}
@@ -63,7 +69,6 @@ class Holdings extends Component {
 
 const styles = {
 	viewStyle: {
-		// marginBottom: 10,
 		paddingTop: 20,
 		paddingBottom: 20,
 		backgroundColor: 'transparent',
@@ -90,13 +95,4 @@ const styles = {
 
 };
 
-	// return (
-	// 			<View style={styles.viewStyle} >
-	// 				<TouchableHighlight onPress={() => Actions.indStock()}>
-	// 					<Text> AAPL </Text>
-	// 				</TouchableHighlight>
-	// 					<Text> .25% </Text>
-	// 			</View>
-	// 		);
-
-export default connect(null, { searchStock })(Holdings);
+export default connect(null, { searchStock, updateMarketValue })(Holdings);
