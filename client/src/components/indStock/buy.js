@@ -10,7 +10,6 @@ class Buy extends Component {
 
 
 	onSharesChange(text) {
-		console.log('from onSharesChange', text)
 		this.props.updateStockShare(text);
 	}
 
@@ -54,16 +53,15 @@ class Buy extends Component {
 				<CardSection>
 					<Input
 						label="MKT Price"
+						placeholder={JSON.stringify(stockRes.data.LastPrice)}
 					/>
-					<Text>{stockRes.data.LastPrice}</Text>
 				</CardSection>
 
 				<CardSection>
 					<Input
 						label="EST Cost"
-						placeholder="500"
+						placeholder={JSON.stringify(Math.round((stockRes.data.LastPrice * stockShare)*100)/100)}
 					/>
-					<Text>{Math.round((stockRes.data.LastPrice * stockShare)*100)/100}</Text>
 				</CardSection>
 
 
