@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
-import { Card, CardSection, Input, Button } from '../common/';
+import { CardSection, Input, Button, Background } from '../common/';
 import { updateStockShare } from '../../actions';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -17,11 +17,7 @@ class Buy extends Component {
 
 
 	onButtonPress() {
-		console.log('stockShare', this.props.stockShare);
-		console.log('stockPrice', this.props.stockRes.data.LastPrice)
-		console.log('stockTicker', this.props.stockRes.data.Symbol)
 		const context = this;
-
 		axios({
 			method: 'post',
 			url: 'http://localhost:3000/api/stocks/' + 'nflx',
@@ -45,7 +41,7 @@ class Buy extends Component {
 
 		const { stockRes, stockShare } = this.props;
 		return (
-			<Card>
+			<Background>
 				<CardSection>
 					<Input
 						label="Shares"
@@ -67,15 +63,16 @@ class Buy extends Component {
 						label="EST Cost"
 						placeholder="500"
 					/>
-					<Text>{stockRes.data.LastPrice * stockShare}</Text>
+					<Text>{Math.round((stockRes.data.LastPrice * stockShare)*100)/100}</Text>
 				</CardSection>
+
 
 				<CardSection>
 					<Button onPress={this.onButtonPress.bind(this)}>
 						Confirm
 					</Button>
 				</CardSection>
-			</Card>
+			</Background>
 	  );
 	}
 }
@@ -84,7 +81,6 @@ const styles = {
 	viewStyle: {
 		marginTop: 20,
 		marginBottom: 10,
-		backgroundColor: '#F8F8F8',
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: 60,
@@ -96,7 +92,9 @@ const styles = {
 		position: 'relative'
 	},
 	textStyle: {
-		fontSize: 20
+		fontSize: 20,
+		color: '#42f4c2'
+
 	}
 };
 

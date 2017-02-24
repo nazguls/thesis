@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, Image } from 'react-native';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
+import { Background } from './common';
+
 
 class LoginForm extends Component {
 
@@ -33,7 +35,9 @@ class LoginForm extends Component {
 
 	render() {
 		return (
-			<Card>
+			<Background>
+				<Text style={style.limeShape}> 3<Text style={style.limeTitle}> lime </Text>
+				</Text>
 				<CardSection>
 					<Input
 						label="Email"
@@ -62,12 +66,35 @@ class LoginForm extends Component {
 				<CardSection>
 					{this.renderButton()}
 				</CardSection>
-			</Card>
+			</Background>
+
 		);
 	}
 }
 
 const style = {
+	limeShape: {
+		fontSize: 200,
+		color: 'transparent',
+		borderWidth: 3,
+		borderColor: '#42f4c2',
+		borderRadius: 100,
+		backgroundColor: 'transparent'
+	},
+	limeTitle: {
+		fontWeight: '100',
+		fontSize: 60,
+		backgroundColor: 'transparent',
+		color: '#42f4c2',
+		marginBottom: 30
+	},
+	background: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: null,
+		height: null
+	},
 	errorTextStyle: {
 		fontSize: 20,
 		alignSelf: 'center',

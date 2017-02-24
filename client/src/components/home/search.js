@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardSection, Input, Button } from '../common';
+import { Card, CardSection, Input, Button, Background } from '../common';
 import { Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { searchChanged, searchStock } from '../../actions';
@@ -19,7 +19,7 @@ class Search extends Component {
 	render() {
 		const { viewStyle } = styles;
 		return (
-			<Card>
+			<Background>
 				<CardSection>
 					<Input label='Search' onChangeText={this.onSearchChange.bind(this)} value={this.props.search} />
 
@@ -31,7 +31,7 @@ class Search extends Component {
 					</Button>
 				</CardSection>
 
-			</Card>
+			</Background>
 
 
 		);
