@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { AppRegistry, View, Text, ScrollView } from 'react-native';
-import { Card, CardSection } from '../common';
+import { Background } from '../common';
 import { connect } from 'react-redux';
 
 
@@ -30,58 +30,58 @@ class Index extends Component {
 
 		return (
 			<ScrollView>
-				<View>
-					<Header headerText />
-					<Price Price />
+				<Background>
+					<Header />
+					<Price />
 					<Chart Chart={stockObj.chart} />
 					<Periodic />
 					<BuySell />
-					<Text style = {{ marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3 }}> Stats </Text>
+					<Text style = {{ backgroundColor: 'transparent', marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3, color: '#42f4c2' }}> Stats </Text>
 
 					<View style={viewStyle}>
 						<View style={columnStyle}>
-							<Text> OPEN </Text>
-							<Text> {stockRes.data.Open} </Text>
+							<Text style={textStyle}> OPEN </Text>
+							<Text style={textStyle}> {stockRes.data.Open} </Text>
 						</View>
 						<View style={columnStyle}>
-							<Text> HIGH </Text>
-							<Text> {stockRes.data.High} </Text>
+							<Text style={textStyle}> HIGH </Text>
+							<Text style={textStyle}> {stockRes.data.High} </Text>
 						</View>
 					</View>
 
 					<View style={viewStyle}>
 						<View style={columnStyle}>
-							<Text> LOW </Text>
-							<Text> {stockRes.data.Low} </Text>
+							<Text style={textStyle}> LOW </Text>
+							<Text style={textStyle}> {stockRes.data.Low} </Text>
 						</View>
 						<View style={columnStyle}>
-							<Text> CHANGE </Text>
-							<Text> {Math.round((stockRes.data.Change * 100) / 100) + '%'} </Text>
-						</View>
-					</View>
-
-					<View style={viewStyle}>
-						<View style={columnStyle}>
-							<Text> CHANGE YTD </Text>
-							<Text> {stockRes.data.ChangeYTD} </Text>
-						</View>
-						<View style={columnStyle}>
-							<Text> MKT CAP </Text>
-							<Text> {Math.round(stockRes.data.MarketCap / 1000000000)} Bil </Text>
+							<Text style={textStyle}> CHANGE </Text>
+							<Text style={textStyle}> {Math.round((stockRes.data.Change * 100) / 100) + '%'} </Text>
 						</View>
 					</View>
 
 					<View style={viewStyle}>
 						<View style={columnStyle}>
-							<Text> VOL </Text>
-							<Text> {stockRes.data.Volume} </Text>
+							<Text style={textStyle}> CHANGE YTD </Text>
+							<Text style={textStyle}> {stockRes.data.ChangeYTD} </Text>
+						</View>
+						<View style={columnStyle}>
+							<Text style={textStyle}> MKT CAP </Text>
+							<Text style={textStyle}> {Math.round(stockRes.data.MarketCap / 1000000000)} Bil </Text>
+						</View>
+					</View>
+
+					<View style={viewStyle}>
+						<View style={columnStyle}>
+							<Text style={textStyle}> VOL </Text>
+							<Text style={textStyle}> {stockRes.data.Volume} </Text>
 						</View>
 						<View style={columnStyle}>
 							<Text>  </Text>
 							<Text> </Text>
 						</View>
 					</View>
-				</View>
+				</Background>
 			</ScrollView>
 
 
@@ -95,7 +95,8 @@ const styles = {
 		marginTop: 5,
 		marginBottom: 5,
 		marginLeft: 10,
-		marginRight:10,
+		marginRight: 10,
+		backgroundColor: 'transparent',
 		justifyContent: 'space-between',
 		flexDirection: 'row',
 		position: 'relative',
@@ -109,10 +110,10 @@ const styles = {
 		borderBottomWidth: 1,
 		justifyContent: 'space-between',
 		flex: 1,
-		borderColor: '#ddd'
+		borderColor: 'grey'
 	},
 	textStyle: {
-		fontSize: 12
+		color: '#42f4c2'
 	}
 };
 

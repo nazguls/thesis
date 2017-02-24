@@ -11,7 +11,7 @@ class Header extends Component {
 
 				<View style={viewStyle}>
 					<Text style={textStyle}>{stockRes.data.Name}</Text>
-					<Text>{stockRes.data.Symbol}</Text>
+					<Text style={{ color: '#42f4c2', marginBottom: 20 }}>{stockRes.data.Symbol}</Text>
 				</View>
 		);
 	};
@@ -19,20 +19,19 @@ class Header extends Component {
 
 const styles = {
 	viewStyle: {
-		// marginBottom: 10,
-		backgroundColor: '#F8F8F8',
+		backgroundColor: 'transparent',
 		justifyContent: 'center',
 		alignItems: 'center',
 		height: 60,
 		paddingTop: 20,
-		shadowColor: '#000',
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.2,
-		elevation: 2,
-		position: 'relative'
+		position: 'relative',
+		borderBottomWidth: 1,
+		borderColor: 'grey'
 	},
 	textStyle: {
-		fontSize: 20
+		fontSize: 20,
+		color: '#42f4c2'
+
 	}
 
 };

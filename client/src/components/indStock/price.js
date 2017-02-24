@@ -20,15 +20,17 @@ class Price extends Component {
 
 const styles = {
 	viewStyle: {
-		marginTop: 30,
+		marginTop: 15,
 		justifyContent: 'center',
 		alignItems: 'center',
-		// height: 60,
-		paddingTop: 20,
-		position: 'relative'
+		paddingTop: 15,
+		position: 'relative',
+		backgroundColor: 'transparent'
 	},
 	textStyle: {
-		fontSize: 45
+		fontSize: 45,
+		color: '#42f4c2',
+		fontWeight: '100'
 	}
 };
 

@@ -20,6 +20,7 @@ class Periodic extends Component {
 
 const styles = {
 	viewStyle: {
+		backgroundColor: 'transparent',
 		marginTop: 20,
 		alignSelf: 'stretch',
 		flexDirection: 'row',

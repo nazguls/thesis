@@ -26,6 +26,7 @@ const styles = {
 		justifyContent: 'space-around'
 	},
 	textStyle: {
+		backgroundColor: 'transparent',
 		fontSize: 12,
 		color: 'grey',
 
