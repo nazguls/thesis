@@ -30,9 +30,9 @@ class Index extends Component {
 
 		return (
 			<ScrollView>
-				<View>
+				<Background>
 					<Header />
-					<Price  />
+					<Price />
 
 					<Chart Chart={stockObj.chart} />
 					<Periodic />
