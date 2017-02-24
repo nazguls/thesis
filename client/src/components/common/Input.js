@@ -14,6 +14,8 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
+        keyboardType='numeric'
+        placeholderTextColor= '#42f4c2'
       />
     </View>
   );

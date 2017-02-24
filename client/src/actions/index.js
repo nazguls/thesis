@@ -59,8 +59,6 @@ export const searchChanged = (text) => {
 };
 
 export const searchStock = ({ search }) => {
-	console.log('search from index', search)
-	console.log('from search stock' , search);
 	return (dispatch) => {
 		axios.get('http://localhost:3000/api/stocks/'+ search +'?period=current')
 		.then((stockInfo) => indStockFetched(dispatch, stockInfo))
@@ -69,7 +67,6 @@ export const searchStock = ({ search }) => {
 };
 
 const indStockFetched = (dispatch, stockInfo) => {
-	console.log('stockInfo fetched', stockInfo);
 	dispatch({
 		type: STOCK_RESULT,
 		payload: stockInfo
