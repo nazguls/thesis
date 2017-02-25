@@ -26,10 +26,10 @@ class Buy extends Component {
 				userId: 1,
 				price: context.props.stockRes.data.LastPrice,
 				shares: context.props.stockShare,
-
 			}
 		}).then(function(response) {
-			Actions.home();
+			Actions.pop();
+			Actions.pop();
 			Actions.refresh();
 		}).catch(function(error) {
 			console.log(error)
