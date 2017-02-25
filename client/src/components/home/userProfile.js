@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+<<<<<<< 322f8d70218a4e2589cdc96906f747d6414d053e
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+=======
+>>>>>>> added chart handlers
 import {
 	View,
 	Text
@@ -33,6 +36,11 @@ class UserProfile extends Component {
 	}
 
 
+<<<<<<< 322f8d70218a4e2589cdc96906f747d6414d053e
+=======
+class SlideUserProfile extends Component {
+
+>>>>>>> added chart handlers
   render() {
 		const styles = {
 			controlPanel: {
@@ -64,7 +72,11 @@ class UserProfile extends Component {
 					Hi, {this.props.user.name}!
         </Text>
         <Text style={styles.navItems}>
+<<<<<<< 322f8d70218a4e2589cdc96906f747d6414d053e
 					MARKET VALUE
+=======
+					MARKET VALUE:
+>>>>>>> added chart handlers
         </Text>
         <Text style={styles.navItems}>
           $ {Math.round(this.props.user.mktValue * 100) / 100}
