@@ -72,10 +72,13 @@ exports.deposit = (depositData, username) => {
 };
 
 exports.getUser = (usernameInput) => {
-  const username = usernameInput.user;
-  return User.findOne({ where: { username } })
+
+  const username =  usernameInput.user;
+  console.log('76', username);
+  return User.findOne({ where: {  username } })
+   //then(user => user)
   .catch(err => console.log(err));
-};  
+ }
 
 exports.addUser = (username, userData) =>
     User.create({

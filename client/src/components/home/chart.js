@@ -15,17 +15,6 @@ const { Surface, Group, Shape, } = ART;
 const dimensionsWindow = Dimensions.get('window');
 console.log('15: ', dimensionsWindow);
 
-const data = [
-  {date: new Date(2000, 1, 1), value: 83.24},
-  {date: new Date(2000, 1, 2), value: 85.35},
-  {date: new Date(2000, 1, 3), value: 98.84},
-  {date: new Date(2000, 1, 4), value: 79.92},
-  {date: new Date(2000, 1, 5), value: 83.80},
-  {date: new Date(2000, 1, 6), value: 88.47},
-  {date: new Date(2000, 1, 7), value: 94.47}
-];
-
-
 const xAccessor = function(d) {return d.date}
 
 const yAccessor = function(d) {return d.value}
@@ -42,14 +31,25 @@ class Chart extends Component {
 
     componentWillMount() {
 
-      axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical')
-
-
-      const line = makeChart.createLineGraph({
-      data, xAccessor, yAccessor, width: 300, height: 200 });
-      this.setState({lineGraph: line.path}, function() {
-        console.log('46', line);
+      axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
+        console.log('46', response);
+        let data = response.data.map(dataObj => {
+          return {
+            date: new Date(dataObj.date),
+            value: dataObj.portfolioValue
+          }
+        })
+        console.log('52', data);
+        const line = makeChart.createLineGraph({
+        data, xAccessor, yAccessor, width: 300, height: 200 });
+        this.setState({lineGraph: line.path}, function() {
+          console.log('46', line);
+        });
       })
+
+        // console.log('46', response));
+
+
     }
 
     //this.state = {lineGraph: ''};
