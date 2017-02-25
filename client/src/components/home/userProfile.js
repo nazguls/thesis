@@ -78,7 +78,7 @@ class UserProfile extends Component {
         <Text style={styles.navItems} onPress={() => Actions.deposit()}>
 					<Icon name='account-balance' size={20} />  ACCOUNT
         </Text>
-        <Text style={styles.navItems}>
+        <Text style={styles.navItems} onPress={() => Actions.history()}>
 					<Icon name='history' size={20} />  HISTORY
         </Text>
         <Text style={styles.navItems}>

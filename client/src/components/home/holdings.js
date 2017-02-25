@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight, ScrollView } from 'react-native';
+import { Text, View, TouchableHighlight, ScrollView, Image } from 'react-native';
 import { CardSection } from '../common';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
@@ -12,7 +12,7 @@ class Holdings extends Component {
 		super(props);
 
 		this.state = {
-			portfolio: []
+			portfolio: null
 		};
 	}
 
@@ -23,6 +23,8 @@ class Holdings extends Component {
 			context.setState({
 				portfolio: response
 			});
+
+
 			let total = 0;
 			for (let i = 0; i < response.data.length; i++) {
 				total += response.data[i].marketValue;
@@ -41,12 +43,16 @@ class Holdings extends Component {
 	}
 
 	render() {
-		if (this.state.portfolio.length === 0) {
-			return <View></View>;
+		if(this.state.portfolio === null) {
+			return (
+				<View>
+					<Image source={{ uri: 'http://i.giphy.com/13vjYK5TC5wELK.gif' }} style={{ width: 50, height: 50}}/>
+				</View>
+			)
 		}
 		const { data } = this.state.portfolio;
 		const { viewStyle, container, textStyle } = styles;
-		const stockData = data.map((stock, key)=> {
+		const stockData = data.map((stock, key) => {
 			return (
 				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >

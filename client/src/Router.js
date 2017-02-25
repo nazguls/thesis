@@ -9,11 +9,12 @@ import drawer from './components/home/drawerComponent';
 import search from './components/home/search';
 import accountIcon from './components/assets/ic_account_circle.png';
 import deposit from './components/Deposit';
+import history from './components/History';
 
 const RouterComponent = () => {
 	return (
 		<Router >
-			<Scene key="auth"  >
+			<Scene key="auth">
 				<Scene
         key='login'
         component={LoginForm}
@@ -49,13 +50,32 @@ const RouterComponent = () => {
           onLeft={() => Actions.home()}
           sceneStyle={{ paddingTop: 60 }}
         />
-        <Scene key='buy' component={buy} title="Market Buy" sceneStyle={{ paddingTop: 60 }} />
-        <Scene key='sell' component={sell} title="Market Sell" sceneStyle={{ paddingTop: 60 }} />
-
-
         <Scene key='search' component={search} title="Search" sceneStyle={{ paddingTop: 60 }} />
-         <Scene key="deposit" component={deposit} title='Deposit' sceneStyle={{ paddingTop: 60 }} />
+        </Scene>
       </Scene>
+
+      <Scene key="buyPage">
+        <Scene
+        key='buy'
+        component={buy}
+        title="Market Buy"
+        sceneStyle={{ paddingTop: 60 }}
+        leftTitle="back"
+        onLeft={() => Actions.pop()} />
+      </Scene>
+      <Scene key='sellPage'>
+        <Scene
+        key='sell'
+        component={sell}
+        title="Market Sell"
+        sceneStyle={{ paddingTop: 60 }}
+        leftTitle="back"
+        onLeft={() => Actions.pop()} />
+      </Scene>
+
+      <Scene key= 'sideNav'>
+         <Scene key="deposit" component={deposit} title='Deposit' sceneStyle={{ paddingTop: 60 }} />
+         <Scene key='history' component={history} title='History' sceneStyle={{ paddingTop: 60 }} />
       </Scene>
     </Router>
 	);
