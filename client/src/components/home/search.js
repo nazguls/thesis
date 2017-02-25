@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
-import { CardSection, Input, Button, Background } from '../common';
+import { Text, ScrollView, View } from 'react-native';
+import { CardSection, Input, Button, Background, TouchableHighlight } from '../common';
 import { connect } from 'react-redux';
 import { searchChanged, searchStock } from '../../actions';
+import ticker from '../../ticker.json';
 
 class Search extends Component {
+	constructor() {
+		super();
+		this.state = {
+			ticker: []
+		}
+	}
 
 	onSearchChange(text) {
 		this.props.searchChanged(text);
+		let appendTicker = ticker.filter(ticker => {
+			if(ticker.Symbol.toUpperCase().indexOf(text.toUpperCase()) !== -1) {
+				return (ticker.Symbol);
+			}
+		});
+		this.setState({ ticker: appendTicker });
 	}
 
 	onButtonPress() {
 		const { search } = this.props;
 		this.props.searchStock({ search });
+	}
+
+	tickerPressed(text) {
+		console.log(text);
 	}
 
 
@@ -27,6 +45,18 @@ class Search extends Component {
 					/>
 				</CardSection>
 
+				<ScrollView>
+					<View style={styles.viewStyles}>
+					{this.state.ticker.map((suggestion, key) => {
+						return (
+							<View key={key} style={styles.boxStyle} onPress={this.tickerPressed.bind(this, suggestion)}>
+								<Text style={styles.textStyle}> {suggestion.Symbol} : {suggestion.Name}</Text>
+							</View>
+						)
+					})}
+					</View>
+				</ScrollView>
+
 				<CardSection>
 					<Button onPress={this.onButtonPress.bind(this)}>
 						Search
@@ -41,9 +71,20 @@ class Search extends Component {
 }
 const styles = {
 	viewStyle: {
-		alignSelf: 'stretch',
-		flexDirection: 'row',
-		justifyContent: 'space-between'
+		height: 300
+	},
+	boxStyle: {
+		borderWidth: 1,
+		padding: 5,
+		borderRadius: 5,
+		borderColor: 'gray'
+
+
+	},
+	textStyle: {
+		backgroundColor: 'transparent',
+		fontSize: 15,
+		color: '#42f4c2'
 	}
 };
 

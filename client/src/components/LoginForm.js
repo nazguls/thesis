@@ -76,14 +76,15 @@ const style = {
 	limeShape: {
 		fontSize: 200,
 		color: 'transparent',
-		borderWidth: 3,
+		borderWidth: 2,
 		borderColor: '#42f4c2',
-		borderRadius: 100,
-		backgroundColor: 'transparent'
+		borderRadius: 80,
+		backgroundColor: 'transparent',
+		marginBottom: 50
 	},
 	limeTitle: {
 		fontWeight: '100',
-		fontSize: 60,
+		fontSize: 50,
 		backgroundColor: 'transparent',
 		color: '#42f4c2',
 		marginBottom: 30

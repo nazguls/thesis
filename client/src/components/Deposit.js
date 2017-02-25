@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, CardSection, Input } from './common';
+import { Button, Background, CardSection, Input } from './common';
 import axios from 'axios';
 
 class Deposit extends Component {
@@ -33,7 +33,7 @@ class Deposit extends Component {
 
 	render() {
 		return (
-			<Card>
+			<Background>
 				<CardSection>
 					<Input
 						label="Amount"
@@ -47,7 +47,7 @@ class Deposit extends Component {
 						Deposit
 					</Button>
 				</CardSection>
-			</Card>
+				</Background>
 		);
 	}
 }
