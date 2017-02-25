@@ -42,7 +42,7 @@ class Chart extends Component {
 
     componentWillMount() {
 
-      axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical');
+      axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical')
 
 
       const line = makeChart.createLineGraph({
@@ -61,8 +61,8 @@ class Chart extends Component {
        <Group x={100} y={0}>
        <Shape
           d={this.state.lineGraph}
-          stroke="#000"
-          strokeWidth={1} />
+          stroke="orange"
+          strokeWidth={3} />
          </Group>
         </Surface>
       </View>
