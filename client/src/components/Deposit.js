@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Background, CardSection, Input } from './common';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
 
 class Deposit extends Component {
 	constructor() {
@@ -19,13 +20,14 @@ class Deposit extends Component {
 		const context = this;
 		axios({
 			method: 'post',
-			url: 'http://127.0.0.1:3000/api/money/' + 'mike',
+			url: 'http://127.0.0.1:3000/api/money/' + 'isaac1',
 			data: {
 				amount: parseInt(context.state.DepositInput),
 				type: 'DEPOSIT',
 			}
 		}).then(function(response) {
 			console.log(response);
+			Actions.pop();
 		}).catch(function(error) {
 			console.log(error);
 		});
