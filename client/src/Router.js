@@ -73,10 +73,10 @@ const RouterComponent = () => {
         onLeft={() => Actions.pop()} />
       </Scene>
 
-      <Scene key= 'sideNav'>
+
          <Scene key="deposit" component={deposit} title='Deposit' sceneStyle={{ paddingTop: 60 }} />
          <Scene key='history' component={history} title='History' sceneStyle={{ paddingTop: 60 }} />
-      </Scene>
+
     </Router>
 	);
 };

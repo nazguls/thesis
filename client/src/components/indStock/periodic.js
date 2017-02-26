@@ -7,7 +7,7 @@ class Periodic extends Component {
 
 		return (
 			<View style={styles.viewStyle}>
-				<Text style={styles.textStyle}> 1D </Text>
+				<Text style={styles.textStyle}> 1W </Text>
 				<Text style={styles.textStyle}> 1M </Text>
 				<Text style={styles.textStyle}> 3M </Text>
 				<Text style={styles.textStyle}> 6M </Text>

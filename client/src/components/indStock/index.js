@@ -35,7 +35,6 @@ class Index extends Component {
 					<Price />
 
 					<Chart Chart={stockObj.chart} />
-					<Periodic />
 					<BuySell />
 					<Text style = {{ backgroundColor: 'transparent', marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3, color: '#42f4c2' }}> Stats </Text>
 

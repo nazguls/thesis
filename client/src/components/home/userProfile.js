@@ -23,7 +23,7 @@ class UserProfile extends Component {
 		// 	console.log(error);
 		// });
 
-		axios.get('http://localhost:3000/api/users/isaac1')
+		axios.get('http://127.0.0.1:3000/api/users/isaac1')
 		.then(response => {
 			const cashValue = response.data.cash;
 			context.props.updateCashValue(cashValue);
