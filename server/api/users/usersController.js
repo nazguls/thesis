@@ -3,7 +3,7 @@ const dbHelper = require('../utils/dbHelpers');
 exports.get = ((req, res) => {
   const username = req.params;
   dbHelper.getUser(username)
-    .then((userData) => res.send(userData))
+    .then((userData) => {console.log(userData); res.send(userData)})
     .catch((err) => res.send(err));
 });
 

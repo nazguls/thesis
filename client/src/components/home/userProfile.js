@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+
 import {
 	View,
 	Text
@@ -31,6 +32,7 @@ class UserProfile extends Component {
 			console.log(error);
 		});
 	}
+
 
 
   render() {
