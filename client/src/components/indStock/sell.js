@@ -17,7 +17,7 @@ class Sell extends Component {
 		const context = this;
 		axios({
 			method: 'post',
-			url: 'http://localhost:3000/api/stocks/' + 'nflx',
+			url: 'http://127.0.0.1:3000/api/stocks/',
 			data: {
 				stock: context.props.stockRes.data.Symbol,
 				transact: 'sell',

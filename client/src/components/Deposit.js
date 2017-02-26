@@ -19,7 +19,7 @@ class Deposit extends Component {
 		const context = this;
 		axios({
 			method: 'post',
-			url: 'http://localhost:3000/api/money/' + 'mike',
+			url: 'http://127.0.0.1:3000/api/money/' + 'mike',
 			data: {
 				amount: parseInt(context.state.DepositInput),
 				type: 'DEPOSIT',
