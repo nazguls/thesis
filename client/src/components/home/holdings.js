@@ -18,7 +18,7 @@ class Holdings extends Component {
 
 	componentWillMount() {
 		const context = this;
-		axios.get('http://127.0.0.1:3000/api/portfolio/' + 'isaac1?period=current')
+		axios.get('http://127.0.0.1:3000/api/portfolio/isaac1?period=current')
 		.then(response => {
 			context.setState({
 				portfolio: response

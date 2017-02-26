@@ -8,7 +8,7 @@ exports.get = (req, res) => {
   console.log('query', req.query);
   if (period === 'historical') {
     apiHelper.getHistoricalPrices(stock, options)
-      .then(data => { console.log(data); res.send(data.data); })
+      .then(data => { res.send(data.data); })
       .catch(err => res.status(404).send(err));
   }
   if (period === 'current') {

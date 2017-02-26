@@ -15,11 +15,11 @@ class Buy extends Component {
 
 
 
-	onButtonPress() {
+	onButtonPress(symbol) {
 		const context = this;
 		axios({
 			method: 'post',
-			url: 'http://127.0.0.1:3000/api/stocks/',
+			url: 'http://127.0.0.1:3000/api/stocks/' + symbol,
 			data: {
 				stock: context.props.stockRes.data.Symbol,
 				transact: 'buy',
@@ -30,10 +30,12 @@ class Buy extends Component {
 		}).then(function(response) {
 			Actions.pop();
 			Actions.pop();
-			Actions.refresh();
+			Actions.pop({type:ActionConst.REFRESH});
+			// Actions.refresh();
 		}).catch(function(error) {
 			console.log(error)
 		});
+
 	}
 
 	render() {
@@ -66,7 +68,7 @@ class Buy extends Component {
 
 
 				<CardSection>
-					<Button onPress={this.onButtonPress.bind(this)}>
+					<Button onPress={this.onButtonPress.bind(this, this.props.stockRes.data.Symbol)}>
 						Confirm
 					</Button>
 				</CardSection>

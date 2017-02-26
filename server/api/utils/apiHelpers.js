@@ -10,6 +10,7 @@ const getStockPrice = (ticker) =>
       ).catch((err) => console.log(err));
 
 const getHistoricalPrices = (ticker, options) => {
+  console.log('13', options);
   const currentDate = new Date();
   const numPeriods = options.numperiods;
   const period = options.type;
@@ -20,10 +21,10 @@ const getHistoricalPrices = (ticker, options) => {
   const inputOptions = { params:
   { parameters: { "Normalized": false, "StartDate":
     formattedStart , "EndDate": formattedCurrentDate,
-    "DataPeriod": period, "Elements":[ {"Symbol": ticker, "Type": options.attribute, "Params":["c"]}]}}};
+    "DataPeriod": period, "Elements":[ {"Symbol": ticker, "Type": options.attributes, "Params": options.attributes === 'price' ? ["c"] : null}]}}};
 
   return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
-  .catch(err => console.log('20', err));
+  .catch(err => console.log('20 error'));
 };
 
  const formatDate = (date) => {
