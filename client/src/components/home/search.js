@@ -35,6 +35,7 @@ class Search extends Component {
 
 	render() {
 		const { viewStyle } = styles;
+		const searchList = this.state.ticker;
 		return (
 			<Background>
 				<CardSection>
@@ -47,9 +48,9 @@ class Search extends Component {
 
 				<ScrollView>
 					<View style={styles.viewStyles}>
-					{this.state.ticker.map((suggestion, key) => {
+					{searchList.map((suggestion, key) => {
 						return (
-							<View key={key} style={styles.boxStyle} onPress={this.tickerPressed.bind(this, suggestion)}>
+							<View key={key} style={styles.boxStyle} onPress={()=> console.log('hello', suggestion)}>
 								<Text style={styles.textStyle}> {suggestion.Symbol} : {suggestion.Name}</Text>
 							</View>
 						)

@@ -24,14 +24,19 @@ class Chart extends Component {
 
   constructor(props) {
     super(props);
-     this.state = {lineGraph: ''};
+     this.state = {lineGraph: '', num: '365', period: 'day'};
     }
 
+  historicalData(num, period) {
+    console.log('31', num, period);
+    this.setState({num, period});
+      //, function(console.log(this.state)));
+  }
 
     componentWillMount() {
       axios.get('http://localhost:3000/api/stocks/' +
         this.props.stockRes.data.Symbol +
-        '?type=day&numperiods=365&period=historical&attributes=price').then(response => {
+        '?type='+this.state.period+''+'&numperiods='+this.state.num+'&period=historical&attributes=price').then(response => {
         console.log('46', response);
         let data = response.data.Dates.map((dataObj, i) => {
           return {
@@ -54,8 +59,9 @@ class Chart extends Component {
 
     //this.state = {lineGraph: ''};
   render() {
-    console.log('stockres', this.props.stockRes);
-    console.log('search', this.props.search);
+
+    const {textStyle} = styles;
+
     return (
       <View style={{backgroundColor: 'transparent'}}>
        <Surface width={500} height={200}>
@@ -66,9 +72,33 @@ class Chart extends Component {
           strokeWidth={3} />
          </Group>
         </Surface>
+      <View style={styles.viewStyle}>
+        <Text onPress={this.historicalData.bind(this, 1, 'week')} style={styles.textStyle}> 1W </Text>
+        <Text onPress={this.historicalData.bind(this, 1, 'month')} style={styles.textStyle}> 1M </Text>
+        <Text onPress={this.historicalData.bind(this, 3, 'month')} style={styles.textStyle}> 3M </Text>
+        <Text onPress={this.historicalData.bind(this, 6, 'month')} style={styles.textStyle}> 6M </Text>
+        <Text onPress={this.historicalData.bind(this, 1, 'year')} style={styles.textStyle}> 1Y </Text>
+        <Text style={styles.textStyle}> ALL </Text>
+      </View>
       </View>
     )
   }
+};
+
+
+const styles = {
+	viewStyle: {
+		backgroundColor: 'transparent',
+		marginTop: 20,
+		alignSelf: 'stretch',
+		flexDirection: 'row',
+		justifyContent: 'space-around'
+	},
+	textStyle: {
+		fontSize: 12,
+		color: 'grey',
+
+	}
 };
 const mapStateToProps = ({search}) => {
   const { stockRes } = search;
