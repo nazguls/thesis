@@ -58,7 +58,7 @@ class Holdings extends Component {
 					<View style={viewStyle} >
 
 					<Text style={textStyle}> {stock.symbol} </Text>
-					<Text style={textStyle}> $ {Math.round(stock.currentPrice * 100) / 100} </Text>
+					<Text style={textStyle}> $ {stock.currentPrice } </Text>
 					</View>
 				</TouchableHighlight>
 			)}

@@ -30,7 +30,8 @@ class Buy extends Component {
 		}).then(function(response) {
 			Actions.pop();
 			Actions.pop();
-			Actions.pop({type:ActionConst.REFRESH});
+			Actions.pop();
+
 			// Actions.refresh();
 		}).catch(function(error) {
 			console.log(error)

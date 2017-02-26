@@ -13,11 +13,11 @@ class Sell extends Component {
 		this.props.updateStockShare(text);
 	}
 
-	onButtonPress() {
+	onButtonPress(symbol) {
 		const context = this;
 		axios({
 			method: 'post',
-			url: 'http://127.0.0.1:3000/api/stocks/',
+			url: 'http://127.0.0.1:3000/api/stocks/' + symbol,
 			data: {
 				stock: context.props.stockRes.data.Symbol,
 				transact: 'sell',
@@ -33,8 +33,7 @@ class Sell extends Component {
 		});
 			Actions.pop();
 			Actions.pop();
-			Actions.pop();
-			Actions.refresh();
+			Actions.pop({refresh: {}});
 	}
 
 	render() {
@@ -65,7 +64,7 @@ class Sell extends Component {
 				</CardSection>
 
 				<CardSection>
-					<Button onPress={this.onButtonPress.bind(this)}>
+					<Button onPress={this.onButtonPress.bind(this, this.props.stockRes.data.Symbol)}>
 						Confirm
 					</Button>
 				</CardSection>
