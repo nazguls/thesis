@@ -28,19 +28,14 @@ class Buy extends Component {
 				shares: context.props.stockShare,
 			}
 		}).then(function(response) {
-			Actions.pop();
-			Actions.pop();
-			Actions.pop();
+			Actions.home({ type: "reset" });
 
-			// Actions.refresh();
 		}).catch(function(error) {
-			console.log(error)
+			console.log(error);
 		});
-
 	}
 
 	render() {
-
 		const { stockRes, stockShare } = this.props;
 		return (
 			<Background>

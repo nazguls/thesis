@@ -20,10 +20,10 @@ class BuySell extends Component {
 		const { viewStyle, buttonStyle, textStyle } = styles;
 		return (
 			<View style={styles.viewStyle}>
-				<TouchableHighlight style={styles.buttonStyle} onPress={() => Actions.buyPage()}>
+				<TouchableHighlight style={styles.buttonStyle} onPress={() => Actions.buy()}>
 					<Text style={{ color: '#42f4c2' }}>Buy</Text>
 				</TouchableHighlight>
-				<TouchableHighlight style={styles.buttonStyle} onPress={() => Actions.sellPage()}>
+				<TouchableHighlight style={styles.buttonStyle} onPress={() => Actions.sell()}>
 					<Text style={{ color: '#42f4c2' }}>Sell</Text>
 				</TouchableHighlight>
 			</View>

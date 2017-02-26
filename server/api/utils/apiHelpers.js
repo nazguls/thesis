@@ -74,6 +74,7 @@ const getHistoricalPrices = (ticker, options) => {
       }
       return getStockPrice(port[increment].symbol)
         .then(stock => {
+          console.log('from lastprice' , stock);
           port[increment].currentPrice = stock.LastPrice;
           port[increment].marketValue = stock.LastPrice *
           port[increment].numOfShares;
