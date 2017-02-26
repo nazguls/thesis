@@ -34,7 +34,7 @@ class Index extends Component {
 					<Header />
 					<Price />
 
-					<Chart Chart={stockObj.chart} />
+					<Chart />
 					<BuySell />
 					<Text style = {{ backgroundColor: 'transparent', marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3, color: '#42f4c2' }}> Stats </Text>
 
