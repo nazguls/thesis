@@ -27,13 +27,10 @@ class Sell extends Component {
 
 			}
 		}).then(function(response) {
-			console.log(response);
+			Actions.home({ type: 'reset' });
 		}).catch(function(error) {
-			console.log(error)
+			console.log(error);
 		});
-			Actions.pop();
-			Actions.pop();
-			Actions.pop({refresh: {}});
 	}
 
 	render() {

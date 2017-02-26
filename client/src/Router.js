@@ -51,10 +51,7 @@ const RouterComponent = () => {
           sceneStyle={{ paddingTop: 60 }}
         />
         <Scene key='search' component={search} title="Search" sceneStyle={{ paddingTop: 60 }} />
-        </Scene>
-      </Scene>
 
-      <Scene key="buyPage">
         <Scene
         key='buy'
         component={buy}
@@ -62,8 +59,6 @@ const RouterComponent = () => {
         sceneStyle={{ paddingTop: 60 }}
         leftTitle="back"
         onLeft={() => Actions.pop()} />
-      </Scene>
-      <Scene key='sellPage'>
         <Scene
         key='sell'
         component={sell}
@@ -71,6 +66,7 @@ const RouterComponent = () => {
         sceneStyle={{ paddingTop: 60 }}
         leftTitle="back"
         onLeft={() => Actions.pop()} />
+        </Scene>
       </Scene>
 
 

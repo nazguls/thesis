@@ -28,14 +28,12 @@ class Chart extends Component {
      this.state = {
      	lineGraph: '',
      	period: 'day',
-     	num: 365
+     	num: 365,
+      price: true
      };
     }
 
   historicalData(num, period, type) {
-  	console.log('num', num)
-  	console.log('period', period);
-  	console.log('type', type)
   	this.setState({ period: period, num: num  });
   	axios.get('http://localhost:3000/api/stocks/' +
       this.props.stockRes.data.Symbol +
@@ -64,18 +62,20 @@ class Chart extends Component {
   render() {
     return (
     	<View>
-    	<Text onPress={this.historicalData.bind(this, this.state.num, this.state.period, 'volume')}> Switch to Volumn View </Text>
-      <View  style={{ backgroundColor: 'transparent' }}>
-       <Surface width={500} height={200} >
-       <Group x={100} y={0}>
-       <Shape
-          d={this.state.lineGraph}
-          stroke="orange"
-          strokeWidth={2}
-          />
-       </Group>
-      </Surface>
+      <TouchableWithoutFeedback onPress={this.historicalData.bind(this, this.state.num, this.state.period, 'volume')}>
+
+       <View  style={{ backgroundColor: 'transparent' }}>
+         <Surface width={500} height={200} >
+         <Group x={100} y={0}>
+         <Shape
+            d={this.state.lineGraph}
+            stroke="orange"
+            strokeWidth={2}
+            />
+         </Group>
+        </Surface>
       </View>
+      </TouchableWithoutFeedback>
 
       <View style={styles.viewStyle}>
         <Text onPress={this.historicalData.bind(this, 7, 'day', 'price')} style={styles.textStyle}> 1W </Text>
@@ -113,5 +113,7 @@ const mapStateToProps = ({search}) => {
     stockRes: stockRes
   };
 };
+
+// <Text onPress={this.historicalData.bind(this, this.state.num, this.state.period, 'volume')}> Switch to Volumn View </Text>
 
 export default connect(mapStateToProps, {})(Chart);
