@@ -8,8 +8,8 @@ class Chart extends Component {
 		super(props);
 	}
 
-	historicalData(text){
-		console.log(text);
+	historicalData(num, time) {
+		console.log(num);
 	}
 
 	render() {
@@ -17,11 +17,11 @@ class Chart extends Component {
 
 		return (
 			<View style={styles.viewStyle}>
-				<Text onPress={this.historicalData.bind(this, '1 week')} style={styles.textStyle}> 1W </Text>
-				<Text onPress={this.historicalData.bind(this, '1 month')} style={styles.textStyle}> 1M </Text>
-				<Text onPress={this.historicalData.bind(this, '3 month')} style={styles.textStyle}> 3M </Text>
-				<Text onPress={this.historicalData.bind(this, '6 month')} style={styles.textStyle}> 6M </Text>
-				<Text onPress={this.historicalData.bind(this, '1 year')} style={styles.textStyle}> 1Y </Text>
+				<Text onPress={this.historicalData.bind(this, 1, 'week')} style={styles.textStyle}> 1W </Text>
+				<Text onPress={this.historicalData.bind(this, 1, 'month')} style={styles.textStyle}> 1M </Text>
+				<Text onPress={this.historicalData.bind(this, 3, 'month')} style={styles.textStyle}> 3M </Text>
+				<Text onPress={this.historicalData.bind(this, 6, 'month')} style={styles.textStyle}> 6M </Text>
+				<Text onPress={this.historicalData.bind(this, 1, 'year')} style={styles.textStyle}> 1Y </Text>
 				<Text style={styles.textStyle}> ALL </Text>
 			</View>
 		);
