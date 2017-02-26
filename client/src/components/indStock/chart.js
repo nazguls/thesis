@@ -17,9 +17,9 @@ const { Surface, Group, Shape, } = ART;
 const dimensionsWindow = Dimensions.get('window');
 console.log('15: ', dimensionsWindow);
 
-const xAccessor = function(d) {return d.date}
+const xAccessor = function(d) { return d.date }
 
-const yAccessor = function(d) {return d.value}
+const yAccessor = function(d) { return d.value }
 
 class Chart extends Component {
 
@@ -33,16 +33,19 @@ class Chart extends Component {
     }
 
   historicalData(num, period, type) {
-  	console.log('props', this.props)
-  	console.log('clicked');
-  	// this.setState({ period: period, num: num  });
+  	console.log('num', num)
+  	console.log('period', period);
+  	console.log('type', type)
+  	this.setState({ period: period, num: num  });
   	axios.get('http://localhost:3000/api/stocks/' +
       this.props.stockRes.data.Symbol +
       '?type='+period+'&numperiods=' + num + '&period=historical&attributes=' + type).then(response => {
+      	console.log('43:', response)
+      	console.log('this type', type)
       let data = response.data.Dates.map((dataObj, i) => {
         return {
           date: new Date(dataObj),
-          value: response.data.Elements[0].DataSeries.close.values[i]
+          value: type === 'price' ? response.data.Elements[0].DataSeries.close.values[i] : response.data.Elements[0].DataSeries.volume.values[i]
         };
       });
       const line = makeChart.createLineGraph({
@@ -52,14 +55,16 @@ class Chart extends Component {
   }
 
   componentDidMount() {
-    this.historicalData(this.state.num, this.state.period)
+  	console.log('statenum', this.state.num);
+  	console.log('stateperiod', this.state.period);
+    this.historicalData(this.state.num, this.state.period, 'price')
   }
 
     //this.state = {lineGraph: ''};
   render() {
     return (
     	<View>
-    	<Text onPress={this.historicalData.bind(this.state.num, this.state.period, 'volume')}> Switch to Volumn View </Text>
+    	<Text onPress={this.historicalData.bind(this, this.state.num, this.state.period, 'volume')}> Switch to Volumn View </Text>
       <View  style={{ backgroundColor: 'transparent' }}>
        <Surface width={500} height={200} >
        <Group x={100} y={0}>

@@ -31,7 +31,10 @@ class Sell extends Component {
 		}).catch(function(error) {
 			console.log(error)
 		});
-		Actions.home();
+			Actions.pop();
+			Actions.pop();
+			Actions.pop();
+			Actions.refresh();
 	}
 
 	render() {
