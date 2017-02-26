@@ -33,6 +33,34 @@ class Chart extends Component {
       //, function(console.log(this.state)));
   }
 
+  componentDidUpdate() {
+      console.log('37 period: ', this.state.period);
+      console.log('37 num: ', this.state.num);
+
+
+      axios.get('http://localhost:3000/api/stocks/' +
+        this.props.stockRes.data.Symbol +
+        '?type='+this.state.period+''+'&numperiods='+this.state.num+'&period=historical&attributes=price').then(response => {
+        console.log('70', response);
+        let data = response.data.Dates.map((dataObj, i) => {
+          return {
+            date: new Date(dataObj),
+            value: response.data.Elements[0].DataSeries.close.values[i]
+          };
+        });
+        const line = makeChart.createLineGraph({
+        data, xAccessor, yAccessor, width: 300, height: 200 });
+        this.setState({lineGraph: line.path}, function() {
+        });
+      })
+
+        // console.log('46', response));
+
+
+    }
+
+
+
     componentWillMount() {
       axios.get('http://localhost:3000/api/stocks/' +
         this.props.stockRes.data.Symbol +
