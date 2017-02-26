@@ -54,9 +54,9 @@ class Chart extends Component {
 
     //this.state = {lineGraph: ''};
   render() {
-    console.log(this.state.lineGraph);
+
     return (
-      <View>
+      <View style={{backgroundColor: 'transparent'}}>
        <Surface width={500} height={200}>
        <Group x={100} y={0}>
        <Shape

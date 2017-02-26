@@ -3,10 +3,10 @@ import { AppRegistry, View, Text, ScrollView } from 'react-native';
 import { Background } from '../common';
 import { connect } from 'react-redux';
 
-
 import Header from './header';
 import Price from './price';
-import Chart from './chart';
+//import Chart from './chart';
+import Chart from './chart.js';
 import BuySell from './buySell';
 import Periodic from './periodic';
 
