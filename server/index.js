@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 const api = require('./api/api');
-//const db = require('../db/dbModels');
+const db = require('../db/dbModels');
 
 //route to the landing page
 
