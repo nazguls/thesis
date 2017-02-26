@@ -72,7 +72,7 @@ class Chart extends Component {
           strokeWidth={3} />
          </Group>
         </Surface>
-      <View style={styles.viewStyle}>
+          <View style={styles.viewStyle}>
         <Text onPress={this.historicalData.bind(this, 1, 'week')} style={styles.textStyle}> 1W </Text>
         <Text onPress={this.historicalData.bind(this, 1, 'month')} style={styles.textStyle}> 1M </Text>
         <Text onPress={this.historicalData.bind(this, 3, 'month')} style={styles.textStyle}> 3M </Text>
@@ -84,6 +84,9 @@ class Chart extends Component {
     )
   }
 };
+
+
+
 
 
 const styles = {
