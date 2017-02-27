@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text } from 'react-native';
-import { Background, CardSection, Input, Button } from '../common/';
-import { updateStockShare } from '../../actions';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+import { Background, CardSection, Input, Button } from '../common/';
+import { updateStockShare, updateCashValue } from '../../actions';
 
 class Sell extends Component {
-
 
 	onSharesChange(text) {
 		this.props.updateStockShare(text);
@@ -17,7 +15,7 @@ class Sell extends Component {
 		const context = this;
 		axios({
 			method: 'post',
-			url: 'http://127.0.0.1:3000/api/stocks/' + symbol,
+			url: `http://127.0.0.1:3000/api/stocks/${symbol}`,
 			data: {
 				stock: context.props.stockRes.data.Symbol,
 				transact: 'sell',
@@ -26,11 +24,15 @@ class Sell extends Component {
 				shares: context.props.stockShare,
 
 			}
-		}).then(function(response) {
+		}).then(() => {
 			Actions.home({ type: 'reset' });
-		}).catch(function(error) {
-			console.log(error);
-		});
+			const price = context.props.stockRes.data.LastPrice;
+			const numShares = context.props.stockShare;
+			const preBuyCashValue = context.props.cashValue;
+			const newCashValue = preBuyCashValue + (price * numShares);
+			const roundedCashValue = Math.round(newCashValue * 100) / 100;
+			context.props.updateCashValue(roundedCashValue);
+		}).catch(error => console.log(error));
 	}
 
 	render() {
@@ -66,39 +68,19 @@ class Sell extends Component {
 					</Button>
 				</CardSection>
 			</Background>
-	  );
+		);
 	}
 }
 
-const styles = {
-	viewStyle: {
-		marginTop: 20,
-		marginBottom: 10,
-		backgroundColor: '#F8F8F8',
-		justifyContent: 'center',
-		alignItems: 'center',
-		height: 60,
-		paddingTop: 20,
-		shadowColor: '#000',
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.2,
-		elevation: 2,
-		position: 'relative'
-	},
-	textStyle: {
-		fontSize: 20
-	}
-};
 
 const mapStateToProps = (state) => {
 	const { stockRes, stockShare } = state.search;
-	console.log(stockRes);
-	console.log('stockshare' , stockShare);
+	const { cashValue } = state.user;
 	return ({
 		stockShare,
-		stockRes
+		stockRes,
+		cashValue
 	});
 };
 
-
-export default connect(mapStateToProps, { updateStockShare })(Sell);
+export default connect(mapStateToProps, { updateStockShare, updateCashValue })(Sell);
