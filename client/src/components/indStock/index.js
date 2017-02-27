@@ -12,12 +12,6 @@ import Periodic from './periodic';
 
 const SideMenu = require('react-native-side-menu');
 
-const stockObj = {
-  name: 'AAPL',
-  description: 'Apple Inc. - Common Stock',
-  price: '$135.21',
-  chart: 'https://i.stack.imgur.com/KRxDx.png'
-};
 
 class Index extends Component {
 	constructor () {
