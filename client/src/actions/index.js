@@ -12,9 +12,16 @@ import {
 	STOCK_RESULT,
 	STOCK_SHARE_CHANGED,
 	MARKET_VALUE,
-	CASH_VALUE
+	CASH_VALUE,
+	CHART_VIEW
 } from './types';
 
+export const selectChartView = (text) => {
+	return {
+		type: CHART_VIEW,
+		payload: text
+	};
+};
 
 export const updateMarketValue = (text) => {
 	return {
