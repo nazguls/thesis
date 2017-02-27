@@ -9,3 +9,4 @@ export const STOCK_RESULT = 'stock_result';
 export const STOCK_SHARE_CHANGED = 'stock_share_changed';
 export const MARKET_VALUE = 'market_value';
 export const CASH_VALUE = 'cash_value';
+export const CHART_VIEW = 'chart_view';

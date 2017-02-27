@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const connection = require('./dbConnect');
 
-const Stock = connection.define('Stocks', {
+const Stock = connection.define('Stock', {
   stockSymbol: Sequelize.STRING,
   //watch or hold
   type: Sequelize.STRING,

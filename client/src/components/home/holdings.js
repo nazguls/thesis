@@ -18,7 +18,7 @@ class Holdings extends Component {
 
 	componentWillMount() {
 		const context = this;
-		axios.get('http://127.0.0.1:3000/api/portfolio/' + 'isaac1?period=current')
+		axios.get('http://127.0.0.1:3000/api/portfolio/isaac1?period=current')
 		.then(response => {
 			context.setState({
 				portfolio: response
@@ -58,7 +58,7 @@ class Holdings extends Component {
 					<View style={viewStyle} >
 
 					<Text style={textStyle}> {stock.symbol} </Text>
-					<Text style={textStyle}> $ {Math.round(stock.currentPrice * 100) / 100} </Text>
+					<Text style={textStyle}> $ {stock.currentPrice } </Text>
 					</View>
 				</TouchableHighlight>
 			)}

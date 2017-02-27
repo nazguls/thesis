@@ -13,6 +13,7 @@ class Price extends Component {
 		return (
 			<View style={styles.viewStyle}>
 				<Text style={styles.textStyle}>{stockRes.data.LastPrice}</Text>
+				<Text style={{color: 'orange'}}> VIEW: { this.props.chartView }</Text>
 			</View>
 		);
 	}
@@ -36,9 +37,10 @@ const styles = {
 
 const mapStateToProps = ({ search }) => {
 
-	const { stockRes } = search;
+	const { stockRes, chartView } = search;
 	return {
-		stockRes
+		stockRes,
+		chartView
 	};
 };
 
