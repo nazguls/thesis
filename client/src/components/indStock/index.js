@@ -6,9 +6,10 @@ import { connect } from 'react-redux';
 import Header from './header';
 import Price from './price';
 //import Chart from './chart';
+import News from './news.js'
 import Chart from './chart.js';
 import BuySell from './buySell';
-import Periodic from './periodic';
+import axios from 'axios';
 
 const SideMenu = require('react-native-side-menu');
 
@@ -17,6 +18,7 @@ class Index extends Component {
 	constructor () {
 		super();
 	}
+
 
 	render() {
 		const { stockRes } = this.props;
@@ -75,6 +77,8 @@ class Index extends Component {
 							<Text> </Text>
 						</View>
 					</View>
+					<Text style = {{ backgroundColor: 'transparent', marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3, color: '#42f4c2' }}> News </Text>
+					<News />
 				</Background>
 			</ScrollView>
 

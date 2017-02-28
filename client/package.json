@@ -13,6 +13,7 @@
     "d3-scale": "^1.0.4",
     "d3-shape": "^1.0.4",
     "firebase": "^3.6.9",
+    "google-finance": "^0.1.9",
     "react": "15.4.2",
     "react-native": "0.41.2",
     "react-native-communications": "^2.2.1",
