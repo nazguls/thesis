@@ -36,7 +36,7 @@ class LoginForm extends Component {
 	render() {
 		return (
 			<Background>
-				<Text style={style.limeShape}> 3<Text style={style.limeTitle}> lime </Text>
+				<Text style={style.limeShape}> 3<Text style={style.limeTitle}> limeRock </Text>
 				</Text>
 				<CardSection>
 					<Input
@@ -84,7 +84,7 @@ const style = {
 	},
 	limeTitle: {
 		fontWeight: '100',
-		fontSize: 50,
+		fontSize: 40,
 		backgroundColor: 'transparent',
 		color: '#42f4c2',
 		marginBottom: 30
