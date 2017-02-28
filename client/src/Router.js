@@ -14,7 +14,7 @@ import history from './components/History';
 const RouterComponent = () => {
 	return (
 		<Router >
-			<Scene key="auth">
+			<Scene key="auth" >
 				<Scene
         key='login'
         component={LoginForm}

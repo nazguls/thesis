@@ -12,7 +12,8 @@ class Holdings extends Component {
 		super(props);
 
 		this.state = {
-			portfolio: null
+			portfolio: null,
+			indStockButtonView: ''
 		};
 	}
 
@@ -21,7 +22,8 @@ class Holdings extends Component {
 		axios.get('http://127.0.0.1:3000/api/portfolio/isaac1?period=current')
 		.then(response => {
 			context.setState({
-				portfolio: response
+				portfolio: response,
+				indStockButtonView: ' "$" + stock.currentPrice'
 			});
 
 
@@ -42,23 +44,32 @@ class Holdings extends Component {
 		this.props.searchStock({ search: searchQuery });
 	}
 
+	indStockButtonPress() {
+		if (this.state.indStockButtonView === ' "$" + stock.currentPrice') {
+			this.setState({ indStockButtonView: 'stock.numOfShares + " shares"' });
+		} else {
+			this.setState({ indStockButtonView: ' "$" + stock.currentPrice' });
+		}
+	}
+
 	render() {
-		if(this.state.portfolio === null) {
+		if (this.state.portfolio === null) {
 			return (
 				<View>
-					<Image source={{ uri: 'http://i.giphy.com/13vjYK5TC5wELK.gif' }} style={{ width: 50, height: 50}}/>
+					<Image source={{ uri: 'http://i.giphy.com/13vjYK5TC5wELK.gif' }} style={{ width: 50, height: 50 }} />
 				</View>
-			)
+			);
 		}
 		const { data } = this.state.portfolio;
-		const { viewStyle, container, textStyle } = styles;
+		const { viewStyle, container, textStyle, buttonStyle } = styles;
 		const stockData = data.map((stock, key) => {
+			console.log('stock', stock)
 			return (
 				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
 
 					<Text style={textStyle}> {stock.symbol} </Text>
-					<Text style={textStyle}> $ {stock.currentPrice } </Text>
+					<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
 					</View>
 				</TouchableHighlight>
 			)}
@@ -78,7 +89,7 @@ const styles = {
 	viewStyle: {
 		paddingTop: 20,
 		paddingBottom: 20,
-		backgroundColor: 'transparent',
+		// backgroundColor: 'transparent',
 		marginTop: 10,
 		marginLeft: 20,
 		marginRight: 20,
@@ -97,9 +108,18 @@ const styles = {
 	textStyle: {
 		fontSize: 17,
 		color: '#42f4c2'
+		// color: 'transparent'
 
+	},
+	buttonStyle: {
+		borderWidth: 1,
+		// backgroundColor: '#42f4c2',
+ 		padding: 5,
+		fontSize: 17,
+		color: '#42f4c2',
+		borderRadius: 10,
+    borderColor: '#42f4c2'
 	}
-
 };
 
 export default connect(null, { searchStock, updateMarketValue })(Holdings);
