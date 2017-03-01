@@ -62,32 +62,38 @@ Models.Stock.build({
 
 Models.Portfolio.build({
   date: new Date(2017, 1, 18),
-  portfolioValue: 5230
+  portfolioValue: 1460,
+  cash: 3000
 }).save();
 
 Models.Portfolio.build({
   date: new Date(2017, 1, 19),
-  portfolioValue: 5300
+  portfolioValue: 1480,
+  cash: 3000
 }).save();
 
 Models.Portfolio.build({
   date: new Date(2017, 1, 20),
-  portfolioValue: 5600
+  portfolioValue: 1532,
+  cash: 3000
 }).save();
 
 Models.Portfolio.build({
   date: new Date(2017, 1, 21),
-  portfolioValue: 5700
+  portfolioValue: 1575,
+  cash: 3000
 }).save();
 
 Models.Portfolio.build({
   date: new Date(2017, 1, 22),
-  portfolioValue: 6000
+  portfolioValue: 1599,
+  cash: 3000
 }).save();
 
 Models.Portfolio.build({
   date: new Date(2017, 1, 23),
-  portfolioValue: 1638.36
+  portfolioValue: 1638.36,
+  cash: 3000
 }).save();
 
 Models.UserStock.build({
