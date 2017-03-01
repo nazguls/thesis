@@ -24,17 +24,16 @@ class UserProfile extends Component {
 		// 	console.log(error);
 		// });
 
-		axios.get('http://127.0.0.1:3000/api/users/isaac1')
+		axios.get('http://localhost:3000/api/portfolio/isaac1?period=historical')
 		.then(response => {
-			const cashValue = response.data.cash;
+			const length = response.data.length;
+			const cashValue = response.data[length - 1].cash;
 			context.props.updateCashValue(cashValue);
 		}).catch(error => {
 			console.log(error);
 		});
 	}
-
-
-
+  
   render() {
 		const styles = {
 			controlPanel: {
