@@ -5,6 +5,7 @@ const Portfolio = require('../../../db/dbModels').Portfolio;
 
 //sending price and shares
 exports.transact = (tradeData) => {
+
   const userId = tradeData.userId;
   if (tradeData.transact === 'buy') {
     return User.findOne({ where: { id: userId } })

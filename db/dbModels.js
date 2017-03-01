@@ -6,9 +6,14 @@ const Portfolio = require('./portfolioModel');
 const UserStock = require('./userStockModel');
 const UserPortfolio = require('./userPortfolioModel');
 
-Stock.belongsToMany(User, { through: 'UserStocks' });
+User.belongsToMany(Stock, { through: 'UserStocks' });
+
+//User.belongsToMany(Stock, { through: 'UserStocks' });
+
+
 Portfolio.belongsToMany(User, { through: 'UserPortfolios' });
 connection.sync();
+
 
 module.exports = {
   User,

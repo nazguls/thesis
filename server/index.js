@@ -15,6 +15,7 @@ app.use('/adam', (req, res) => res.send('Hi Adam. Michael Comes is an amazing ge
 
 app.use('/api', api);
 
+
 //serve landing page
 app.use('/', express.static('.'));
 

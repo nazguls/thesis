@@ -12,17 +12,17 @@ Models.User.build({
 
 }).save();
 
-// Models.User.build({
-//   username: 'adamw',
-//   firstName: 'adam',
-//   lastName: 'watt',
-//   cash: 4000,
-//   address: '944 Market',
-//   city: 'SF',
-//   state: 'CA',
-//   zipCode: '34236'
+Models.User.build({
+  username: 'adamw',
+  firstName: 'adam',
+  lastName: 'watt',
+  cash: 4000,
+  address: '944 Market',
+  city: 'SF',
+  state: 'CA',
+  zipCode: '34236'
 
-// }).save();
+}).save();
 
 Models.Stock.build({
   stockSymbol: 'AAPL',
