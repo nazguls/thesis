@@ -3,17 +3,24 @@ const connection = require('./dbConnect');
 const User = require('./userModel');
 const Stock = require('./stockModel');
 const Portfolio = require('./portfolioModel');
+const Transaction = require('./transactionModel');
 const UserStock = require('./userStockModel');
 const UserPortfolio = require('./userPortfolioModel');
+const UserTransaction = require('./userTransactionModel');
 
-Stock.belongsToMany(User, { through: 'UserStocks' });
-Portfolio.belongsToMany(User, { through: 'UserPortfolios' });
+
+
+User.belongsToMany(Stock, { through: 'UserStocks' });
+User.belongsToMany(Portfolio, { through: 'UserPortfolios' });
+User.belongsToMany(Transaction, { through: 'UserTransactions' });
 connection.sync();
 
 module.exports = {
   User,
   Stock,
   Portfolio,
+  Transaction,
   UserStock,
-  UserPortfolio
+  UserPortfolio,
+  UserTransaction
 };

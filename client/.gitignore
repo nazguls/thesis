@@ -56,3 +56,4 @@ fastlane/screenshots
 # xcode compile files
 client/ios/build/Build/Products/Debug-iphonesimulator/client.app.dSYM/Contents/Info.plist
 client/ios/client.xcodeproj/project.pbxproj
+client/ios/
