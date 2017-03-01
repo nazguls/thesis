@@ -1,7 +1,7 @@
 const User = require('../../../db/dbModels').User;
 const Stock = require('../../../db/dbModels').Stock;
 const Portfolio = require('../../../db/dbModels').Portfolio;
-const UserStock = require('../../../db/dbModels');
+const UserStock = require('../../../db/dbModels').UserStock;
 
 //sending price and shares
 exports.transact = (tradeData) => {
@@ -106,6 +106,13 @@ exports.fetchHoldings = (username) =>
     .then(User => User.getStocks())
     .then(stocks => stocks)
     .catch(err => console.log(err));
+
+exports.getCash = (username) =>
+   User.findOne({ where: { username } })
+    .then(User => User.getPortfolios())
+    .then(portfolios => portfolios)
+    .catch(err => console.log(err));    
+
 exports.fetchPortfolioHistory = (username) => {
 
     return Portfolio.findAll({});
