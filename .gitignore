@@ -35,6 +35,7 @@ bower_components/
 
 # API Keys
 server/api/config/config.js
+api_key.js
 
 .DS_Store
 client/public/bundle.js

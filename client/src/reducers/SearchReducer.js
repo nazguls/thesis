@@ -25,10 +25,9 @@ export default (state = INITIAL_STATE, action) => {
 		case STOCK_SHARE_CHANGED:
 			return { ...state, stockShare: action.payload };
 		case CHART_VIEW:
-			console.log('are you working?')
 			return { ...state, chartView: action.payload };
 		case RECOMMENDATIONS:
-			console.log('entered working')
+			console.log('entered working');
 			return { ...state, recommendations: action.payload };
 		default:
 			return state;
