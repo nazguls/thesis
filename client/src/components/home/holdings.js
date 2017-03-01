@@ -31,7 +31,6 @@ class Holdings extends Component {
 			for (let i = 0; i < response.data.length; i++) {
 				total += response.data[i].marketValue;
 			}
-			console.log('total', total);
 
 			context.props.updateMarketValue(total);
 		}).catch(error => {
@@ -63,7 +62,6 @@ class Holdings extends Component {
 		const { data } = this.state.portfolio;
 		const { viewStyle, container, textStyle, buttonStyle } = styles;
 		const stockData = data.map((stock, key) => {
-			console.log('stock', stock)
 			return (
 				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >

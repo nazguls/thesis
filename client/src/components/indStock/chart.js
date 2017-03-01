@@ -16,11 +16,10 @@ const d3 = {
 const { Surface, Group, Shape, } = ART;
 
 const dimensionsWindow = Dimensions.get('window');
-console.log('15: ', dimensionsWindow);
 
-const xAccessor = function(d) { return d.date; };
+const xAccessor = (d) => { return d.date; };
 
-const yAccessor = function(d) { return d.value; };
+const yAccessor = (d) => { return d.value; };
 
 class Chart extends Component {
 

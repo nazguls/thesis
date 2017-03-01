@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Linking } from 'react-native';
 import { connect } from 'react-redux';
+import { recommendations } from '../../actions';
 import axios from 'axios';
 
 
@@ -9,8 +10,8 @@ class News extends Component {
 		super();
 
 		this.state = {
-			news: []
-
+			news: [],
+			sentiment: ''
 		};
 	}
 
@@ -18,16 +19,21 @@ class News extends Component {
 
 		axios.get('http://127.0.0.1:3000/api/news/' + this.props.stockRes.data.Symbol)
 		.then(response => {
-			this.setState({
-				news: response.data
+			const newsArray = response.data.map(news => news.description);
+			this.setState({ news: response.data });
+			axios.post('http://127.0.0.1:3000/api/sentiment/sentimentAnalysis', {
+				params: {
+					newsArray
+				}
+			}).then(result => {
+				console.log('sentiment score: ', result.data.actions[0].result.sentiment_analysis[0].aggregate.score);
+				this.setState({ sentiment: result.data.actions[0].result.sentiment_analysis[0].aggregate.score })
+				recommendations(result.data.actions[0].result.sentiment_analysis[0].aggregate.score);
 			});
-			axios.post('http://127.0.0.1:3000/api/sentiment/sentimentAnalysis')
-		})
+		});
 	}
 
 	render() {
-		// console.log('what is selected', this.props.stockRes.data.Symbol)
-
 		const newsArticle = this.state.news.map((news, key) => {
 			return (
 				<View key={key} style={styles.viewStyle}>
@@ -37,7 +43,10 @@ class News extends Component {
 		});
 		return (
 			<View>
+			<View>
 				{newsArticle}
+			</View>
+			<Text style = {styles.textstyle}>{ this.state.sentiment }</Text>
 			</View>
 		);
 	}
@@ -73,5 +82,5 @@ const styles = {
 	}
 }
 
-export default connect(mapStateToProps, {})(News);
+export default connect(mapStateToProps, { recommendations })(News);
 
