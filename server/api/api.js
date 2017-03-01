@@ -4,6 +4,7 @@ const portfolio = require('./portfolio/portfolioRoutes');
 const users = require('./users/usersRoutes');
 const money = require('./money/moneyRoutes');
 const news = require('./news/newsRoutes');
+const sentiment = require('./sentimentAnalysis/sentimentAnalysisRoutes');
 // const test = require('./test');
 
 router.use('/portfolio', portfolio);
@@ -11,6 +12,7 @@ router.use('/stocks', stocks);
 router.use('/users', users);
 router.use('/money', money);
 router.use('/news', news);
+router.use('/sentiment', sentiment);
 // router.use('/test', test);
 
 // });

@@ -7,3 +7,4 @@ exports.get = (req, res) => {
 		res.send(news);
 	});
 };
+
