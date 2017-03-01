@@ -13,8 +13,17 @@ import {
 	STOCK_SHARE_CHANGED,
 	MARKET_VALUE,
 	CASH_VALUE,
-	CHART_VIEW
+	CHART_VIEW,
+	RECOMMENDATIONS
 } from './types';
+
+export const recommendations = (text) => {
+	console.log('print rec', text);
+	return {
+		type: RECOMMENDATIONS,
+		payload: text
+	};
+};
 
 export const selectChartView = (text) => {
 	return {

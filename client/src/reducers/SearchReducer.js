@@ -2,14 +2,16 @@ import {
 	SEARCH_CHANGED,
 	STOCK_RESULT,
 	STOCK_SHARE_CHANGED,
-	CHART_VIEW
+	CHART_VIEW,
+	RECOMMENDATIONS
 } from '../actions/types';
 
 const INITIAL_STATE = {
 	search: '',
 	stockRes: {},
 	stockShare: '',
-	chartView: 'Share Price'
+	chartView: 'Share Price',
+	recommendations: ''
 
 };
 
@@ -23,8 +25,11 @@ export default (state = INITIAL_STATE, action) => {
 		case STOCK_SHARE_CHANGED:
 			return { ...state, stockShare: action.payload };
 		case CHART_VIEW:
-			console.log('from search Reducer chartView', action.payload);
+			console.log('are you working?')
 			return { ...state, chartView: action.payload };
+		case RECOMMENDATIONS:
+			console.log('entered working')
+			return { ...state, recommendations: action.payload };
 		default:
 			return state;
 	}
