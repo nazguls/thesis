@@ -40,7 +40,6 @@ class Chart extends Component {
   historicalData(num, period, type) {
     let chartView = '';
     chartView = type === 'price' ? 'Share Price' : 'Daily Trading Volume';
-    console.log('what is the view?', chartView);
     this.props.selectChartView(chartView);
     this.setState({ period, num });
 

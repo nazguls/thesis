@@ -15,19 +15,19 @@ class News extends Component {
 	}
 
 	componentWillMount() {
-		console.log('componentWillmount', this.props.search)
+
 		axios.get('http://127.0.0.1:3000/api/news/' + this.props.stockRes.data.Symbol)
 		.then(response => {
 			this.setState({
 				news: response.data
 			});
-		}).catch(error => {
-			console.log(error);
-		});
+			axios.post('http://127.0.0.1:3000/api/sentiment/sentimentAnalysis')
+		})
 	}
 
 	render() {
 		// console.log('what is selected', this.props.stockRes.data.Symbol)
+
 		const newsArticle = this.state.news.map((news, key) => {
 			return (
 				<View key={key} style={styles.viewStyle}>
