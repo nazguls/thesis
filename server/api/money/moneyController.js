@@ -8,3 +8,9 @@ exports.post = (req, res) => {
   dbHelper.deposit(depositData, user).then(data =>
   res.send(data));
 };
+
+exports.get = (req, res) => {
+  const user = req.params.user;
+  dbHelper.getCash(user).then(data =>
+  res.send(data));
+};
