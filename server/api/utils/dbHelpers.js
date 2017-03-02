@@ -168,6 +168,14 @@ exports.fetchHoldings = (username) =>
     .then(stocks => stocks)
     .catch(err => console.log(err));
 
+exports.getCash = (username) =>
+   User.findOne({ where: { username } })
+    .then(User => User.getPortfolios())
+    .then(portfolios => portfolios)
+    .catch(err => console.log(err));
+
+
+
 exports.fetchPortfolioHistory = (username) => {
     return Portfolio.findAll({});
 };

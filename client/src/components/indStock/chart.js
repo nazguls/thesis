@@ -16,11 +16,10 @@ const d3 = {
 const { Surface, Group, Shape, } = ART;
 
 const dimensionsWindow = Dimensions.get('window');
-console.log('15: ', dimensionsWindow);
 
-const xAccessor = function(d) { return d.date; };
+const xAccessor = (d) => { return d.date; };
 
-const yAccessor = function(d) { return d.value; };
+const yAccessor = (d) => { return d.value; };
 
 class Chart extends Component {
 
@@ -40,7 +39,6 @@ class Chart extends Component {
   historicalData(num, period, type) {
     let chartView = '';
     chartView = type === 'price' ? 'Share Price' : 'Daily Trading Volume';
-    console.log('what is the view?', chartView);
     this.props.selectChartView(chartView);
     this.setState({ period, num });
 

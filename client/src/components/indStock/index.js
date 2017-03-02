@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { AppRegistry, View, Text, ScrollView } from 'react-native';
+import { AppRegistry, View, Text, ScrollView, Image } from 'react-native';
 import { Background } from '../common';
 import { connect } from 'react-redux';
 
@@ -19,17 +19,19 @@ class Index extends Component {
 		super();
 	}
 
+recommendations() {
+	console.log('from rec', this.props.recommendations);
+}
 
 	render() {
-		const { stockRes } = this.props;
+		const { stockRes, recommendations } = this.props;
 		const { viewStyle, textStyle, columnStyle} = styles;
 
 		return (
 			<ScrollView>
-				<Background>
-					<Header />
+				<Image source={require('../assets/background5.jpg')} style={styles.containerStyle}>
+				<Header />
 					<Price />
-
 					<Chart />
 					<BuySell />
 					<Text style = {{ backgroundColor: 'transparent', marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3, color: '#42f4c2' }}> Stats </Text>
@@ -73,13 +75,13 @@ class Index extends Component {
 							<Text style={textStyle}> {stockRes.data.Volume} </Text>
 						</View>
 						<View style={columnStyle}>
-							<Text>  </Text>
-							<Text> </Text>
+							<Text style={textStyle}> {recommendations} </Text>
+							<Text> {this.recommendations()} </Text>
 						</View>
 					</View>
 					<Text style = {{ backgroundColor: 'transparent', marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3, color: '#42f4c2' }}> News </Text>
 					<News />
-				</Background>
+				</Image>
 			</ScrollView>
 
 
@@ -88,7 +90,14 @@ class Index extends Component {
 }
 const styles = {
 
-
+	containerStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: null,
+    height: null,
+    resizeMode: 'stretch'
+  },
 	viewStyle: {
 		marginTop: 5,
 		marginBottom: 5,
@@ -116,9 +125,10 @@ const styles = {
 };
 
 const mapStateToProps = ({ search }) => {
-	const { stockRes } = search;
+	const { stockRes, recommendations } = search;
 	return {
-		stockRes
+		stockRes,
+		recommendations
 	};
 };
 

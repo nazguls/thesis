@@ -13,11 +13,10 @@ const d3 = {
 const { Surface, Group, Shape, } = ART;
 
 const dimensionsWindow = Dimensions.get('window');
-console.log('15: ', dimensionsWindow);
 
-const xAccessor = function(d) {return d.date}
+const xAccessor = (d) => { return d.date; };
 
-const yAccessor = function(d) {return d.value}
+const yAccessor = (d) => { return d.value; };
 
 class Chart extends Component {
 
@@ -25,7 +24,7 @@ class Chart extends Component {
 		super(props);
 
 
-     this.state = {lineGraph: ''};
+     this.state = { lineGraph: '' };
     }
 
 
@@ -34,20 +33,17 @@ class Chart extends Component {
     componentWillMount() {
 
       axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
-        console.log('46', response);
         let data = response.data.map(dataObj => {
           return {
             date: new Date(dataObj.date),
             value: dataObj.portfolioValue
-          }
-        })
-        console.log('52', data);
+          };
+        });
         const line = makeChart.createLineGraph({
         data, xAccessor, yAccessor, width: 300, height: 200 });
-        this.setState({lineGraph: line.path}, function() {
-          console.log('46', line);
+        this.setState({ lineGraph: line.path }, () => {
         });
-      })
+      });
 
         // console.log('46', response));
 
