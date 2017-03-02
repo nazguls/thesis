@@ -24,12 +24,14 @@ class Search extends Component {
 	}
 
 	onButtonPress() {
+		console.log(this.props.search);
 		const { search } = this.props;
 		this.props.searchStock({ search });
 	}
 
 	tickerPressed(text) {
 		console.log(text);
+		this.props.searchStock({ search: text });
 	}
 
 
@@ -50,8 +52,8 @@ class Search extends Component {
 					<View style={styles.viewStyles}>
 					{searchList.map((suggestion, key) => {
 						return (
-							<View key={key} style={styles.boxStyle} onPress={()=> console.log('hello', suggestion)}>
-								<Text style={styles.textStyle}> {suggestion.Symbol} : {suggestion.Name}</Text>
+							<View key={key} style={styles.boxStyle}>
+								<Text style={styles.textStyle} onPress={()=> this.tickerPressed(suggestion.Symbol)}> {suggestion.Symbol} : {suggestion.Name}</Text>
 							</View>
 						)
 					})}
