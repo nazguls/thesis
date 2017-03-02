@@ -80,6 +80,7 @@ recommendations() {
 							<Text style={textStyle}> {stockRes.data.Volume} </Text>
 						</View>
 						<View style={columnStyle}>
+
 							<Text style={textStyle}> RECOMMEND </Text>
 							<Text style={textStyle}> {this.recommendations()} </Text>
 						</View>
