@@ -6,7 +6,7 @@ const Stock = connection.define('Stock', {
   type: Sequelize.STRING,
   purchaseDate: Sequelize.DATE,
   purchasePrice: Sequelize.FLOAT,
-  numOfShares: Sequelize.INTEGER,
+  numOfShares: Sequelize.BIGINT,
 });
 
 module.exports = Stock;

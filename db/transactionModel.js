@@ -5,7 +5,7 @@ const Transaction = connection.define('Transactions', {
   date: Sequelize.DATE,
   type: Sequelize.STRING,
   symbol: Sequelize.STRING,
-  numOfShares: Sequelize.INTEGER,
+  numOfShares: Sequelize.BIGINT,
   purchasePrice: Sequelize.FLOAT
 });
 
