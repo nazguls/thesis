@@ -23,6 +23,7 @@ exports.get = (req, res) => {
 exports.post = (req, res) => {
   const order = req.query;
   const tradeData = Object.assign(req.query, req.body);
+
   dbHelper.transact(tradeData)
     .then(data => res.status(200).send(data))
     .catch(err => res.status(200).send(err));

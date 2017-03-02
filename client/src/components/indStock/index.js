@@ -1,12 +1,10 @@
-import React, {Component} from 'react';
-import { AppRegistry, View, Text, ScrollView, Image } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, ScrollView, Image } from 'react-native';
 import { Background } from '../common';
 import { connect } from 'react-redux';
-
 import Header from './header';
 import Price from './price';
-//import Chart from './chart';
-import News from './news.js'
+import News from './news.js';
 import Chart from './chart.js';
 import BuySell from './buySell';
 import axios from 'axios';
@@ -20,7 +18,14 @@ class Index extends Component {
 	}
 
 recommendations() {
-	console.log('from rec', this.props.recommendations);
+	console.log(this.props.recommendations);
+	if (this.props.recommendations > 0.2) {
+		return 'BUY';
+	} else if (this.props.recommendations < -0.2) {
+		return 'SELL';
+	} else {
+		return 'HOLD';
+	}
 }
 
 	render() {
@@ -75,8 +80,8 @@ recommendations() {
 							<Text style={textStyle}> {stockRes.data.Volume} </Text>
 						</View>
 						<View style={columnStyle}>
-							<Text style={textStyle}> {recommendations} </Text>
-							<Text> {this.recommendations()} </Text>
+							<Text style={textStyle}> RECOMMEND </Text>
+							<Text style={textStyle}> {this.recommendations()} </Text>
 						</View>
 					</View>
 					<Text style = {{ backgroundColor: 'transparent', marginLeft: 10, marginTop: 10, fontSize: 20, borderBottomWidth: 3, color: '#42f4c2' }}> News </Text>

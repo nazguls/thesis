@@ -5,6 +5,7 @@ import * as scale from 'd3-scale';
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 import axios from 'axios';
+import snpData from '../assets/snpData.js'
 
 const d3 = {
   scale,
@@ -16,15 +17,15 @@ const dimensionsWindow = Dimensions.get('window');
 
 const xAccessor = (d) => { return d.date; };
 
-const yAccessor = (d) => { return d.value !== "." ? d.value; };
+const yAccessor = (d) => { return d.value === "." ? 1 : d.value ; };
 
 class Chart extends Component {
 
   constructor(props) {
 		super(props);
+      console.log(snpData);
 
-
-     this.state = { lineGraph: '' };
+     this.state = { lineGraph: snpData };
     }
 
 
