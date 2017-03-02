@@ -100,7 +100,7 @@ exports.addUser = (username, userData) =>
 //        Stock.findAll({ where: { userID: user.id } })
 //     )
 //     .catch(err => console.log(err));
-    
+
 exports.fetchHoldings = (username) =>
    User.findOne({ where: { username } })
     .then(User => User.getStocks())
@@ -111,7 +111,7 @@ exports.getCash = (username) =>
    User.findOne({ where: { username } })
     .then(User => User.getPortfolios())
     .then(portfolios => portfolios)
-    .catch(err => console.log(err));    
+    .catch(err => console.log(err));
 
 exports.fetchPortfolioHistory = (username) => {
 

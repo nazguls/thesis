@@ -18,7 +18,7 @@ import {
 } from './types';
 
 export const recommendations = (text) => {
-	console.log('print rec', text);
+	console.log('received in action', text);
 	return {
 		type: RECOMMENDATIONS,
 		payload: text

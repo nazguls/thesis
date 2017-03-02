@@ -11,13 +11,15 @@ const INITIAL_STATE = {
 	stockRes: {},
 	stockShare: '',
 	chartView: 'Share Price',
-	recommendations: ''
+	recommendations: 'hello There'
 
 };
 
 export default (state = INITIAL_STATE, action) => {
-	console.log(action);
+	console.log('actions in redducer', action);
 	switch (action.type) {
+		case RECOMMENDATIONS:
+			return { ...state, recommendations: action.payload };
 		case SEARCH_CHANGED:
 			return { ...state, search: action.payload };
 		case STOCK_RESULT:
@@ -26,9 +28,6 @@ export default (state = INITIAL_STATE, action) => {
 			return { ...state, stockShare: action.payload };
 		case CHART_VIEW:
 			return { ...state, chartView: action.payload };
-		case RECOMMENDATIONS:
-			console.log('entered working');
-			return { ...state, recommendations: action.payload };
 		default:
 			return state;
 	}

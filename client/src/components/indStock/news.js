@@ -10,13 +10,12 @@ class News extends Component {
 		super();
 
 		this.state = {
-			news: [],
-			sentiment: ''
+			news: []
 		};
 	}
 
 	componentWillMount() {
-
+	 const context = this;
 		axios.get('http://127.0.0.1:3000/api/news/' + this.props.stockRes.data.Symbol)
 		.then(response => {
 			const newsArray = response.data.map(news => news.description);
@@ -26,9 +25,7 @@ class News extends Component {
 					newsArray
 				}
 			}).then(result => {
-				console.log('sentiment score: ', result.data.actions[0].result.sentiment_analysis[0].aggregate.score);
-				this.setState({ sentiment: result.data.actions[0].result.sentiment_analysis[0].aggregate.score })
-				recommendations(result.data.actions[0].result.sentiment_analysis[0].aggregate.score);
+				context.props.recommendations(result.data.actions[0].result.sentiment_analysis[0].aggregate.score);
 			});
 		});
 	}
@@ -43,10 +40,7 @@ class News extends Component {
 		});
 		return (
 			<View>
-			<View>
 				{newsArticle}
-			</View>
-			<Text style = {styles.textstyle}>{ this.state.sentiment }</Text>
 			</View>
 		);
 	}

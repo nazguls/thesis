@@ -29,8 +29,7 @@ Models.Stock.build({
   type: 'hold',
   purchaseDate: new Date(),
   purchasePrice: 123,
-  numOfShares: 10,
-  userID: 1
+  numOfShares: 10
 }).save();
 
 Models.Stock.build({
@@ -38,8 +37,7 @@ Models.Stock.build({
   type: 'hold',
   purchaseDate: new Date(),
   purchasePrice: 400,
-  numOfShares: 10,
-  userID: 1
+  numOfShares: 10
 }).save();
 
 Models.Stock.build({
@@ -47,17 +45,7 @@ Models.Stock.build({
   type: 'hold',
   purchaseDate: new Date(),
   purchasePrice: 123,
-  numOfShares: 10,
-  userID: 2
-}).save();
-
-Models.Stock.build({
-  stockSymbol: 'MSFT',
-  type: 'hold',
-  purchaseDate: new Date(),
-  purchasePrice: 400,
-  numOfShares: 10,
-  userID: 2
+  numOfShares: 10
 }).save();
 
 Models.Portfolio.build({
