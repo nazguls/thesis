@@ -160,6 +160,4 @@ const mapStateToProps = ({ search }) => {
   };
 };
 
-// <Text onPress={this.historicalData.bind(this, this.state.num, this.state.period, 'volume')}> Switch to Volumn View </Text>
-
 export default connect(mapStateToProps, { selectChartView })(Chart);
