@@ -24,7 +24,7 @@ recommendations() {
 	} else if (this.props.recommendations < -0.2) {
 		return 'SELL';
 	} else {
-		return 'NEUTRAL';
+		return 'HOLD';
 	}
 }
 
@@ -80,7 +80,7 @@ recommendations() {
 							<Text style={textStyle}> {stockRes.data.Volume} </Text>
 						</View>
 						<View style={columnStyle}>
-							<Text style={textStyle}> REC </Text>
+							<Text style={textStyle}> RECOMMEND </Text>
 							<Text style={textStyle}> {this.recommendations()} </Text>
 						</View>
 					</View>

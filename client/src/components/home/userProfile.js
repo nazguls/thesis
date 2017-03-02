@@ -33,7 +33,7 @@ class UserProfile extends Component {
 			console.log(error);
 		});
 	}
-  
+
   render() {
 		const styles = {
 			controlPanel: {
@@ -75,6 +75,9 @@ class UserProfile extends Component {
         </Text>
         <Text style={styles.navItems}>
 					$ {this.props.user.cashValue}
+        </Text>
+        <Text style={styles.navItems} onPress={() => Actions.verses()}>
+					<Icon name='account-balance' size={20} />  YOU VS. THEM
         </Text>
         <Text style={styles.navItems} onPress={() => Actions.deposit()}>
 					<Icon name='account-balance' size={20} />  ACCOUNT
