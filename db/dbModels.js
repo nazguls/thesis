@@ -9,11 +9,11 @@ const UserPortfolio = require('./userPortfolioModel');
 const UserTransaction = require('./userTransactionModel');
 
 
-
 User.belongsToMany(Stock, { through: 'UserStocks' });
 User.belongsToMany(Portfolio, { through: 'UserPortfolios' });
 User.belongsToMany(Transaction, { through: 'UserTransactions' });
 connection.sync();
+
 
 module.exports = {
   User,

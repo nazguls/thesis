@@ -28,6 +28,8 @@ class Chart extends Component {
     }
 
 
+
+
     componentWillMount() {
 
       axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
