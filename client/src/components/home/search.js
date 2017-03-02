@@ -16,7 +16,7 @@ class Search extends Component {
 	onSearchChange(text) {
 		this.props.searchChanged(text);
 		let appendTicker = ticker.filter(ticker => {
-			if(ticker.Symbol.toUpperCase().indexOf(text.toUpperCase()) !== -1) {
+			if (ticker.Symbol.toUpperCase().indexOf(text.toUpperCase()) !== -1) {
 				return (ticker.Symbol);
 			}
 		});

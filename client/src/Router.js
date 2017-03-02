@@ -10,6 +10,7 @@ import search from './components/home/search';
 import accountIcon from './components/assets/ic_account_circle.png';
 import deposit from './components/Deposit';
 import history from './components/History';
+import compare from './components/Compare';
 
 const RouterComponent = () => {
 	return (
@@ -72,6 +73,7 @@ const RouterComponent = () => {
 
          <Scene key="deposit" component={deposit} title='Deposit' sceneStyle={{ paddingTop: 60 }} />
          <Scene key='history' component={history} title='History' sceneStyle={{ paddingTop: 60 }} />
+         <Scene key='verses' component={compare} title='YOU VS THEM' sceneStyle={{ paddingTop: 60 }} />
 
     </Router>
 	);
