@@ -49,12 +49,10 @@ exports.transact = (tradeData) => {
                + buyAmount;
              portfolios[portfolios.length - 1]
              .updateAttributes({ cash: newCashBal, portfolioValue: newMV });
-        });
-        }
-          );
+              });
+            });
           }
-        }
-        );
+        });
       });
   };
   // date: Sequelize.DATE,
@@ -169,10 +167,9 @@ exports.fetchHoldings = (username) =>
     .then(User => User.getStocks())
     .then(stocks => stocks)
     .catch(err => console.log(err));
+
 exports.fetchPortfolioHistory = (username) => {
-
     return Portfolio.findAll({});
-
 };
 
 
