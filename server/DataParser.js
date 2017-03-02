@@ -12,20 +12,18 @@ const connection = mysql.createConnection({
 connection.query('create table indexData (date DATE, value INTEGER)');
 
 fs.readFile(path.resolve(__dirname, 'indexData.json'), 'utf8', (err, data) => {
-    let jsonData = JSON.parse(data);
-    let dataValues = [];
-    let line = jsonData.map((val, idx) => {
-        if(val.VALUE === ".") {
+    const jsonData = JSON.parse(data);
+    const dataValues = [];
+    jsonData.forEach((val, idx) => {
+        if (val.VALUE === '.') {
           val.VALUE = jsonData[idx - 1].VALUE;
         }
         dataValues.push([val.DATE, val.VALUE]);
-        return [val];
-      //console.log('30', line);
     });
-    var queryStr = "INSERT INTO indexData (date, value) VALUES ?";
-    connection.query(queryStr, [dataValues], (err) => {
-      if(err) {
-        console.log(err);
+    const queryStr = 'INSERT INTO indexData (date, value) VALUES ?';
+    connection.query(queryStr, [dataValues], (error) => {
+      if (err) {
+        console.log(error);
       }
       connection.end();
     });
