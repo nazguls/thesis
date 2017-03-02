@@ -29,6 +29,7 @@ class Chart extends Component {
       lineGraph: '',
       period: 'day',
       num: 365,
+      view: true
     };
   }
 
@@ -38,7 +39,17 @@ class Chart extends Component {
 
   historicalData(num, period, type) {
     let chartView = '';
-    chartView = type === 'price' ? 'Share Price' : 'Daily Trading Volume';
+    if (this.state.view === false) {
+      chartView = 'Daily Tradig Volumn';
+      type = 'volume';
+      this.setState({ view: !this.state.view });
+    } else {
+      chartView = 'Share Price';
+      type = 'price';
+      this.setState({ view: !this.state.view });
+    }
+    // chartView = type === 'price' ? 'Share Price' : 'Daily Trading Volume';
+
     this.props.selectChartView(chartView);
     this.setState({ period, num });
 
