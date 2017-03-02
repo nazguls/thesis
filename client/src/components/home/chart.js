@@ -17,7 +17,7 @@ const dimensionsWindow = Dimensions.get('window');
 
 const xAccessor = (d) => { return d.date; };
 
-const yAccessor = (d) => { return d.value === "." ? 1 : d.value ; };
+const yAccessor = (d) => { return d.value; };
 
 class Chart extends Component {
 
