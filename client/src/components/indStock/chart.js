@@ -29,7 +29,6 @@ class Chart extends Component {
       lineGraph: '',
       period: 'day',
       num: 365,
-      view: true
     };
   }
 
@@ -39,17 +38,7 @@ class Chart extends Component {
 
   historicalData(num, period, type) {
     let chartView = '';
-    if (this.state.view === false) {
-      chartView = 'Daily Tradig Volumn';
-      type = 'volume';
-      this.setState({ view: !this.state.view });
-    } else {
-      chartView = 'Share Price';
-      type = 'price';
-      this.setState({ view: !this.state.view });
-    }
-    // chartView = type === 'price' ? 'Share Price' : 'Daily Trading Volume';
-
+    chartView = type === 'price' ? 'Share Price' : 'Daily Trading Volume';
     this.props.selectChartView(chartView);
     this.setState({ period, num });
 
@@ -159,5 +148,7 @@ const mapStateToProps = ({ search }) => {
     stockRes
   };
 };
+
+// <Text onPress={this.historicalData.bind(this, this.state.num, this.state.period, 'volume')}> Switch to Volumn View </Text>
 
 export default connect(mapStateToProps, { selectChartView })(Chart);
