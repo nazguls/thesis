@@ -25,6 +25,7 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.1",
     "express": "^4.14.1",
+    "google-finance": "^0.1.9",
     "morgan": "^1.8.1",
     "mysql": "^2.13.0",
     "sequelize": "^3.30.2"

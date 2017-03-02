@@ -4,6 +4,7 @@ const app = express();
 const api = require('./api/api');
 const db = require('../db/dbModels');
 
+
 //route to the landing page
 
 
@@ -14,6 +15,7 @@ require('./middleware/middleware')(app);
 app.use('/adam', (req, res) => res.send('Hi Adam. Michael Comes is an amazing genius'));
 
 app.use('/api', api);
+
 
 //serve landing page
 app.use('/', express.static('.'));

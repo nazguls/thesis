@@ -60,6 +60,14 @@ class Chart extends Component {
   }
 
 
+
+
+  componentDidMount() {
+    this.historicalData(this.state.num, this.state.period)
+  }
+
+
+
     //this.state = {lineGraph: ''};
   render() {
     return (
