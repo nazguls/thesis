@@ -4,6 +4,7 @@ const Portfolio = require('../../../db/dbModels').Portfolio;
 const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
+const UserTransactions = require('../../../db/dbModels').UserTransaction;
 
 //sending price and shares
 exports.transact = (tradeData) => {
@@ -19,12 +20,24 @@ exports.transact = (tradeData) => {
    purchasePrice: tradeData.price,
    numOfShares: shs
   });
+  //find the user and update the # of shares
    return User.findOne({ userId })
-    .then(user => {
+    .then(user => { Transactions.create({
+        date: new Date(),
+        type: tradeData.transact,
+        symbol,
+        purchasePrice: tradeData.price,
+        numOfShares: shs
+        }).then(transaction => {
+            UserTransactions.create({
+            UserId: user.id,
+            TransactionId: transaction.id
+          });
+        });
        user.getStocks({ where: { stockSymbol: symbol } })
          .then(stock => {
             if (stock[0] !== undefined) {
-              const currentShares = stock[0].dataValues.numOfShares + shs;
+              let currentShares = parseInt(stock[0].dataValues.numOfShares) + parseInt(shs);
               stock[0].updateAttributes({ numOfShares: currentShares
               });
          } else {
