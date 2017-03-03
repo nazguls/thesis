@@ -28,23 +28,26 @@ exports.transact = (tradeData) => {
               stock[0].updateAttributes({ numOfShares: currentShares
               });
          } else {
-         Stock.create({
+           Stock.create({
           stockSymbol: symbol,
           type: 'hold',
           purchaseDate: new Date(),
           purchasePrice: tradeData.price,
           numOfShares: tradeData.shares,
-          }).then(stock => {
+          });
             UserStocks.create({
             UserId: user.id,
             StockId: stock.id
             });
-            user.getPortfolios()
+          }
+             user.getPortfolios()
             .then(portfolios => {
              console.log('45', portfolios);
              const cash = portfolios[portfolios.length - 1].cash;
              const buyAmount = tradeData.price * shs;
              const newCashBal = cash - buyAmount;
+             console.log('cash: ', cash);
+             console.log('new cash: ', newCashBal);
              const newMV = portfolios[portfolios.length - 1].portfolioValue
                + buyAmount;
              portfolios[portfolios.length - 1]
@@ -52,70 +55,9 @@ exports.transact = (tradeData) => {
               });
             });
           }
-        });
-      });
-  };
-  // date: Sequelize.DATE,
-  // type: Sequelize.STRING,
-  // symbol: Sequelize.STRING,
-  // numOfShares: Sequelize.INTEGER,
-  // purchasePrice: Sequelize.FLOAT
+        );
+      };
 
-// exports.transact1 = (tradeData) => {
-
-//   const userId = tradeData.userId;
-//   if (tradeData.transact === 'buy') {
-//     return User.findOne({ where: { id: userId } })
-//        .then(user => {
-//         const buyAmount = tradeData.price * tradeData.shares;
-//         const newCashBal = user.cash - buyAmount;
-//         user.updateAttributes({ cash: newCashBal });
-//         if (user) {
-//         return Stock.findOne({ where: {
-//           stockSymbol: tradeData.stock,
-//           userID: userId }
-//         }).then(stock => {
-//             if (stock) {
-//               const shs = stock.numOfShares + parseInt(tradeData.shares, 10);
-//               stock.update({ numOfShares: shs });
-//             } else {
-//           Stock.create({
-//           stockSymbol: tradeData.stock,
-//           type: 'hold',
-//           purchaseDate: new Date(),
-//           purchasePrice: tradeData.price,
-//           numOfShares: tradeData.shares,
-//           userID: userId
-//         });
-//         }
-//       });
-//       }
-//     })
-//        .catch(err => console.log(err));
-//   } else if (tradeData.transact === 'sell') {
-//     return User.findOne({ where: { id: tradeData.userId } }).then((user) => {
-//       if (user) {
-//         const sellAmount = tradeData.price * tradeData.shares;
-//         const newCashBal = user.cash + sellAmount;
-//         user.updateAttributes({ cash: newCashBal });
-//         return Stock.findOne({ where: {
-//           stockSymbol: tradeData.stock,
-//           userID: tradeData.userId
-//         } })
-//           .then(stock => {
-//             const numShares = stock.numOfShares - parseInt(tradeData.shares, 10);
-//             stock.updateAttributes({
-//               numOfShares: numShares
-//             }).then(holding => {
-//               if (holding.numOfShares === 0) {
-//                 holding.destroy();
-//               }
-//           });
-//       });
-//      }
-//     });
-//   }
-// };
 
 exports.deposit = (depositData, username) => {
   const type = depositData.type;
@@ -173,8 +115,6 @@ exports.getCash = (username) =>
     .then(User => User.getPortfolios())
     .then(portfolios => portfolios)
     .catch(err => console.log(err));
-
-
 
 exports.fetchPortfolioHistory = (username) => {
     return Portfolio.findAll({});
