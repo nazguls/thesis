@@ -5,10 +5,7 @@ const api = require('./api/api');
 const db = require('../db/dbModels');
 
 
-//route to the landing page
 
-
-//instance middleware
 require('./middleware/middleware')(app);
 
 //Adam's docker-testing endpoint

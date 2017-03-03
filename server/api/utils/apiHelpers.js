@@ -1,5 +1,5 @@
 const axios = require('axios');
-
+const connection = require('../../../db/dbConnect.js');
 
 const getStockPrice = (ticker) =>
   axios.get('http://dev.markitondemand.com/MODApis/Api/v2/Quote/json', {
@@ -23,8 +23,23 @@ const getHistoricalPrices = (ticker, options) => {
     formattedStart , "EndDate": formattedCurrentDate,
     "DataPeriod": period, "Elements":[ {"Symbol": ticker, "Type": options.attributes, "Params": options.attributes === 'price' ? ["c"] : null}]}}};
 
-  return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
-  .catch(err => console.log('20 error'));
+   if (ticker === 'SPX') {
+      console.log('27');
+      console.log(startDate);
+      return connection.query('SELECT * FROM indexData where date >=  :startDate AND date <= :currentDate', { replacements: {
+          startDate: formattedStart,
+          currentDate: formattedCurrentDate
+        }}).then((results) => {
+
+            return { data: results[0]};
+           });
+        }
+        //WHERE "date" >= \
+
+      else {
+    return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
+    .catch(err => console.log('20 error'));
+    }
 };
 
  const formatDate = (date) => {

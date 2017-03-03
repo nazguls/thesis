@@ -40,3 +40,5 @@ api_key.js
 .DS_Store
 client/public/bundle.js
 client/public/bundle.js.map
+
+client/ios/

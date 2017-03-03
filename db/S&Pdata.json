@@ -1,4 +1,4 @@
-var snpdata = [
+[
   {
     "DATE": "2007-03-01",
     "VALUE": 1403.17
@@ -10440,5 +10440,3 @@ var snpdata = [
     "VALUE": 2395.96
   }
 ]
-
-module.exports = snpdata;
