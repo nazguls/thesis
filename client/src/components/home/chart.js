@@ -5,7 +5,6 @@ import * as scale from 'd3-scale';
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 import axios from 'axios';
-import snpData from '../assets/snpData.js'
 
 const d3 = {
   scale,
@@ -23,13 +22,10 @@ class Chart extends Component {
 
   constructor(props) {
 		super(props);
-      console.log(snpData);
+      //console.log(snpData);
 
-     this.state = { lineGraph: snpData };
+     this.state = { lineGraph: '' };
     }
-
-
-
 
     componentWillMount() {
 
@@ -45,17 +41,13 @@ class Chart extends Component {
         this.setState({ lineGraph: line.path }, () => {
         });
       });
-
-        // console.log('46', response));
-
-
-    }
+    };
 
     //this.state = {lineGraph: ''};
   render() {
 
     return (
-      <View style={{backgroundColor: 'transparent'}}>
+      <View style={{ backgroundColor: 'transparent' }}>
        <Surface width={500} height={200}>
        <Group x={100} y={0}>
        <Shape
@@ -65,9 +57,9 @@ class Chart extends Component {
          </Group>
         </Surface>
       </View>
-    )
+    );
   }
-};
+}
 
 
 export default Chart;

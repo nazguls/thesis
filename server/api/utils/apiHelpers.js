@@ -30,15 +30,16 @@ const getHistoricalPrices = (ticker, options) => {
           startDate: formattedStart,
           currentDate: formattedCurrentDate
         }}).then((results) => {
-          return { data: results[0]};
+
+            return { data: results[0]};
+           });
         }
-       ); //WHERE "date" >= \
-      }
-     //  :startDate AND "date" <= :currentDate', null, {raw: true}, {
-     //    startDate: startDate,
-     //    currentDate: currentDate
-  return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
-  .catch(err => console.log('20 error'));
+        //WHERE "date" >= \
+
+      else {
+    return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
+    .catch(err => console.log('20 error'));
+    }
 };
 
  const formatDate = (date) => {

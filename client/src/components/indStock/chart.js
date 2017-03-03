@@ -47,16 +47,24 @@ class Chart extends Component {
       '?type='+period+'&numperiods=' +
       num + '&period=historical&attributes=' + type)
     .then(response => {
+      console.log('50', response);
+      let data;
       if(this.props.stockRes.data.Symbol === 'SPX') {
-        return response;
+          console.log(response.data);
+          data = response.data.map((dataObj) => {
+            return {
+            date: new Date(dataObj.date),
+            value: dataObj.value
+          }
+          });
+      } else {
+        data = response.data.Dates.map((dataObj, i) => {
+          return {
+            date: new Date(dataObj),
+            value: type === 'price' ? response.data.Elements[0].DataSeries.close.values[i] : response.data.Elements[0].DataSeries.volume.values[i]
+          };
+        });
       }
-
-      let data = response.data.Dates.map((dataObj, i) => {
-        return {
-          date: new Date(dataObj),
-          value: type === 'price' ? response.data.Elements[0].DataSeries.close.values[i] : response.data.Elements[0].DataSeries.volume.values[i]
-        };
-      });
       const line = makeChart.createLineGraph({
       data, xAccessor, yAccessor, width: 300, height: 200 });
       this.setState({ lineGraph: line.path });
@@ -64,10 +72,8 @@ class Chart extends Component {
   }
 
 
-
-
   componentDidMount() {
-    this.historicalData(this.state.num, this.state.period)
+    this.historicalData(this.state.num, this.state.period, 'price')
   }
 
 
