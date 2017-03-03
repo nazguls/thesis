@@ -47,6 +47,10 @@ class Chart extends Component {
       '?type='+period+'&numperiods=' +
       num + '&period=historical&attributes=' + type)
     .then(response => {
+      if(this.props.stockRes.data.Symbol === 'SPX') {
+        return response;
+      }
+
       let data = response.data.Dates.map((dataObj, i) => {
         return {
           date: new Date(dataObj),

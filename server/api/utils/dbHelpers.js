@@ -42,12 +42,9 @@ exports.transact = (tradeData) => {
           }
              user.getPortfolios()
             .then(portfolios => {
-             console.log('45', portfolios);
              const cash = portfolios[portfolios.length - 1].cash;
              const buyAmount = tradeData.price * shs;
              const newCashBal = cash - buyAmount;
-             console.log('cash: ', cash);
-             console.log('new cash: ', newCashBal);
              const newMV = portfolios[portfolios.length - 1].portfolioValue
                + buyAmount;
              portfolios[portfolios.length - 1]
@@ -57,7 +54,6 @@ exports.transact = (tradeData) => {
           }
         );
       };
-
 
 exports.deposit = (depositData, username) => {
   const type = depositData.type;
@@ -80,7 +76,6 @@ exports.getUser = (usernameInput) => {
   const username = usernameInput.user;
   console.log('76', username);
   return User.findOne({ where: { username } })
-   //then(user => user)
   .catch(err => console.log(err));
  };
 
