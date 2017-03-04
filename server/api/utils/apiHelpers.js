@@ -22,7 +22,7 @@ const getHistoricalPrices = (ticker, options) => {
   { parameters: { "Normalized": false, "StartDate":
     formattedStart , "EndDate": formattedCurrentDate,
     "DataPeriod": period, "Elements":[ {"Symbol": ticker, "Type": options.attributes, "Params": options.attributes === 'price' ? ["c"] : null}]}}};
-
+    console.log('25 inputOptions: ', inputOptions);
    if (ticker === 'SPX') {
       console.log('27');
       console.log(startDate);
@@ -38,8 +38,9 @@ const getHistoricalPrices = (ticker, options) => {
 
       else {
     return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
-    .catch(err => console.log('20 error'));
-    }
+    .catch(err => {
+    });
+   }
 };
 
  const formatDate = (date) => {

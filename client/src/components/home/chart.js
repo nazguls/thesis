@@ -45,7 +45,7 @@ class Chart extends Component {
 
   render() {
     // console.log('46', this.state.graphMembers);
-    let tickXFormat = this.state.graphMembers.scale.x(null, '%b %d');
+    //let tickXFormat = this.state.graphMembers.scale.x(null, '%b %d');
 
     return (
       <View style={{ backgroundColor: 'transparent' }}>
