@@ -2,6 +2,9 @@ import firebase from 'firebase';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
 import {
+	LAST_NAME_CHANGED,
+	FIRST_NAME_CHANGED,
+	USERNAME_CHANGED,
 	EMAIL_CHANGED,
 	PASSWORD_CHANGED,
 	LOGIN_USER_SUCCESS,
@@ -60,6 +63,27 @@ export const emailChanged = (text) => {
 	};
 };
 
+export const usernameChanged = (text) => {
+	return {
+		type: USERNAME_CHANGED,
+		payload: text
+	};
+};
+
+export const updateFirstName = (text) => {
+	return {
+		type: FIRST_NAME_CHANGED,
+		payload: text
+	};
+};
+
+export const updateLastName = (text) => {
+	return {
+		type: LAST_NAME_CHANGED,
+		payload: text
+	};
+};
+
 export const passwordChanged = (text) => {
 	return {
 		type: PASSWORD_CHANGED,
@@ -95,7 +119,10 @@ export const loginUser = ({ email, password }) => {
 	return (dispatch) => {
 		dispatch({ type: LOGIN_USER });
 		firebase.auth().signInWithEmailAndPassword(email, password)
-		.then(user => loginUserSuccess(dispatch, user))
+		.then(user => {
+			console.log(user);
+			loginUserSuccess(dispatch, user);
+		})
 		.catch((error) => {
 			console.log(error);
 			firebase.auth().createUserWithEmailAndPassword(email, password)
