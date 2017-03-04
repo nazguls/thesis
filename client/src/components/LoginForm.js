@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Text, Image } from 'react-native';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Text } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { CardSection, Input, Button, Spinner, Background } from './common';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Background } from './common';
-
 
 class LoginForm extends Component {
 
@@ -19,9 +18,10 @@ class LoginForm extends Component {
 
 	onButtonPress() {
 		const { email, password } = this.props;
+
 		this.props.loginUser({ email, password });
 	}
-
+	
 	renderButton() {
 		if (this.props.loading) {
 			return <Spinner size="large" />;
@@ -32,8 +32,20 @@ class LoginForm extends Component {
 			</Button>
 		);
 	}
+	renderSignUpButton() {
+		if (this.props.loading) {
+			return <Spinner size="large" />;
+		}
+		return (
+			<Button onPress={() => Actions.signup()}>
+				Sign Up
+			</Button>
+		);
+	}
+
 
 	render() {
+		console.log(this.props);
 		return (
 			<Background>
 				<Text style={style.limeShape}> 3<Text style={style.limeTitle}> limeRock </Text>
@@ -65,6 +77,9 @@ class LoginForm extends Component {
 
 				<CardSection>
 					{this.renderButton()}
+				</CardSection>
+				<CardSection>
+					{this.renderSignUpButton()}
 				</CardSection>
 			</Background>
 
