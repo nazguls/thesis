@@ -4,8 +4,8 @@ const Portfolio = require('../../../db/dbModels').Portfolio;
 const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
-
 const UserTransactions = require('../../../db/dbModels').UserTransaction;
+
 //sending price and shares
 exports.transact = (tradeData) => {
   console.log(11);
