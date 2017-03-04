@@ -65,7 +65,6 @@ class Holdings extends Component {
 			return (
 				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
-
 					<Text style={textStyle}> {stock.symbol} </Text>
 					<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
 					</View>
