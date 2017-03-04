@@ -4,6 +4,7 @@ const connection = require('./dbConnect');
 const User = connection.define('Users', {
   username: Sequelize.STRING,
   password: Sequelize.STRING,
+  email: Sequelize.STRING,
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
   address: Sequelize.STRING,

@@ -58,6 +58,9 @@ client/ios/build/Build/Products/Debug-iphonesimulator/client.app.dSYM/Contents/I
 client/ios/client.xcodeproj/project.pbxproj
 client/ios/
 
+Pods/
+
+
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore

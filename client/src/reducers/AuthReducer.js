@@ -1,4 +1,5 @@
 import {
+	USERNAME_CHANGED,
 	EMAIL_CHANGED,
 	PASSWORD_CHANGED,
 	LOGIN_USER_SUCCESS,
@@ -7,6 +8,7 @@ import {
 } from '../actions/types';
 
 const INITIAL_STATE = {
+	username: '',
 	email: '',
 	password: '',
 	user: null,
@@ -16,6 +18,8 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case USERNAME_CHANGED:
+			return { ...state, username: action.payload };
 		case EMAIL_CHANGED:
 			return { ...state, email: action.payload };
 		case PASSWORD_CHANGED:
@@ -29,4 +33,4 @@ export default (state = INITIAL_STATE, action) => {
 		default:
 			return state;
 	}
-}
+};

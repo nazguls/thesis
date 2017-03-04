@@ -1,6 +1,7 @@
 import React from 'react';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
+import SignUp from './components/signup';
 import Home from './components/home/index';
 import IndStock from './components/indStock/index';
 import buy from './components/indStock/buy';
@@ -15,20 +16,27 @@ import compare from './components/Compare';
 const RouterComponent = () => {
 	return (
 		<Router >
-			<Scene key="auth" >
+			<Scene key="auth" initial>
 				<Scene
-        key='login'
-        component={LoginForm}
-        title="Please Login"
-        hideNavBar='false'
+          key="login"
+          component={LoginForm}
+          title="Please Login"
+          hideNavBar='false'
         />
+        <Scene
+          key="signup"
+          component={SignUp}
+          title="Please Sign Up"
+          hideNavBar='false'
+        />
+
 			</Scene>
 
       <Scene
         key="drawer"
         component={drawer}
         open={false}
-        initial
+        
       >
 
 			<Scene key="main" >
@@ -59,14 +67,16 @@ const RouterComponent = () => {
         title="Market Buy"
         sceneStyle={{ paddingTop: 60 }}
         leftTitle="back"
-        onLeft={() => Actions.pop()} />
+        onLeft={() => Actions.pop()} 
+        />
         <Scene
         key='sell'
         component={sell}
         title="Market Sell"
         sceneStyle={{ paddingTop: 60 }}
         leftTitle="back"
-        onLeft={() => Actions.pop()} />
+        onLeft={() => Actions.pop()} 
+        />
         </Scene>
       </Scene>
 
