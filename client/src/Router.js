@@ -16,7 +16,7 @@ import compare from './components/Compare';
 const RouterComponent = () => {
 	return (
 		<Router >
-			<Scene key="auth" initial>
+			<Scene key="auth" >
 				<Scene
           key="login"
           component={LoginForm}
@@ -36,7 +36,7 @@ const RouterComponent = () => {
         key="drawer"
         component={drawer}
         open={false}
-        
+        initial
       >
 
 			<Scene key="main" >
@@ -67,7 +67,7 @@ const RouterComponent = () => {
         title="Market Buy"
         sceneStyle={{ paddingTop: 60 }}
         leftTitle="back"
-        onLeft={() => Actions.pop()} 
+        onLeft={() => Actions.pop()}
         />
         <Scene
         key='sell'
@@ -75,7 +75,7 @@ const RouterComponent = () => {
         title="Market Sell"
         sceneStyle={{ paddingTop: 60 }}
         leftTitle="back"
-        onLeft={() => Actions.pop()} 
+        onLeft={() => Actions.pop()}
         />
         </Scene>
       </Scene>
