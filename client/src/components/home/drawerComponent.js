@@ -3,7 +3,6 @@ import Drawer from 'react-native-drawer';
 import { Actions, DefaultRenderer } from 'react-native-router-flux';
 import UserProfile from './userProfile';
 
-
 export default class NavigationDrawer extends React.Component {
   render() {
     const state = this.props.navigationState;

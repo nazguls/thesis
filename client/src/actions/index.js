@@ -16,8 +16,16 @@ import {
 	MARKET_VALUE,
 	CASH_VALUE,
 	CHART_VIEW,
-	RECOMMENDATIONS
+	RECOMMENDATIONS,
+	NOCASH
 } from './types';
+
+export const notEnoughFunds = (text) => {
+	return {
+		type: NOCASH,
+		payload: text
+	};
+};
 
 export const recommendations = (text) => {
 	console.log('received in action', text);
