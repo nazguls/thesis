@@ -27,41 +27,74 @@ class Chart extends Component {
     super(props);
     this.state = {
       lineGraph: '',
-      period: 'day',
       num: 365,
+      priceView: 'price'
     };
   }
 
   componentDidMount() {
-    this.historicalData(this.state.num, this.state.period, 'price');
+    this.historicalData(this.state.num, 'price', 'b');
   }
 
-  historicalData(num, period, type) {
-    let chartView = '';
-    chartView = type === 'price' ? 'Share Price' : 'Daily Trading Volume';
+  historicalData(num, typeChart, buttonOrImage) {
+    console.log('print this', num, typeChart, buttonOrImage);
+    // chartView = typeChart === 'price' ? 'Share Price' : 'Daily Trading Volume';
+
+    let chartView = typeChart;
+    this.setState({ num });
+    if (buttonOrImage === 'b') {
+      this.setState({ priceView: 'price' });
+    } else if (buttonOrImage === 'i') {
+        if (this.state.priceView === 'price') {
+          chartView = 'volume';
+          this.setState({ priceView: 'volume' });
+        } else {
+          chartView = 'price';
+          this.setState({ priceView: 'price' });
+      }
+    }
+
+    console.log('chartView', chartView);
     this.props.selectChartView(chartView);
-    this.setState({ period, num });
+
+
+
+    // const type = type1;
+    // if (type === 'price') {
+    //   this.state.view = true;
+    // }
+    // let chartView = '';
+    // if (this.state.view === false) {
+    //   chartView = 'Daily Tradig Volumn';
+    //   type = 'volume';
+    //   this.setState({ view: !this.state.view });
+    // } else {
+    //   chartView = 'Share Price';
+    //   type = 'price';
+    //   this.setState({ view: !this.state.view });
+    // }
+
 
     axios.get('http://localhost:3000/api/stocks/' +
       this.props.stockRes.data.Symbol +
-      '?type='+period+'&numperiods=' +
-      num + '&period=historical&attributes=' + type)
+      '?type=day&numperiods=' +
+      num + '&period=historical&attributes=' + chartView)
     .then(response => {
       console.log('50', response);
       let data;
-      if(this.props.stockRes.data.Symbol === 'SPX') {
+      if (this.props.stockRes.data.Symbol === 'SPX') {
           console.log(response.data);
           data = response.data.map((dataObj) => {
             return {
             date: new Date(dataObj.date),
             value: dataObj.value
-          }
-          });
+          };
+        });
       } else {
         data = response.data.Dates.map((dataObj, i) => {
           return {
             date: new Date(dataObj),
-            value: type === 'price' ? response.data.Elements[0].DataSeries.close.values[i] : response.data.Elements[0].DataSeries.volume.values[i]
+            value: chartView === 'price' ? response.data.Elements[0].DataSeries.close.values[i] : response.data.Elements[0].DataSeries.volume.values[i]
           };
         });
       }
@@ -71,19 +104,12 @@ class Chart extends Component {
     });
   }
 
-
-  componentDidMount() {
-    this.historicalData(this.state.num, this.state.period, 'price')
-  }
-
-
-
     //this.state = {lineGraph: ''};
   render() {
     return (
       <View>
         <Text style={styles.chartTypeText}> {this.state.chartView} </Text>
-        <TouchableWithoutFeedback onPress={this.historicalData.bind(this, this.state.num, this.state.period, 'volume')}>
+        <TouchableWithoutFeedback onPress={this.historicalData.bind(this, this.state.num, 'volume', 'i')}>
 
         <View style={{ backgroundColor: 'transparent' }}>
           <Surface width={500} height={200} >
@@ -100,23 +126,23 @@ class Chart extends Component {
 
       <View style={styles.viewStyle}>
         <Text
-          onPress={this.historicalData.bind(this, 7, 'day', 'price')}
+          onPress={this.historicalData.bind(this, 7, 'price', 'b')}
           style={styles.textStyle}
         > 1W </Text>
         <Text
-          onPress={this.historicalData.bind(this, 30, 'day', 'price')}
+          onPress={this.historicalData.bind(this, 30, 'price', 'b')}
           style={styles.textStyle}
         > 1M </Text>
         <Text
-          onPress={this.historicalData.bind(this, 90, 'day', 'price')}
+          onPress={this.historicalData.bind(this, 90, 'price', 'b')}
           style={styles.textStyle}
         > 3M </Text>
         <Text
-          onPress={this.historicalData.bind(this, 180, 'day', 'price')}
+          onPress={this.historicalData.bind(this, 180, 'price', 'b')}
           style={styles.textStyle}
         > 6M </Text>
         <Text
-          onPress={this.historicalData.bind(this, 365, 'day', 'price')}
+          onPress={this.historicalData.bind(this, 365, 'price', 'b')}
           style={styles.textStyle}
         > 1Y </Text>
         <Text style={styles.textStyle}> ALL </Text>
