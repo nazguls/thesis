@@ -22,8 +22,7 @@ Models.User.build({
   city: 'SF',
   state: 'CA',
   zipCode: '34236'
-
-}).save()
+}).save();
 
 
 Models.Stock.build({
