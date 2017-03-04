@@ -5,41 +5,51 @@ const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
 
+const UserTransactions = require('../../../db/dbModels').UserTransaction;
 //sending price and shares
 exports.transact = (tradeData) => {
+  console.log(11);
  const shs = tradeData.transact === 'buy' ? tradeData.shares :
 -tradeData.shares;
  const userId = tradeData.userId;
  const symbol = tradeData.stock;
- console.log('9', tradeData);
-  Transactions.create({
-   date: new Date(),
-   type: tradeData.transact,
-   symbol,
-   purchasePrice: tradeData.price,
-   numOfShares: shs
-  });
+
+  //find the user and update the # of shares
    return User.findOne({ userId })
-    .then(user => {
+    .then(user => { Transactions.create({
+        date: new Date(),
+        type: tradeData.transact,
+        symbol,
+        purchasePrice: tradeData.price,
+        numOfShares: shs
+        }).then(transaction => {
+            UserTransactions.create({
+            UserId: user.id,
+            TransactionId: transaction.id
+          });
+
        user.getStocks({ where: { stockSymbol: symbol } })
          .then(stock => {
             if (stock[0] !== undefined) {
-              const currentShares = parseInt(stock[0].dataValues.numOfShares) + parseInt(shs);
+              let currentShares = parseInt(stock[0].dataValues.numOfShares) + parseInt(shs);
               stock[0].updateAttributes({ numOfShares: currentShares
               });
          } else {
+          console.log('37 -------------');
            Stock.create({
           stockSymbol: symbol,
           type: 'hold',
           purchaseDate: new Date(),
           purchasePrice: tradeData.price,
           numOfShares: tradeData.shares,
-          });
+          }).then(stock => {
+            console.log('user.id --', user.id);
+            console.log('user.id --', stock.id);
             UserStocks.create({
             UserId: user.id,
             StockId: stock.id
             });
-          }
+
              user.getPortfolios()
             .then(portfolios => {
              const cash = portfolios[portfolios.length - 1].cash;
@@ -49,11 +59,13 @@ exports.transact = (tradeData) => {
                + buyAmount;
              portfolios[portfolios.length - 1]
              .updateAttributes({ cash: newCashBal, portfolioValue: newMV });
+              })
               });
-            });
-          }
-        );
-      };
+            };
+          });
+      });
+      });
+  }
 
 exports.deposit = (depositData, username) => {
   const type = depositData.type;
@@ -72,16 +84,16 @@ exports.deposit = (depositData, username) => {
     });
 };
 
-exports.getUser = (usernameInput) => {
-  const username = usernameInput.user;
-  console.log('76', username);
-  return User.findOne({ where: { username } })
+exports.getUser = (userEmailInput) => {
+  const userEmail = userEmailInput.user;
+  return User.findOne({ where: { email: userEmail } })
   .catch(err => console.log(err));
  };
 
 exports.addUser = (username, userData) =>
     User.create({
     username,
+    email: userData.email,
     firstName: userData.firstName,
     lastName: userData.lastName,
     address: userData.address,
@@ -91,28 +103,18 @@ exports.addUser = (username, userData) =>
     password: userData.password
   }).catch(err => console.log(err));
 
-
-// exports.fetchHoldings = (username) =>
-//    User.findOne({ where: { username } })
-//     .then(user =>
-//        Stock.findAll({ where: { userID: user.id } })
-//     )
-//     .catch(err => console.log(err));
-
 exports.fetchHoldings = (username) =>
    User.findOne({ where: { username } })
-    .then(User => User.getStocks())
+    .then(user => user.getStocks())
     .then(stocks => stocks)
     .catch(err => console.log(err));
 
 exports.getCash = (username) =>
    User.findOne({ where: { username } })
-    .then(User => User.getPortfolios())
+    .then(user => user.getPortfolios())
     .then(portfolios => portfolios)
     .catch(err => console.log(err));
 
 exports.fetchPortfolioHistory = (username) => {
-    return Portfolio.findAll({});
+  return Portfolio.findAll({});
 };
-
-

@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
 
 //connection.connect();
 connection.query('create table indexData (date DATE, value INTEGER)',
-  (err) => if(err) {console.log('table already exists, friend.')});
+  () =>  {console.log('table created.')});
 
 fs.readFile(path.resolve(__dirname, 'indexData.json'), 'utf8', (err, data) => {
     const jsonData = JSON.parse(data);

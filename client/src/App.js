@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers';
 import firebase from 'firebase';
-import LoginForm from './components/LoginForm';
-//middleware
 import ReduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 import Router from './Router';
+import reducers from './reducers';
 
 class App extends Component {
 
@@ -18,7 +16,7 @@ class App extends Component {
 			storageBucket: 'manager-e9f84.appspot.com',
 			messagingSenderId: '968270480798'
   };
-  	firebase.initializeApp(config);
+    firebase.initializeApp(config);
 	}
 
 	render() {

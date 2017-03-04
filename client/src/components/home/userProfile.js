@@ -8,22 +8,23 @@ import {
 	Text
 } from 'react-native';
 import { connect } from 'react-redux';
-import { updateMarketValue, updateCashValue } from '../../actions';
+import { updateMarketValue, updateCashValue, updateFirstName, usernameChanged, emailChanged } from '../../actions';
 import communications from 'react-native-communications';
 
 class UserProfile extends Component {
 
 	componentWillMount() {
-		const context = this;
-		// axios.get('http://localhost:3000/api/portfolio/isaac1?period=historical')
-		// .then(response => {
-		// 	const length = response.data.length;
-		// 	const mktValue = response.data[length - 1].portfolioValue;
-		// 	context.props.updateMarketValue(mktValue);
-		// }).catch(error => {
-		// 	console.log(error);
-		// });
 
+		const context = this;
+		const email = this.props.auth.email;
+		this.props.emailChanged(email);
+    axios.get(`http://localhost:3000/api/users/${email}`)
+		.then(response => {
+			context.props.updateFirstName(response.data.firstName);
+			context.props.usernameChanged(response.data.username);
+		}).catch(error => {
+			console.log(error);
+		});
 		axios.get('http://localhost:3000/api/portfolio/isaac1?period=historical')
 		.then(response => {
 			const length = response.data.length;
@@ -58,11 +59,10 @@ class UserProfile extends Component {
 				color: '#42f4c2'
       },
 		};
-		console.log(this.props);
 		return (
       <View style={styles.controlPanel}>
         <Text style={styles.controlPanelWelcome}>
-					Hi, {this.props.user.name}!
+					Hi, {this.props.user.firstName}!
         </Text>
         <Text style={styles.navItems}>
 					MARKET VALUE
@@ -86,10 +86,13 @@ class UserProfile extends Component {
 					<Icon name='history' size={20} />  HISTORY
         </Text>
         <Text style={styles.navItems}>
-					<Icon name='people' size={20} onPress={() => communications.text(null, 'Hey I found this great stock website where you can trade for free! Check it out :D')}/>  REFER FRIENDS
+					<Icon name='people' size={20} onPress={() => communications.text(null, 'Hey I found this great stock website where you can trade for free! Check it out :D')} />  REFER FRIENDS
         </Text>
         <Text style={styles.navItems}>
 					<Icon name='help' size={20} />  HELP
+        </Text>
+        <Text style={styles.navItems}>
+					<Icon name='close' size={20} />  LOG OUT
         </Text>
 
       </View>
@@ -98,7 +101,10 @@ class UserProfile extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return { user: state.user };
+	return { 
+		user: state.user,
+		auth: state.auth
+  };
 };
 
-export default connect(mapStateToProps, { updateMarketValue, updateCashValue })(UserProfile);
+export default connect(mapStateToProps, { updateMarketValue, updateCashValue, updateFirstName, usernameChanged, emailChanged })(UserProfile);

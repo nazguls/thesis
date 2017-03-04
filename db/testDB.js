@@ -2,6 +2,7 @@ const Models = require('./dbModels');
 
 Models.User.build({
   username: 'isaac1',
+  email: 'Test@test.com',
   firstName: 'isaac',
   lastName: 'yoon',
   cash: 3000,
@@ -11,9 +12,9 @@ Models.User.build({
   zipCode: '34236'
 
 }).save();
-
 Models.User.build({
   username: 'adamw',
+  email: 'Adam@test.com',
   firstName: 'adam',
   lastName: 'watt',
   cash: 4000,
@@ -22,7 +23,8 @@ Models.User.build({
   state: 'CA',
   zipCode: '34236'
 
-}).save();
+}).save()
+
 
 Models.Stock.build({
   stockSymbol: 'AAPL',
