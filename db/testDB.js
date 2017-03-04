@@ -2,6 +2,7 @@ const Models = require('./dbModels');
 
 Models.User.build({
   username: 'isaac1',
+  email: 'Test@test.com',
   firstName: 'isaac',
   lastName: 'yoon',
   cash: 3000,
@@ -14,6 +15,7 @@ Models.User.build({
 
 Models.User.build({
   username: 'adamw',
+  email: 'Adam@test.com',
   firstName: 'adam',
   lastName: 'watt',
   cash: 4000,
