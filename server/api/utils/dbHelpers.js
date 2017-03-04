@@ -1,9 +1,12 @@
 const User = require('../../../db/dbModels').User;
 const Stock = require('../../../db/dbModels').Stock;
 const Portfolio = require('../../../db/dbModels').Portfolio;
+<<<<<<< HEAD
 const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
+=======
+>>>>>>> add email to addUser
 
 //sending price and shares
 exports.transact = (tradeData) => {
@@ -72,16 +75,16 @@ exports.deposit = (depositData, username) => {
     });
 };
 
-exports.getUser = (usernameInput) => {
-  const username = usernameInput.user;
-  console.log('76', username);
-  return User.findOne({ where: { username } })
+exports.getUser = (userEmailInput) => {
+  const userEmail = userEmailInput.user;
+  return User.findOne({ where: { email: userEmail } })
   .catch(err => console.log(err));
  };
 
 exports.addUser = (username, userData) =>
     User.create({
     username,
+    email: userData.email,
     firstName: userData.firstName,
     lastName: userData.lastName,
     address: userData.address,
@@ -91,28 +94,18 @@ exports.addUser = (username, userData) =>
     password: userData.password
   }).catch(err => console.log(err));
 
-
-// exports.fetchHoldings = (username) =>
-//    User.findOne({ where: { username } })
-//     .then(user =>
-//        Stock.findAll({ where: { userID: user.id } })
-//     )
-//     .catch(err => console.log(err));
-
 exports.fetchHoldings = (username) =>
    User.findOne({ where: { username } })
-    .then(User => User.getStocks())
+    .then(user => user.getStocks())
     .then(stocks => stocks)
     .catch(err => console.log(err));
 
 exports.getCash = (username) =>
    User.findOne({ where: { username } })
-    .then(User => User.getPortfolios())
+    .then(user => user.getPortfolios())
     .then(portfolios => portfolios)
     .catch(err => console.log(err));
 
 exports.fetchPortfolioHistory = (username) => {
-    return Portfolio.findAll({});
+  return Portfolio.findAll({});
 };
-
-
