@@ -1,48 +1,55 @@
 const User = require('../../../db/dbModels').User;
 const Stock = require('../../../db/dbModels').Stock;
 const Portfolio = require('../../../db/dbModels').Portfolio;
-<<<<<<< HEAD
 const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
-=======
->>>>>>> add email to addUser
 
+const UserTransactions = require('../../../db/dbModels').UserTransaction;
 //sending price and shares
 exports.transact = (tradeData) => {
+  console.log(11);
  const shs = tradeData.transact === 'buy' ? tradeData.shares :
 -tradeData.shares;
  const userId = tradeData.userId;
  const symbol = tradeData.stock;
- console.log('9', tradeData);
-  Transactions.create({
-   date: new Date(),
-   type: tradeData.transact,
-   symbol,
-   purchasePrice: tradeData.price,
-   numOfShares: shs
-  });
+
+  //find the user and update the # of shares
    return User.findOne({ userId })
-    .then(user => {
+    .then(user => { Transactions.create({
+        date: new Date(),
+        type: tradeData.transact,
+        symbol,
+        purchasePrice: tradeData.price,
+        numOfShares: shs
+        }).then(transaction => {
+            UserTransactions.create({
+            UserId: user.id,
+            TransactionId: transaction.id
+          });
+
        user.getStocks({ where: { stockSymbol: symbol } })
          .then(stock => {
             if (stock[0] !== undefined) {
-              const currentShares = stock[0].dataValues.numOfShares + shs;
+              let currentShares = parseInt(stock[0].dataValues.numOfShares) + parseInt(shs);
               stock[0].updateAttributes({ numOfShares: currentShares
               });
          } else {
+          console.log('37 -------------');
            Stock.create({
           stockSymbol: symbol,
           type: 'hold',
           purchaseDate: new Date(),
           purchasePrice: tradeData.price,
           numOfShares: tradeData.shares,
-          });
+          }).then(stock => {
+            console.log('user.id --', user.id);
+            console.log('user.id --', stock.id);
             UserStocks.create({
             UserId: user.id,
             StockId: stock.id
             });
-          }
+
              user.getPortfolios()
             .then(portfolios => {
              const cash = portfolios[portfolios.length - 1].cash;
@@ -52,11 +59,13 @@ exports.transact = (tradeData) => {
                + buyAmount;
              portfolios[portfolios.length - 1]
              .updateAttributes({ cash: newCashBal, portfolioValue: newMV });
+              })
               });
-            });
-          }
-        );
-      };
+            };
+          });
+      });
+      });
+  }
 
 exports.deposit = (depositData, username) => {
   const type = depositData.type;

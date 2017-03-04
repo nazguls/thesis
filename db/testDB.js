@@ -12,7 +12,6 @@ Models.User.build({
   zipCode: '34236'
 
 }).save();
-
 Models.User.build({
   username: 'adamw',
   email: 'Adam@test.com',
@@ -24,7 +23,8 @@ Models.User.build({
   state: 'CA',
   zipCode: '34236'
 
-}).save();
+}).save()
+
 
 Models.Stock.build({
   stockSymbol: 'AAPL',
