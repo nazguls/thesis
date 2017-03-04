@@ -24,7 +24,7 @@ exports.transact = (tradeData) => {
        user.getStocks({ where: { stockSymbol: symbol } })
          .then(stock => {
             if (stock[0] !== undefined) {
-              const currentShares = stock[0].dataValues.numOfShares + shs;
+              const currentShares = parseInt(stock[0].dataValues.numOfShares) + parseInt(shs);
               stock[0].updateAttributes({ numOfShares: currentShares
               });
          } else {

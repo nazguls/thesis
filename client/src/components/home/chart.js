@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, ART, Dimensions } from 'react-native';
+import { Text, View, Image, ART, Dimensions, StyleSheet, Color } from 'react-native';
 import * as makeChart from '../../chartUtils/graphUtil.js';
 import * as scale from 'd3-scale';
 import * as shape from 'd3-shape';
@@ -22,13 +22,13 @@ class Chart extends Component {
 
   constructor(props) {
 		super(props);
-      //console.log(snpData);
 
-     this.state = { lineGraph: '' };
+    this.state = { lineGraph: '', graphMembers: ''};
+
     }
 
-    componentWillMount() {
-
+    componentWillUpdate() {
+      var context = this;
       axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
         let data = response.data.map(dataObj => {
           return {
@@ -38,13 +38,14 @@ class Chart extends Component {
         });
         const line = makeChart.createLineGraph({
         data, xAccessor, yAccessor, width: 300, height: 200 });
-        this.setState({ lineGraph: line.path }, () => {
+        context.setState({lineGraph: line.path, graphMembers: line})
         });
-      });
-    };
+       };
 
-    //this.state = {lineGraph: ''};
+
   render() {
+    // console.log('46', this.state.graphMembers);
+    let tickXFormat = this.state.graphMembers.scale.x(null, '%b %d');
 
     return (
       <View style={{ backgroundColor: 'transparent' }}>
@@ -54,12 +55,67 @@ class Chart extends Component {
           d={this.state.lineGraph}
           stroke="orange"
           strokeWidth={3} />
+        <Shape
+          d={this.state.lineGraph}
+          stroke="white"
+          strokeWidth={3} />
          </Group>
         </Surface>
+        {this.state.graphMembers !== '' ? (<View key={'ticksX'}>
+          {this.state.graphMembers.ticks.map((tick, index) => {
+            const tickStyles = {};
+            tickStyles.width = 20;
+            tickStyles.left = tick.x - (20 / 2);
+
+            return (
+
+              <Text key={index} style={[styles.tickLabelX, tickStyles]}>
+                {tickXFormat(new Date(tick.datum.time * 1000))}
+              </Text>
+            );
+          })}
+        </View> ) : <View></View>}
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+  },
+
+  tickLabelX: {
+    position: 'absolute',
+    bottom: 0,
+    fontSize: 12,
+    textAlign: 'center',
+  },
+
+  ticksYContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+
+  tickLabelY: {
+    position: 'absolute',
+    left: 0,
+    backgroundColor: 'transparent',
+  },
+
+  tickLabelYText: {
+    fontSize: 12,
+    textAlign: 'center',
+  },
+
+  ticksYDot: {
+    position: 'absolute',
+    width: 2,
+    height: 2,
+    backgroundColor: '#000000',
+    borderRadius: 100,
+  },
+});
 
 
 export default Chart;
