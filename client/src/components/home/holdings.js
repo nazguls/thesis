@@ -58,16 +58,19 @@ class Holdings extends Component {
 		const { data } = this.state.portfolio;
 		const { viewStyle, container, textStyle, buttonStyle } = styles;
 		const stockData = data.map((stock, key) => {
-			return (
-				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
-					<View style={viewStyle} >
-						<Text style={textStyle}> {stock.symbol} </Text>
-						<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
-					</View>
-				</TouchableHighlight>
-			);
-		}
+			if (stock.numOfShares > 0) {
+				return (
+					<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
+						<View style={viewStyle} >
+							<Text style={textStyle}> {stock.symbol} </Text>
+							<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
+						</View>
+					</TouchableHighlight>
+				);
+			}
+			}
 		);
+
 
 		return (
 			<View style={container} >
