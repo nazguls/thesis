@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, ScrollView, Image } from 'react-native';
 import axios from 'axios';
-import { searchStock, updateMarketValue } from '../../actions';
+import { searchStock, updateMarketValue, numShares } from '../../actions';
 
 
 class Holdings extends Component {
@@ -122,4 +122,4 @@ const mapStateToProps = (state) => {
 		auth: state.auth
   };
 };
-export default connect(mapStateToProps, { searchStock, updateMarketValue })(Holdings);
+export default connect(mapStateToProps, { searchStock, updateMarketValue, numShares })(Holdings);
