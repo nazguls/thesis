@@ -3,7 +3,7 @@ import { Text, View, TouchableHighlight, ScrollView, Image } from 'react-native'
 import { CardSection } from '../common';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
-import { searchStock, updateMarketValue } from '../../actions';
+import { searchStock, updateMarketValue, numShares } from '../../actions';
 import { connect } from 'react-redux';
 
 class Holdings extends Component {
@@ -21,6 +21,7 @@ class Holdings extends Component {
 		const context = this;
 		axios.get('http://127.0.0.1:3000/api/portfolio/isaac1?period=current')
 		.then(response => {
+			this.props.numShares(response.data);
 			context.setState({
 				portfolio: response,
 				indStockButtonView: ' "$" + stock.currentPrice'
@@ -65,8 +66,8 @@ class Holdings extends Component {
 			return (
 				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
-					<Text style={textStyle}> {stock.symbol} </Text>
-					<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
+						<Text style={textStyle}> {stock.symbol} </Text>
+						<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
 					</View>
 				</TouchableHighlight>
 			)}
@@ -119,4 +120,4 @@ const styles = {
 	}
 };
 
-export default connect(null, { searchStock, updateMarketValue })(Holdings);
+export default connect(null, { searchStock, updateMarketValue, numShares })(Holdings);

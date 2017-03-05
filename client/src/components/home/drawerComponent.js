@@ -1,7 +1,7 @@
 import React from 'react';
 import Drawer from 'react-native-drawer';
 import UserProfile from './userProfile';
-import {Actions, DefaultRenderer} from 'react-native-router-flux';
+import { Actions, DefaultRenderer } from 'react-native-router-flux';
 
 export default class NavigationDrawer extends React.Component {
   render(){
@@ -12,8 +12,8 @@ export default class NavigationDrawer extends React.Component {
       <Drawer
         ref="navigation"
         open={state.open}
-        onOpen={()=>Actions.refresh({key:state.key, open: true})}
-        onClose={()=>Actions.refresh({key:state.key, open: false})}
+        onOpen={() => Actions.refresh({ key: state.key, open: true })}
+        onClose={() => Actions.refresh({key: state.key, open: false })}
         type="displace"
         content={<UserProfile  />}
         tapToClose={true}

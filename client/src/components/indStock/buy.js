@@ -3,7 +3,8 @@ import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { CardSection, Input, Button, Background } from '../common/';
-import { updateStockShare, updateCashValue } from '../../actions';
+import { updateStockShare, updateCashValue, notEnoughFunds } from '../../actions';
+import { Text } from 'react-native'
 
 class Buy extends Component {
 
@@ -11,33 +12,45 @@ class Buy extends Component {
 		this.props.updateStockShare(text);
 	}
 	onButtonPress(symbol) {
-		const context = this;
-		console.log(this.props.cashValue);
-		axios({
-			method: 'post',
-			url: `http://127.0.0.1:3000/api/stocks/${symbol}`,
-			data: {
-				stock: context.props.stockRes.data.Symbol,
-				transact: 'buy',
-				userId: 1,
-				price: context.props.stockRes.data.LastPrice,
-				shares: context.props.stockShare,
-			}
-		}).then(() => {
-			Actions.home({ type: 'reset' });
-			const price = context.props.stockRes.data.LastPrice;
-			const numShares = context.props.stockShare;
-			const preBuyCashValue = context.props.cashValue;
-			const newCashValue = preBuyCashValue - (price * numShares);
-			const roundedCashValue = Math.round(newCashValue * 100) / 100;
-			context.props.updateCashValue(roundedCashValue);
-		}).catch(error => console.log(error));
+		if (this.props.cashValue < (this.props.stockRes.data.LastPrice * this.props.stockShare)) {
+			this.props.notEnoughFunds(true);
+		} else {
+			const context = this;
+			console.log(this.props.cashValue);
+			axios({
+				method: 'post',
+				url: `http://127.0.0.1:3000/api/stocks/${symbol}`,
+				data: {
+					stock: context.props.stockRes.data.Symbol,
+					transact: 'buy',
+					userId: 1,
+					price: context.props.stockRes.data.LastPrice,
+					shares: context.props.stockShare,
+				}
+			}).then(() => {
+				Actions.home({ type: 'reset' });
+				const price = context.props.stockRes.data.LastPrice;
+				const numShares = context.props.stockShare;
+				const preBuyCashValue = context.props.cashValue;
+				const newCashValue = preBuyCashValue - (price * numShares);
+				const roundedCashValue = Math.round(newCashValue * 100) / 100;
+				context.props.updateCashValue(roundedCashValue);
+			}).catch(error => console.log(error));
+		}
+	}
+
+	onPurchase() {
+		console.log('entered');
+		if (this.props.cashValue < (this.props.stockRes.data.LastPrice * this.props.stockShare)) {
+			return (<Text style={{ color: 'red' }}> Insufficient Funds </Text>);
+		}
 	}
 
 	render() {
 		const { stockRes, stockShare } = this.props;
 		return (
 			<Background>
+
 				<CardSection>
 					<Input
 						label="Shares"
@@ -61,11 +74,20 @@ class Buy extends Component {
 					/>
 				</CardSection>
 
+				<CardSection>
+					<Input
+						label = "Cash Balance"
+						placeholder = {JSON.stringify(this.props.cashValue)}
+					/>
+				</CardSection>
 
 				<CardSection>
 					<Button onPress={this.onButtonPress.bind(this, this.props.stockRes.data.Symbol)}>
 						Confirm
 					</Button>
+				</CardSection>
+				<CardSection>
+					{this.onPurchase()}
 				</CardSection>
 			</Background>
 		);
@@ -74,14 +96,15 @@ class Buy extends Component {
 
 const mapStateToProps = (state) => {
 	const { stockRes, stockShare } = state.search;
-	const { cashValue } = state.user;
+	const { cashValue, noCash } = state.user;
 	console.log(stockRes);
 	console.log('stockshare', stockShare);
 	return ({
 		stockShare,
 		stockRes,
-		cashValue
+		cashValue,
+		noCash
 	});
 };
 
-export default connect(mapStateToProps, { updateStockShare, updateCashValue })(Buy);
+export default connect(mapStateToProps, { updateStockShare, updateCashValue, notEnoughFunds })(Buy);

@@ -17,8 +17,24 @@ import {
 	MARKET_VALUE,
 	CASH_VALUE,
 	CHART_VIEW,
-	RECOMMENDATIONS
+	RECOMMENDATIONS,
+	NOCASH,
+	NUMSHARES
 } from './types';
+
+export const numShares = (obj) => {
+	return {
+		type: NUMSHARES,
+		payload: obj
+	}
+}
+
+export const notEnoughFunds = (text) => {
+	return {
+		type: NOCASH,
+		payload: text
+	};
+};
 
 export const recommendations = (text) => {
 	console.log('received in action', text);
