@@ -1,8 +1,9 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, ScrollView, Image } from 'react-native';
 import axios from 'axios';
-import { connect } from 'react-redux';
 import { searchStock, updateMarketValue } from '../../actions';
+
 
 class Holdings extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Holdings extends Component {
 		const email = this.props.auth.email;
 		axios.get(`http://127.0.0.1:3000/api/portfolio/${email}?period=current`)
 		.then(response => {
+			this.props.numShares(response.data);
 			context.setState({
 				portfolio: response,
 				indStockButtonView: ' "$" + stock.currentPrice'
@@ -59,9 +61,8 @@ class Holdings extends Component {
 			return (
 				<TouchableHighlight key={key} onPress={this.onButtonPress.bind(this, stock)}>
 					<View style={viewStyle} >
-
-					<Text style={textStyle}> {stock.symbol} </Text>
-					<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
+						<Text style={textStyle}> {stock.symbol} </Text>
+						<Text style={buttonStyle} onPress={this.indStockButtonPress.bind(this)}>  { eval(this.state.indStockButtonView) } </Text>
 					</View>
 				</TouchableHighlight>
 			);
@@ -111,8 +112,9 @@ const styles = {
 	}
 };
 
+
 const mapStateToProps = (state) => {
-	return { 
+	return {
 		user: state.user,
 		auth: state.auth
   };
