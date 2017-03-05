@@ -20,12 +20,10 @@ class Sell extends Component {
 
 	onButtonPress(symbol) {
 
-		if (this.props.stockShare > this.currentShares()) {
+		if (this.props.stockShare > parseInt(this.currentShares())) {
 			console.log('You dont have enough shares');
 		} else {
-
-
-		const context = this;
+			const context = this;
 			axios({
 			method: 'post',
 			url: `http://127.0.0.1:3000/api/stocks/${symbol}`,
@@ -57,17 +55,20 @@ class Sell extends Component {
 		}
 	}
 	errorMessage() {
-		if (this.props.stockShare > this.currentShares()) {
+		console.log('inerrorMessage', this.props.stockShare)
+		console.log('this.currentSahre', this.currentShares());
+		if (this.props.stockShare > parseInt(this.currentShares())) {
 			return (
 				<Text style={{ color: 'red' }}> You are trying to sell more than your current holding </Text>
 			);
+		} else {
+			<Text></Text>
 		}
 	}
 
 	render() {
 		console.log('num of Shares', this.props.numShares);
 		console.log('stockRes', this.props.stockShare);
-
 		const { stockRes, stockShare } = this.props;
 		console.log('stockShare', this.props.stockShare);
 		return (
