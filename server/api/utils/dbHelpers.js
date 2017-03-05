@@ -77,17 +77,24 @@ exports.transact = (tradeData) => {
 };
 exports.deposit = (depositData, email) => {
   const type = depositData.type;
-  const amount = type === 'WITHDRAWAL' ?
-   -depositData.amount : depositData.amount;
-   console.log(amount);
+  const amount = type === 'WITHDRAWAL' ? -depositData.amount : depositData.amount;
   return User.findOne({ where: { email } })
     .then(user => {
       user.getPortfolios()
         .then(portfolios => {
-           const cash = portfolios[portfolios.length - 1].cash;
-           const newAmount = cash + amount;
-           portfolios[portfolios.length - 1]
-             .updateAttributes({ cash: newAmount });
+          const portfolioValue = portfolios[portfolios.length - 1].portfolioValue;
+          const cash = portfolios[portfolios.length - 1].cash + amount;
+          Portfolio.create({
+            date: new Date(),
+            cash,
+            portfolioValue 
+          })
+          .then(portfolio =>
+            UserPortfolios.create({
+              UserId: user.id,
+              PortfolioId: portfolio.id
+            })
+          );
         });
     });
 };
@@ -96,7 +103,7 @@ exports.getUser = (userEmailInput) => {
   const userEmail = userEmailInput.user;
   return User.findOne({ where: { email: userEmail } })
   .catch(err => console.log(err));
- };
+};
 
 exports.addUser = (username, userData) =>
     User.create({
