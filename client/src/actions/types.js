@@ -15,3 +15,4 @@ export const CASH_VALUE = 'cash_value';
 export const CHART_VIEW = 'chart_view';
 export const RECOMMENDATIONS = 'recommendations';
 export const NOCASH = 'nocash';
+export const NUMSHARES = 'numshares';
