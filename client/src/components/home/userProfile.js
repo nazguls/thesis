@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
-
+import communications from 'react-native-communications';
 import {
 	View,
 	Text
 } from 'react-native';
 import { connect } from 'react-redux';
-import { updateMarketValue, updateCashValue, updateFirstName, usernameChanged, emailChanged } from '../../actions';
-import communications from 'react-native-communications';
+import { 
+	updateMarketValue, 
+	updateCashValue, 
+	updateFirstName, 
+	usernameChanged, 
+	emailChanged 
+} from '../../actions';
+
 
 class UserProfile extends Component {
-
-	componentWillMount() {
-
-		const context = this;
+  componentWillMount() {
+    const context = this;
 		const email = this.props.auth.email;
 		this.props.emailChanged(email);
     axios.get(`http://localhost:3000/api/users/${email}`)
@@ -25,7 +29,7 @@ class UserProfile extends Component {
 		}).catch(error => {
 			console.log(error);
 		});
-		axios.get('http://localhost:3000/api/portfolio/isaac1?period=historical')
+		axios.get(`http://localhost:3000/api/portfolio/${email}?period=historical`)
 		.then(response => {
 			const length = response.data.length;
 			const cashValue = response.data[length - 1].cash;
