@@ -12,16 +12,15 @@ class Buy extends Component {
 	}
 	onButtonPress(symbol) {
 		const context = this;
-		console.log(this.props.cashValue);
 		axios({
 			method: 'post',
 			url: `http://127.0.0.1:3000/api/stocks/${symbol}`,
 			data: {
-				stock: context.props.stockRes.data.Symbol,
+				stock: this.props.stockRes.data.Symbol,
 				transact: 'buy',
-				userId: 1,
-				price: context.props.stockRes.data.LastPrice,
-				shares: context.props.stockShare,
+				email: this.props.email,
+				price: this.props.stockRes.data.LastPrice,
+				shares: this.props.stockShare,
 			}
 		}).then(() => {
 			Actions.home({ type: 'reset' });
@@ -75,9 +74,9 @@ class Buy extends Component {
 const mapStateToProps = (state) => {
 	const { stockRes, stockShare } = state.search;
 	const { cashValue } = state.user;
-	console.log(stockRes);
-	console.log('stockshare', stockShare);
+	const { email } = state.auth;
 	return ({
+		email,
 		stockShare,
 		stockRes,
 		cashValue

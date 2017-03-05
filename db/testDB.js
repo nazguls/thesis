@@ -22,8 +22,7 @@ Models.User.build({
   city: 'SF',
   state: 'CA',
   zipCode: '34236'
-
-}).save()
+}).save();
 
 
 Models.Stock.build({
@@ -86,6 +85,13 @@ Models.Portfolio.build({
   cash: 3000
 }).save();
 
+Models.Portfolio.build({
+  date: new Date(2017, 1, 23),
+  portfolioValue: 0,
+  cash: 4000
+}).save();
+
+
 Models.UserStock.build({
   UserId: 1,
   StockId: 1
@@ -101,10 +107,6 @@ Models.UserStock.build({
   StockId: 2
 }).save();
 
-Models.UserStock.build({
-  UserId: 2,
-  StockId: 4
-}).save();
 
 Models.UserPortfolio.build({
   UserId: 1,
@@ -134,4 +136,9 @@ Models.UserPortfolio.build({
 Models.UserPortfolio.build({
   UserId: 1,
   PortfolioId: 6
+}).save();
+
+Models.UserPortfolio.build({
+  UserId: 2,
+  PortfolioId: 7
 }).save();

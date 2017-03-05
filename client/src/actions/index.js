@@ -11,7 +11,6 @@ import {
 	LOGIN_USER_FAIL,
 	LOGIN_USER,
 	SEARCH_CHANGED,
-	SEARCH_STOCK,
 	STOCK_RESULT,
 	STOCK_SHARE_CHANGED,
 	MARKET_VALUE,
@@ -100,7 +99,7 @@ export const searchChanged = (text) => {
 
 export const searchStock = ({ search }) => {
 	return (dispatch) => {
-		axios.get('http://127.0.0.1:3000/api/stocks/'+ search +'?period=current')
+		axios.get(`http://127.0.0.1:3000/api/stocks/${search}?period=current`)
 		.then((stockInfo) => indStockFetched(dispatch, stockInfo))
 		.catch((error) => console.log(error));
 	};

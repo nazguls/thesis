@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const portfolio = require('./portfolioController');
 
-router.route('/:username').get(portfolio.get);
+router.route('/:email').get(portfolio.get);
 
 module.exports = router;
