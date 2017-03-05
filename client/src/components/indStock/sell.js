@@ -17,11 +17,11 @@ class Sell extends Component {
 			method: 'post',
 			url: `http://127.0.0.1:3000/api/stocks/${symbol}`,
 			data: {
-				stock: context.props.stockRes.data.Symbol,
+				stock: this.props.stockRes.data.Symbol,
 				transact: 'sell',
-				userId: 1,
-				price: context.props.stockRes.data.LastPrice,
-				shares: context.props.stockShare,
+				email: this.props.email,
+				price: this.props.stockRes.data.LastPrice,
+				shares: this.props.stockShare,
 
 			}
 		}).then(() => {
@@ -76,7 +76,9 @@ class Sell extends Component {
 const mapStateToProps = (state) => {
 	const { stockRes, stockShare } = state.search;
 	const { cashValue } = state.user;
+	const { email } = state.auth;
 	return ({
+		email,
 		stockShare,
 		stockRes,
 		cashValue
