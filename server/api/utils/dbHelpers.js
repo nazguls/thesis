@@ -5,6 +5,7 @@ const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
 const UserTransactions = require('../../../db/dbModels').UserTransaction;
+const UserPortfolios = require('../../../db/dbModels').UserPortfolio;
 
 
 //sending price and shares
@@ -102,7 +103,21 @@ exports.addUser = (username, userData) =>
     state: userData.state,
     zipCode: userData.zipCode,
     password: userData.password
-  }).catch(err => console.log(err));
+  })
+  .then((user) => {
+    Portfolio.create({
+    date: new Date(),
+    portfolioValue: 0,
+    cash: 10000 
+    })
+    .then((portfolio) => 
+      UserPortfolios.create({
+        UserId: user.id,
+        PortfolioId: portfolio.id
+      })
+    );
+  })
+  .catch(err => console.log(err));
 
 exports.fetchHoldings = (email) =>
    User.findOne({ where: { email } })
