@@ -18,8 +18,16 @@ import {
 	CASH_VALUE,
 	CHART_VIEW,
 	RECOMMENDATIONS,
-	NOCASH
+	NOCASH,
+	NUMSHARES
 } from './types';
+
+export const numShares = (obj) => {
+	return {
+		type: NUMSHARES,
+		payload: obj
+	}
+}
 
 export const notEnoughFunds = (text) => {
 	return {
