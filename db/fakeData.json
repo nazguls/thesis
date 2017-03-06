@@ -1,0 +1,62 @@
+[
+  {
+    "_id": 1,
+    "username": 'awatt',
+    "password": "awatt123",
+    "email": "awatt@gmail.com",
+    "firstName": "Adam",
+    "lastName": "Watt",
+    "address": "567 Caton Avenue",
+    "city": "Wacissa",
+    "state": "Idaho",
+    "zipCode": 5618
+  },
+  {
+    "_id": 2,
+    "username": 'iyoon',
+    "password": "iyoon123",
+    "email": "iyoon@gmail.com",
+    "firstName": "Isaac",
+    "lastName": "Yoon",
+    "address": "116 Hubbard Street",
+    "city": "Groveville",
+    "state": "Maryland",
+    "zipCode": 836
+  },
+  {
+    "_id": 3,
+    "username": 'rmushtaq',
+    "password": "rmushtaq123",
+    "email": "rmushtaq@gmail.com",
+    "firstName": "Ramsha",
+    "lastName": "Mushtaq",
+    "address": "218 Merit Court",
+    "city": "Hasty",
+    "state": "Montana",
+    "zipCode": 1486
+  },
+  {
+    "_id": 4,
+    "username": 'cgarcia,
+    "password": "cgarcia123",
+    "email": "cgarcia@gmail.com",
+    "firstName": "Carmen",
+    "lastName": "Garcia",
+    "address": "403 Howard Alley",
+    "city": "Starks",
+    "state": "California",
+    "zipCode": 6294
+  },
+  {
+    "_id": 5,
+    "username": 'mcomes,
+    "password": "mcomes123",
+    "email": "mcomes@gmail.com",
+    "firstName": "Michael",
+    "lastName": "Comes",
+    "address": "920 Stratford Road",
+    "city": "Comptche",
+    "state": "New Hampshire",
+    "zipCode": 1968
+  }
+]
