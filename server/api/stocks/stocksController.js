@@ -5,7 +5,6 @@ exports.get = (req, res) => {
   const stock = req.params.stock;
   const options = req.query;
   const period = req.query.period;
-  console.log('query', req.query);
   if (period === 'historical') {
     console.log(stock);
     apiHelper.getHistoricalPrices(stock, options)

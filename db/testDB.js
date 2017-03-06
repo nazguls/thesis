@@ -101,11 +101,6 @@ Models.UserStock.build({
   StockId: 2
 }).save();
 
-Models.UserStock.build({
-  UserId: 2,
-  StockId: 4
-}).save();
-
 Models.UserPortfolio.build({
   UserId: 1,
   PortfolioId: 1
