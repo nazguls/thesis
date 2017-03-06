@@ -4,12 +4,12 @@ import * as makeChart from '../../chartUtils/graphUtil.js';
 import * as scale from 'd3-scale';
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
-import axios from 'axios';
 
-const d3 = {
-  scale,
-  shape,
-};
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { View, ART } from 'react-native';
+import * as makeChart from '../../chartUtils/graphUtil.js';
+
 const { Surface, Group, Shape, } = ART;
 
 const PaddingSize = 20;
@@ -21,21 +21,23 @@ const height = Math.round(dimensionsWindow.height * 0.5);
 const graphWidth = Math.round(dimensionsWindow.width * 0.9) - 40;
 const graphHeight = Math.round(dimensionsWindow.height * 0.5) - 20;
 
-const xAccessor = (d) => { return d.date; };
 
+const xAccessor = (d) => { return d.date; };
 const yAccessor = (d) => { return d.value; };
 
 class Chart extends Component {
 
   constructor(props) {
 		super(props);
-    console.log('25');
 
     this.state = { lineGraph: '', ticks: '', scale: ''};
         console.log('28');
-     var context = this;
-      axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
-        let data = response.data.map(dataObj => {
+
+    }
+
+    componentWillMount() {
+      axios.get(`http://localhost:3000/api/portfolio/${this.props.email}?period=historical`).then(response => {
+        const data = response.data.map(dataObj => {
           return {
             date: new Date(dataObj.date),
             value: dataObj.portfolioValue
@@ -49,21 +51,7 @@ class Chart extends Component {
 
     }
 
-    componentWillMount() {
-      console.log('31');
-      // var context = this;
-      // axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
-      //   let data = response.data.map(dataObj => {
-      //     return {
-      //       date: new Date(dataObj.date),
-      //       value: dataObj.portfolioValue
-      //     };
-      //   });
-      //   const line = makeChart.createLineGraph({
-      //   data, xAccessor, yAccessor, width: 300, height: 200 });
-      //   context.setState({lineGraph: line.path, ticks: line.ticks, scale: line.scale }, () => {console.log('49' )});
-      //   });
-       }
+
 
 
   render() {
@@ -90,6 +78,19 @@ class Chart extends Component {
           stroke="orange"
           strokeWidth={3} />
          </Group>
+      });
+    }
+    render() {
+    return (
+      <View style={{ backgroundColor: 'transparent' }}>
+        <Surface width={500} height={200}>
+          <Group x={100} y={0}>
+           <Shape
+              d={this.state.lineGraph}
+              stroke="orange"
+              strokeWidth={3}
+           />
+          </Group>
         </Surface>
         {this.state.lineGraph !== '' ? (<View><View key={'ticksX'}>
           {
@@ -173,4 +174,11 @@ const styles = StyleSheet.create({
 });
 
 
-export default Chart;
+const mapStateToProps = (state) => {
+ const { email } = state.auth;
+  return ({
+    email
+  });
+};
+
+export default connect(mapStateToProps, {})(Chart);

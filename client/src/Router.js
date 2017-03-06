@@ -16,7 +16,11 @@ import compare from './components/Compare';
 const RouterComponent = () => {
 	return (
 		<Router >
+<<<<<<< HEAD
 			<Scene key="auth">
+=======
+			<Scene key="auth" initial >
+>>>>>>> d16cbd32beef642e463677ca264a0550f0b9dba4
 				<Scene
           key="login"
           component={LoginForm}
@@ -36,7 +40,10 @@ const RouterComponent = () => {
         key="drawer"
         component={drawer}
         open={false}
+<<<<<<< HEAD
         initial
+=======
+>>>>>>> d16cbd32beef642e463677ca264a0550f0b9dba4
       >
 
 			<Scene key="main" >
