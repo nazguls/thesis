@@ -7,8 +7,7 @@ import * as d3Array from 'd3-array';
 
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { View, ART } from 'react-native';
-import * as makeChart from '../../chartUtils/graphUtil.js';
+
 
 const { Surface, Group, Shape, } = ART;
 
@@ -65,22 +64,9 @@ class Chart extends Component {
     //let tickXFormat = console.log('56', this.state.scale.x(new Date())); //.scale(4,5);
     console.log('58', this.state.ticks);
     if(this.state.lineGraph !== '') {
-    tickXFormat = this.state.scale.x.tickFormat(null, '%b %d');
-  }
-    //console.log(tickXFormat.x);
-
-    return (
-      <View style={{ backgroundColor: 'transparent' }}>
-       <Surface width={graphWidth} height={graphHeight}>
-       <Group x={0} y={-30}>
-       <Shape
-          d={this.state.lineGraph}
-          stroke="orange"
-          strokeWidth={3} />
-         </Group>
-      });
+      tickXFormat = this.state.scale.x.tickFormat(null, '%b %d');
     }
-    render() {
+    //console.log(tickXFormat.x);
     return (
       <View style={{ backgroundColor: 'transparent' }}>
         <Surface width={500} height={200}>
@@ -130,8 +116,8 @@ class Chart extends Component {
           })}
         </View>
         </View>
-         ) : <View></View>}
-      </View>
+        ) : <View></View>}
+        </View>
     );
   }
 }
