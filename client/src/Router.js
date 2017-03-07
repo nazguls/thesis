@@ -15,7 +15,7 @@ import compare from './components/Compare';
 
 const RouterComponent = () => {
 	return (
-		<Router >
+		<Router>
 
 			<Scene key="auth" initial >
 				<Scene

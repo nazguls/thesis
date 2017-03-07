@@ -114,6 +114,7 @@ exports.getCash = (username) =>
     .then(portfolios => portfolios)
     .catch(err => console.log(err));
 
+
 exports.fetchPortfolioHistory = (email) =>
   User.findOne({ where: { email } })
     .then(user => user.getPortfolios({ order: 'date' }))

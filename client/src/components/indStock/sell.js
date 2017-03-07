@@ -20,7 +20,7 @@ class Sell extends Component {
 
 	onButtonPress(symbol) {
 
-		if (this.props.stockShare > parseInt(this.currentShares())) {
+		if (!this.currentShares() || this.props.stockShare > parseInt(this.currentShares())) {
 			console.log('You dont have enough shares');
 		} else {
 			const context = this;
@@ -57,7 +57,8 @@ class Sell extends Component {
 	errorMessage() {
 		console.log('inerrorMessage', this.props.stockShare)
 		console.log('this.currentSahre', this.currentShares());
-		if (this.props.stockShare > parseInt(this.currentShares())) {
+
+		if (!this.currentShares() || this.props.stockShare > parseInt(this.currentShares())) {
 			return (
 				<Text style={{ color: 'red' }}> You are trying to sell more than your current holding </Text>
 			);
@@ -76,7 +77,8 @@ class Sell extends Component {
 				<CardSection>
 					<Input
 						label="Current Shares"
-						placeholder={this.currentShares()}
+
+						placeholder={this.currentShares() || '0'}
 					/>
 				</CardSection>
 				<CardSection>
