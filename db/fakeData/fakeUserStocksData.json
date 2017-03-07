@@ -1,94 +1,94 @@
 [
   {
     "UserId": 1,
-    "TransactionId": 1
+    "StockId": 1
   },
   {
     "UserId": 1,
-    "TransactionId": 2
+    "StockId": 2
   },
   {
     "UserId": 1,
-    "TransactionId": 3
+    "StockId": 3
   },
   {
     "UserId": 1,
-    "TransactionId": 4
+    "StockId": 4
   },
   {
     "UserId": 2,
-    "TransactionId": 5
+    "StockId": 5
   },
   {
     "UserId": 2,
-    "TransactionId": 6
+    "StockId": 6
   },
   {
     "UserId": 2,
-    "TransactionId": 7
+    "StockId": 7
   },
   {
     "UserId": 2,
-    "TransactionId": 8
+    "StockId": 8
   },
   {
     "UserId": 2,
-    "TransactionId": 9
+    "StockId": 9
   },
   {
     "UserId": 3,
-    "TransactionId": 10
+    "StockId": 10
   },
   {
     "UserId": 3,
-    "TransactionId": 11
+    "StockId": 11
   },
   {
     "UserId": 3,
-    "TransactionId": 12
+    "StockId": 12
   },
   {
     "UserId": 3,
-    "TransactionId": 13
+    "StockId": 13
   },
   {
     "UserId": 3,
-    "TransactionId": 14
+    "StockId": 14
   },
   {
     "UserId": 4,
-    "TransactionId": 15
+    "StockId": 15
   },
   {
     "UserId": 4,
-    "TransactionId": 16
+    "StockId": 16
   },
   {
     "UserId": 4,
-    "TransactionId": 17
+    "StockId": 17
   },
   {
     "UserId": 4,
-    "TransactionId": 18
+    "StockId": 18
   },
   {
     "UserId": 5,
-    "TransactionId": 19
+    "StockId": 19
   },
   {
     "UserId": 5,
-    "TransactionId": 20
+    "StockId": 20
   },
   {
     "UserId": 5,
-    "TransactionId": 21
+    "StockId": 21
   },
   {
     "UserId": 5,
-    "TransactionId": 22
+    "StockId": 22
   },
   {
     "UserId": 5,
-    "TransactionId": 23
+    "StockId": 23
   }
 ]

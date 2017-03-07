@@ -1,6 +1,6 @@
 [
   {
-    "_id": 1,
+    "id": 1,
     "username": "awatt",
     "password": "awatt123",
     "email": "awatt@gmail.com",
@@ -12,7 +12,7 @@
     "zipCode": 5618
   },
   {
-    "_id": 2,
+    "id": 2,
     "username": "iyoon",
     "password": "iyoon123",
     "email": "iyoon@gmail.com",
@@ -24,7 +24,7 @@
     "zipCode": 836
   },
   {
-    "_id": 3,
+    "id": 3,
     "username": "rmushtaq",
     "password": "rmushtaq123",
     "email": "rmushtaq@gmail.com",
@@ -36,7 +36,7 @@
     "zipCode": 1486
   },
   {
-    "_id": 4,
+    "id": 4,
     "username": "cgarcia",
     "password": "cgarcia123",
     "email": "cgarcia@gmail.com",
@@ -48,7 +48,7 @@
     "zipCode": 6294
   },
   {
-    "_id": 5,
+    "id": 5,
     "username": "mcomes",
     "password": "mcomes123",
     "email": "mcomes@gmail.com",
