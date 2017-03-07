@@ -11,14 +11,29 @@ import {
 	LOGIN_USER_FAIL,
 	LOGIN_USER,
 	SEARCH_CHANGED,
-	SEARCH_STOCK,
 	STOCK_RESULT,
 	STOCK_SHARE_CHANGED,
 	MARKET_VALUE,
 	CASH_VALUE,
 	CHART_VIEW,
-	RECOMMENDATIONS
+	RECOMMENDATIONS,
+	NOCASH,
+	NUMSHARES
 } from './types';
+
+export const numShares = (obj) => {
+	return {
+		type: NUMSHARES,
+		payload: obj
+	}
+}
+
+export const notEnoughFunds = (text) => {
+	return {
+		type: NOCASH,
+		payload: text
+	};
+};
 
 export const recommendations = (text) => {
 	console.log('received in action', text);
@@ -100,7 +115,7 @@ export const searchChanged = (text) => {
 
 export const searchStock = ({ search }) => {
 	return (dispatch) => {
-		axios.get('http://127.0.0.1:3000/api/stocks/'+ search +'?period=current')
+		axios.get(`http://127.0.0.1:3000/api/stocks/${search}?period=current`)
 		.then((stockInfo) => indStockFetched(dispatch, stockInfo))
 		.catch((error) => console.log(error));
 	};

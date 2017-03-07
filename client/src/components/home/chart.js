@@ -4,12 +4,11 @@ import * as makeChart from '../../chartUtils/graphUtil.js';
 import * as scale from 'd3-scale';
 import * as shape from 'd3-shape';
 import * as d3Array from 'd3-array';
-import axios from 'axios';
 
-const d3 = {
-  scale,
-  shape,
-};
+import axios from 'axios';
+import { connect } from 'react-redux';
+
+
 const { Surface, Group, Shape, } = ART;
 
 const PaddingSize = 20;
@@ -21,21 +20,25 @@ const height = Math.round(dimensionsWindow.height * 0.5);
 const graphWidth = Math.round(dimensionsWindow.width * 0.9) - 40;
 const graphHeight = Math.round(dimensionsWindow.height * 0.5) - 20;
 
-const xAccessor = (d) => { return d.date; };
 
+const xAccessor = (d) => { return d.date; };
 const yAccessor = (d) => { return d.value; };
 
 class Chart extends Component {
 
   constructor(props) {
 		super(props);
-    console.log('25');
 
     this.state = { lineGraph: '', ticks: '', scale: ''};
         console.log('28');
-     var context = this;
-      axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
-        let data = response.data.map(dataObj => {
+
+    }
+
+    componentWillMount() {
+      let context = this;
+
+      axios.get(`http://localhost:3000/api/portfolio/${this.props.email}?period=historical`).then(response => {
+        const data = response.data.map(dataObj => {
           return {
             date: new Date(dataObj.date),
             value: dataObj.portfolioValue
@@ -49,23 +52,6 @@ class Chart extends Component {
 
     }
 
-    componentWillMount() {
-      console.log('31');
-      // var context = this;
-      // axios.get('http://localhost:3000/api/portfolio/' + 'isaac1?period=historical').then(response => {
-      //   let data = response.data.map(dataObj => {
-      //     return {
-      //       date: new Date(dataObj.date),
-      //       value: dataObj.portfolioValue
-      //     };
-      //   });
-      //   const line = makeChart.createLineGraph({
-      //   data, xAccessor, yAccessor, width: 300, height: 200 });
-      //   context.setState({lineGraph: line.path, ticks: line.ticks, scale: line.scale }, () => {console.log('49' )});
-      //   });
-       }
-
-
   render() {
     let tickXFormat;
     // const {
@@ -77,60 +63,21 @@ class Chart extends Component {
     //let tickXFormat = console.log('56', this.state.scale.x(new Date())); //.scale(4,5);
     console.log('58', this.state.ticks);
     if(this.state.lineGraph !== '') {
-    tickXFormat = this.state.scale.x.tickFormat(null, '%b %d');
-  }
+      tickXFormat = this.state.scale.x.tickFormat(null, '%b %d');
+    }
     //console.log(tickXFormat.x);
-
     return (
       <View style={{ backgroundColor: 'transparent' }}>
-       <Surface width={graphWidth} height={graphHeight}>
-       <Group x={0} y={-30}>
-       <Shape
-          d={this.state.lineGraph}
-          stroke="orange"
-          strokeWidth={3} />
-         </Group>
+        <Surface width={500} height={200}>
+          <Group x={100} y={0}>
+           <Shape
+              d={this.state.lineGraph}
+              stroke="orange"
+              strokeWidth={3}
+           />
+          </Group>
         </Surface>
-        {this.state.lineGraph !== '' ? (<View><View key={'ticksX'}>
-          {
-            this.state.ticks.map((tick, index) => {
-            const tickStyles = {};
-            tickStyles.width = TickWidth;
-            tickStyles.left = tick.x - 10;
-            tickStyles.top = -15;
-            // tickStyles.top  = tick.y -40
-            //   - (TickWidth / 2);
-            return (
-              <Text key={index} style={[styles.tickLabelX, tickStyles]}>
-                {tickXFormat(new Date(tick.datum.date))}
-              </Text>
-            );
-          })}
         </View>
-        <View key={'ticksY'} style={styles.ticksYContainer}>
-          {this.state.ticks.map((tick, index) => {
-            const value = yAccessor(tick.datum);
-
-            const tickStyles = {};
-            tickStyles.width = TickWidth;
-            tickStyles.left = -25;
-            //tickStyles.top = tick.x - Math.round(TickWidth * 0.5);
-
-             tickStyles.top = (tick.y - 340)
-             - Math.round(TickWidth * 0.65);
-
-            return (
-              <View key={index} style={[styles.tickLabelY, tickStyles]}>
-                <Text style={styles.tickLabelYText}>
-                  {value}
-                </Text>
-              </View>
-            );
-          })}
-        </View>
-        </View>
-         ) : <View></View>}
-      </View>
     );
   }
 }
@@ -173,4 +120,11 @@ const styles = StyleSheet.create({
 });
 
 
-export default Chart;
+const mapStateToProps = (state) => {
+ const { email } = state.auth;
+  return ({
+    email
+  });
+};
+
+export default connect(mapStateToProps, {})(Chart);

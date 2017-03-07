@@ -4,18 +4,18 @@ const Portfolio = require('../../../db/dbModels').Portfolio;
 const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
-
 const UserTransactions = require('../../../db/dbModels').UserTransaction;
+
+
 //sending price and shares
 exports.transact = (tradeData) => {
   console.log(11);
- const shs = tradeData.transact === 'buy' ? tradeData.shares :
--tradeData.shares;
- const userId = tradeData.userId;
+ const shs = tradeData.transact === 'buy' ? tradeData.shares : -tradeData.shares;
+ const email = tradeData.email;
  const symbol = tradeData.stock;
 
   //find the user and update the # of shares
-   return User.findOne({ userId })
+   return User.findOne({ where: { email } })
     .then(user => { Transactions.create({
         date: new Date(),
         type: tradeData.transact,
@@ -23,6 +23,7 @@ exports.transact = (tradeData) => {
         purchasePrice: tradeData.price,
         numOfShares: shs
         }).then(transaction => {
+            console.log(user);
             UserTransactions.create({
             UserId: user.id,
             TransactionId: transaction.id
@@ -43,7 +44,7 @@ exports.transact = (tradeData) => {
           numOfShares: tradeData.shares,
           }).then(stock => {
             console.log('user.id --', user.id);
-            console.log('user.id --', stock.id);
+            console.log('stock.id --', stock.id);
             UserStocks.create({
             UserId: user.id,
             StockId: stock.id
@@ -54,8 +55,7 @@ exports.transact = (tradeData) => {
              const cash = portfolios[portfolios.length - 1].cash;
              const buyAmount = tradeData.price * shs;
              const newCashBal = cash - buyAmount;
-             const newMV = portfolios[portfolios.length - 1].portfolioValue
-               + buyAmount;
+             const newMV = portfolios[portfolios.length - 1].portfolioValue+ buyAmount;
              portfolios[portfolios.length - 1]
              .updateAttributes({ cash: newCashBal, portfolioValue: newMV });
               })
@@ -66,12 +66,12 @@ exports.transact = (tradeData) => {
       });
   }
 
-exports.deposit = (depositData, username) => {
+exports.deposit = (depositData, email) => {
   const type = depositData.type;
   const amount = type === 'WITHDRAWAL' ?
    -depositData.amount : depositData.amount;
    console.log(amount);
-  return User.findOne({ where: { username } })
+  return User.findOne({ where: { email } })
     .then(user => {
       user.getPortfolios()
         .then(portfolios => {
@@ -102,8 +102,8 @@ exports.addUser = (username, userData) =>
     password: userData.password
   }).catch(err => console.log(err));
 
-exports.fetchHoldings = (username) =>
-   User.findOne({ where: { username } })
+exports.fetchHoldings = (email) =>
+   User.findOne({ where: { email } })
     .then(user => user.getStocks())
     .then(stocks => stocks)
     .catch(err => console.log(err));
@@ -114,6 +114,9 @@ exports.getCash = (username) =>
     .then(portfolios => portfolios)
     .catch(err => console.log(err));
 
-exports.fetchPortfolioHistory = (username) => {
-  return Portfolio.findAll({});
-};
+exports.fetchPortfolioHistory = (email) =>
+  User.findOne({ where: { email } })
+    .then(user => user.getPortfolios({ order: 'date' }))
+    .then(portfolios => portfolios)
+    .catch(err => console.log(err));
+

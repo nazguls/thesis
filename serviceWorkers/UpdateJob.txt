@@ -1,0 +1,3 @@
+
+  * * * * * /usr/local/bin/node /Users/michaelcomes/Desktop/HR52/Thesis/thesis/serviceWorkers/UpdatePortfolio.js
+

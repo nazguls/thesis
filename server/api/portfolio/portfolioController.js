@@ -3,13 +3,13 @@ const fetchPorfolioPrices = require('../utils/apiHelpers').getBulkStockPrices;
 
 
 exports.get = (req, res) => {
-  const username = req.params.username;
+  const email = req.params.email;
   const period = req.query.period;
   if (period === 'historical') {
-    dbHelper.fetchPortfolioHistory(username)
+    dbHelper.fetchPortfolioHistory(email)
       .then(history => res.send(history));
   } else if (period === 'current') {
-    dbHelper.fetchHoldings(username)
+    dbHelper.fetchHoldings(email)
       .then(holdings =>
         fetchPorfolioPrices(holdings)
       ).then(portfolio => res.send(portfolio));
