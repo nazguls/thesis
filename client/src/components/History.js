@@ -65,7 +65,7 @@ class History extends Component {
             <Text style={textStyle}>PRICE</Text> 
             <Text style={textStyle}>BALANCE</Text>
           </View>  
-					<ScrollView style={viewStyle}>
+					<ScrollView >
             {transactions}
           </ScrollView>
 				</View>
