@@ -21,7 +21,7 @@ function twoDigits(d) {
     return d.toString();
 }
 
-const job = new CronJob('* * 14 * * 1-5', () => {
+//const job = new CronJob('10 * * * * 1-5', () => {
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -47,7 +47,10 @@ const getId = function (inputId, idCounter) {
             sum += total;
             counterVar += 1;
             if (counterVar < data.length) {
-               recurse(data[counterVar], counterVar);
+
+               setTimeout(function() {recurse(data[counterVar], counterVar)}, 7000);
+
+
             } else {
                 idCounterVar++;
                 connection.queryAsync('select id, portfolioValue, cash from (select id, portfolioValue, cash from portfolios inner join userportfolios on userportfolios.PortfolioId = Portfolios.id where userportfolios.UserId = ?) as T', inputId)
@@ -86,19 +89,36 @@ const getId = function (inputId, idCounter) {
 };
   getId(ids[0], 0);
 });
-}, null, true, 'America/Los_Angeles');
+//}, null, true, 'America/Los_Angeles');
 
-job.start();
+//job.start();
 
 const getPrice = ((symbol, shares) =>
    axios.get(`http://dev.markitondemand.com/Api/v2/Quote/json?symbol=${symbol}`).then((stock) => {
         const price = stock.data.LastPrice;
         const total = price * shares;
+        console.log('97', symbol, ' ', total);
         return total;
-      }).catch(err =>
-        fs.open('./errorLog.txt', 'r+', (error, id) =>
-          fs.write(`${id} ${err}\r\n'`, 'utf8', () =>
-            fs.close(() => console.log('error logged'))
-          ))
-      )
+      }).catch(err => {
+        //var context = this;
+        console.log(100, JSON.stringify(this.getPrice));
+        // console.log(JSON.stringify(getPrice), symbol);
+        // setTimeout(function(getPrice) {
+        //   console.log('102', JSON.stringify(getPrice));
+        //   return getPrice(symbol, shares)
+        // }, 2000);
+      })
 );
+
+// const getPrice = ((symbol, shares) => {
+//     var context = this;
+
+//    return axios.get(`http://dev.markitondemand.com/Api/v2/Quote/json?symbol=${symbol}`).then((stock) => {
+//         const price = stock.data.LastPrice;
+//         const total = price * shares;
+//         return total;
+//       }).catch(err => {
+//         console.log(err);
+//       })
+
+//   })
