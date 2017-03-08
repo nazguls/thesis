@@ -36,7 +36,6 @@ exports.transact = (tradeData) => {
               stock[0].updateAttributes({ numOfShares: currentShares
               });
          } else {
-          console.log('37 -------------');
            Stock.create({
           stockSymbol: symbol,
           type: 'hold',

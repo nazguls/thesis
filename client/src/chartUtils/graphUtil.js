@@ -24,7 +24,6 @@ export function createLineGraph({
 }) {
   const lastDatum = data[data.length - 1];
   const scaleX = createScaleX(data[0].date, lastDatum.date, width);
-
   const allYValues = data.reduce((all, datum) => {
     all.push(yAccessor(datum));
     return all;
