@@ -11,46 +11,43 @@ class PerformanceModal extends Component {
 
 	render() {
 		return (
-			<View>
+			<View >
 				<Modal
 					animation={"fade"}
 					transparent
 					visible={this.state.modalVisible}
 					onRequestClose={() => { console.log('Modal has been closed'); }}
 				>
-
 					<View style={styles.viewStyle}>
 						<View style={styles.header}>
 						<Icon name="close" color={"white"} size={20} onPress={() => this.setState({ modalVisible: false })} />
 							<Text style={styles.userName}>Hi, Isaac!</Text>
 							<Text style={styles.textStyle}> Here is your Summary </Text>
 						</View>
-
-						<View style={styles.subTitleView}>
+						<View style={styles.boxSection}>
 							<Text style={styles.subTitle}> RETURNS </Text>
 						</View>
-						<CardSection>
+
 						<View style={styles.containerStyle}>
-							<Text style={styles.textStyle}> YOU </Text>
-							<Text style={styles.textStyle}> VS </Text>
-							<Text style={styles.textStyle}> S&P</Text>
+							<Text style={styles.textStyle2}> YOU </Text>
+							<Text style={styles.textStyle2}> VS </Text>
+							<Text style={styles.textStyle2}> S&P</Text>
 						</View>
-						</CardSection>
-						<CardSection>
+
 						<View style={styles.containerStyle}>
 							<Text style={styles.buttonStyle}> 0.34% </Text>
 							<Text> </Text>
 							<Text style={styles.buttonStyle}>  0.34%</Text>
 						</View>
-						</CardSection>
 
-						<CardSection>
+						<View style={styles.boxSection}>
 							<Text style={styles.textStyle}> YOUR CURRENT RANKING </Text>
-						</CardSection>
-						<CardSection>
-							<Text style={{ color: '#42f4c2', fontSize: 40 }}> 6th PLACE </Text>
-						</CardSection>
-					</View>
+						</View>
+
+						<View style={styles.boxSection2}>
+							<Text style={styles.textStyle3}> 6th PLACE </Text>
+						</View>
+						</View>
 				</Modal>
 			</View>
 		)
@@ -60,24 +57,23 @@ class PerformanceModal extends Component {
 
 const styles = {
 	viewStyle: {
-		margin: 30,
+		marginTop: 70,
+		marginLeft: 30,
+		marginRight: 30,
 		backgroundColor: 'black',
 		borderRadius: 40,
 		opacity: .8,
-		flex: 1,
-		alignItems: 'center',
+		// flex: 1,
+		// alignItems: 'center',
 	},
-	// subTitleView:{
-	// 	flex:1,
-	// 	backgroundColor: '#42f4c2'
-	// },
 	subTitle: {
-		alignSelf: 'stretch',
-		padding: 3,
-		borderWidth: 1,
-		borderRadius: 10,
-		backgroundColor: '#42f4c2',
-		color: 'black',
+		borderColor: 'orange',
+		marginLeft: 20,
+		marginRight: 20,
+		borderTopWidth: 2,
+		color: 'orange',
+		alignSelf: 'center',
+		marginTop: 5,
 	},
 	header: {
 		alignItems: 'center',
@@ -85,25 +81,53 @@ const styles = {
 		marginBottom: 15
 	},
 	userName: {
+		marginTop: 30,
+		fontWeight: '200',
 		marginBottom: 5,
 		color: '#42f4c2',
 		fontSize: 35
 	},
 	textStyle: {
+		marginTop: 15,
 		color: '#42f4c2',
-		fontSize: 20
+		fontSize: 20,
+	},
+	textStyle2: {
+		color: 'orange',
+		fontSize: 15,
+	},
+	textStyle3: {
+		color: '#42f4c2',
+		fontSize: 20,
+		marginTop: 20,
+		marginBottom: 30
 	},
 	buttonStyle: {
 		borderWidth: 1,
 		padding: 5,
-		fontSize: 17,
-		color: '#42f4c2',
+		fontSize: 15,
+		color: 'orange',
 		borderRadius: 10,
-    borderColor: '#42f4c2'
+    borderColor: 'orange'
 	},
 	containerStyle: {
 		flexDirection: 'row',
-		justifyContent: 'space-between'
+		justifyContent: 'space-around',
+		alignSelf: 'stretch',
+		margin: 7
+	},
+	boxSection: {
+		margin: 15,
+		borderTopWidth: 1,
+		borderColor: 'orange',
+		alignItems: 'center'
+		// alignSelf: 'center'
+	},
+	boxSection2: {
+		margin: 15,
+		alignItems: 'center'
+
+		// alignSelf: 'center'
 	}
 };
 
