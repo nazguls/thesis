@@ -5,6 +5,7 @@ const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
 const UserTransactions = require('../../../db/dbModels').UserTransaction;
+const UserPortfolios = require('../../../db/dbModels').UserPortfolio;
 
 
 //sending price and shares
@@ -16,71 +17,84 @@ exports.transact = (tradeData) => {
 
   //find the user and update the # of shares
    return User.findOne({ where: { email } })
-    .then(user => { Transactions.create({
+    .then(user => { 
+      Transactions.create({
         date: new Date(),
         type: tradeData.transact,
         symbol,
         purchasePrice: tradeData.price,
         numOfShares: shs
-        }).then(transaction => {
-            console.log(user);
-            UserTransactions.create({
-            UserId: user.id,
-            TransactionId: transaction.id
-          });
+      })
+      .then(transaction => 
+        UserTransactions.create({
+          UserId: user.id,
+          TransactionId: transaction.id
+        })
+      );
 
-       user.getStocks({ where: { stockSymbol: symbol } })
-         .then(stock => {
-            if (stock[0] !== undefined) {
-              let currentShares = parseInt(stock[0].dataValues.numOfShares) + parseInt(shs);
-              stock[0].updateAttributes({ numOfShares: currentShares
-              });
-         } else {
+      user.getStocks({ where: { stockSymbol: symbol } })
+      .then(stock => {
+        if (stock[0] !== undefined) {
+          let currentShares = parseInt(stock[0].dataValues.numOfShares) + parseInt(shs);
+          stock[0].updateAttributes({ numOfShares: currentShares });
+        } else {
           console.log('37 -------------');
-           Stock.create({
-          stockSymbol: symbol,
-          type: 'hold',
-          purchaseDate: new Date(),
-          purchasePrice: tradeData.price,
-          numOfShares: tradeData.shares,
-          }).then(stock => {
-            console.log('user.id --', user.id);
-            console.log('stock.id --', stock.id);
+          Stock.create({
+            stockSymbol: symbol,
+            type: 'hold',
+            purchaseDate: new Date(),
+            purchasePrice: tradeData.price,
+            numOfShares: tradeData.shares,
+          })
+          .then(stock => 
             UserStocks.create({
+              UserId: user.id,
+              StockId: stock.id
+            })
+          );
+        }
+      });  
+      user.getPortfolios()
+      .then(portfolios => {
+        console.log('57---------:', portfolios);
+        const cash = portfolios[portfolios.length - 1].cash;
+        const buyAmount = tradeData.price * shs;
+        const newCashBal = cash - buyAmount;
+        const newMV = portfolios[portfolios.length - 1].portfolioValue + buyAmount;
+        Portfolio.create({
+          date: new Date(),
+          cash: newCashBal,
+          portfolioValue: newMV 
+        })
+        .then(portfolio =>
+          UserPortfolios.create({
             UserId: user.id,
-            StockId: stock.id
-            });
-
-             user.getPortfolios()
-            .then(portfolios => {
-             const cash = portfolios[portfolios.length - 1].cash;
-             const buyAmount = tradeData.price * shs;
-             const newCashBal = cash - buyAmount;
-             const newMV = portfolios[portfolios.length - 1].portfolioValue
-               + buyAmount;
-             portfolios[portfolios.length - 1]
-             .updateAttributes({ cash: newCashBal, portfolioValue: newMV });
-              })
-              });
-            };
-          });
+            PortfolioId: portfolio.id
+          })
+        );
       });
-      });
-  }
-
+});
+};
 exports.deposit = (depositData, email) => {
   const type = depositData.type;
-  const amount = type === 'WITHDRAWAL' ?
-   -depositData.amount : depositData.amount;
-   console.log(amount);
+  const amount = type === 'WITHDRAWAL' ? -depositData.amount : depositData.amount;
   return User.findOne({ where: { email } })
     .then(user => {
       user.getPortfolios()
         .then(portfolios => {
-           const cash = portfolios[portfolios.length - 1].cash;
-           const newAmount = cash + amount;
-           portfolios[portfolios.length - 1]
-             .updateAttributes({ cash: newAmount });
+          const portfolioValue = portfolios[portfolios.length - 1].portfolioValue;
+          const cash = portfolios[portfolios.length - 1].cash + amount;
+          Portfolio.create({
+            date: new Date(),
+            cash,
+            portfolioValue 
+          })
+          .then(portfolio =>
+            UserPortfolios.create({
+              UserId: user.id,
+              PortfolioId: portfolio.id
+            })
+          );
         });
     });
 };
@@ -89,7 +103,7 @@ exports.getUser = (userEmailInput) => {
   const userEmail = userEmailInput.user;
   return User.findOne({ where: { email: userEmail } })
   .catch(err => console.log(err));
- };
+};
 
 exports.addUser = (username, userData) =>
     User.create({
@@ -102,7 +116,21 @@ exports.addUser = (username, userData) =>
     state: userData.state,
     zipCode: userData.zipCode,
     password: userData.password
-  }).catch(err => console.log(err));
+  })
+  .then((user) => {
+    Portfolio.create({
+    date: new Date(),
+    portfolioValue: 0,
+    cash: 10000 
+    })
+    .then((portfolio) => 
+      UserPortfolios.create({
+        UserId: user.id,
+        PortfolioId: portfolio.id
+      })
+    );
+  })
+  .catch(err => console.log(err));
 
 exports.fetchHoldings = (email) =>
    User.findOne({ where: { email } })
