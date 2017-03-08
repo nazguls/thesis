@@ -153,13 +153,13 @@
   },
   {
     "id": 20,
-    "date": "2015-05-16 22:33:14",
+    "date": "2016-05-16 22:33:14",
     "type": "buy",
     "symbol": "C",
     "numOfShares": 40,
     "purchasePrice": 43.11
-  }
-    {
+  },
+  {
     "id": 21,
     "date": "2016-06-06 22:33:14",
     "type": "buy",
@@ -182,5 +182,5 @@
     "symbol": "VZ",
     "numOfShares": 20,
     "purchasePrice": 56.21
-  },
+  }
 ]
