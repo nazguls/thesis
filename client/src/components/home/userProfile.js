@@ -13,7 +13,8 @@ import {
 	updateCashValue,
 	updateFirstName,
 	usernameChanged,
-	emailChanged
+	emailChanged,
+	passwordChanged
 } from '../../actions';
 
 
@@ -37,6 +38,11 @@ class UserProfile extends Component {
 		}).catch(error => {
 			console.log(error);
 		});
+	}
+	logout() {
+    this.props.emailChanged('');
+		this.props.passwordChanged('');
+    Actions.auth();	
 	}
 
   render() {
@@ -95,7 +101,7 @@ class UserProfile extends Component {
         <Text style={styles.navItems}>
 					<Icon name='help' size={20} />  HELP
         </Text>
-        <Text style={styles.navItems}>
+        <Text style={styles.navItems} onPress={this.logout.bind(this)}>
 					<Icon name='close' size={20} />  LOG OUT
         </Text>
 
@@ -111,4 +117,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateMarketValue, updateCashValue, updateFirstName, usernameChanged, emailChanged })(UserProfile);
+export default connect(mapStateToProps, { 
+	updateMarketValue,
+  updateCashValue, 
+  updateFirstName,
+  usernameChanged,
+  emailChanged,
+  passwordChanged 
+})(UserProfile);
+
