@@ -124,6 +124,6 @@ exports.fetchPortfolioHistory = (email) =>
 
 exports.fetchTransactionsHistory = (email) => 
   User.findOne({ where: { email } })
-    .then(user => user.getTransactions({ order: 'date' }))
+    .then(user => user.getTransactions({ order: 'date desc' }))
     .then(transactions => transactions)
     .catch(err => console.log(err));
