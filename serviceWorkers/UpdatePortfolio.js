@@ -21,7 +21,7 @@ function twoDigits(d) {
     return d.toString();
 }
 
-//const job = new CronJob('10 * * * * 1-5', () => {
+const job = new CronJob('14 * * * * 1-5', () => {
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -48,7 +48,7 @@ const getId = function (inputId, idCounter) {
             counterVar += 1;
             if (counterVar < data.length) {
 
-               setTimeout(function() {recurse(data[counterVar], counterVar)}, 7000);
+               setTimeout(function() {recurse(data[counterVar], counterVar)}, 8000);
 
 
             } else {
@@ -58,9 +58,6 @@ const getId = function (inputId, idCounter) {
                     const cash = portfolioData[portfolioData.length - 1].cash;
                     const portId = portfolioData[portfolioData.length - 1].id;
                     connection.queryAsync('UPDATE portfolios SET portfolioValue = ?, cash = ? where id= ?', [sum, cash, portId]).then(updatedPortfolio => {
-                      console.log('66', updatedPortfolio);
-//                      const insertId =  updatedPortfolio.insertId;
-                      //console.log('63', updatedPortfolio);
                     const now = new Date().toMysqlFormat();
                     connection.queryAsync('INSERT into portfolios \
                     (date, portfolioValue, cash, createdAt, updatedAt) select date, portfolioValue, cash, createdAt, updatedAt  from portfolios where id = ?', portId)
@@ -70,14 +67,13 @@ const getId = function (inputId, idCounter) {
                         id= ?', [now, insertId])
                        .then(() => {
                        connection.queryAsync('INSERT INTO userportfolios SET UserId = ?, PortfolioId = ?, createdAt \
-                     =?, updatedAt=? ', [inputId, insertId, now, now]);
+                     =?, updatedAt=? ', [inputId, insertId, now, now]).then((port) => {console.log('70', 'updateSucess')});
                     });
                      });
                   });
                 });
                //idCounter++;
                if (idCounterVar < ids.length) {
-                 //console.log('82', idCounter);
                  getId(ids[idCounterVar], idCounterVar);
               }
             }
@@ -89,36 +85,19 @@ const getId = function (inputId, idCounter) {
 };
   getId(ids[0], 0);
 });
-//}, null, true, 'America/Los_Angeles');
+}, null, true, 'America/Los_Angeles');
 
-//job.start();
+job.start();
 
 const getPrice = ((symbol, shares) =>
    axios.get(`http://dev.markitondemand.com/Api/v2/Quote/json?symbol=${symbol}`).then((stock) => {
         const price = stock.data.LastPrice;
         const total = price * shares;
-        console.log('97', symbol, ' ', total);
+        console.log(symbol, ' ', price, ' ', total);
         return total;
       }).catch(err => {
-        //var context = this;
-        console.log(100, JSON.stringify(this.getPrice));
-        // console.log(JSON.stringify(getPrice), symbol);
-        // setTimeout(function(getPrice) {
-        //   console.log('102', JSON.stringify(getPrice));
-        //   return getPrice(symbol, shares)
-        // }, 2000);
+        console.log('err, could not fetch stock data');
       })
 );
 
-// const getPrice = ((symbol, shares) => {
-//     var context = this;
 
-//    return axios.get(`http://dev.markitondemand.com/Api/v2/Quote/json?symbol=${symbol}`).then((stock) => {
-//         const price = stock.data.LastPrice;
-//         const total = price * shares;
-//         return total;
-//       }).catch(err => {
-//         console.log(err);
-//       })
-
-//   })
