@@ -107,7 +107,10 @@ Models.UserStock.build({
   StockId: 2
 }).save();
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> d16cbd32beef642e463677ca264a0550f0b9dba4
 Models.UserPortfolio.build({
   UserId: 1,
   PortfolioId: 1
