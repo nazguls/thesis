@@ -16,7 +16,7 @@ import compare from './components/Compare';
 const RouterComponent = () => {
 	return (
 		<Router >
-			<Scene key="auth" initial >
+			<Scene key="auth"  >
 				<Scene
           key="login"
           component={LoginForm}
@@ -36,9 +36,20 @@ const RouterComponent = () => {
         key="drawer"
         component={drawer}
         open={false}
+        initial
       >
 
 			<Scene key="main" >
+        <Scene
+          sceneStyle={{ paddingTop: 60 }}
+          key='home'
+          component={Home}
+          title="DashBoard"
+          rightTitle="search"
+          leftButtonImage={accountIcon}
+          onRight={() => Actions.search()}
+          onLeft={() => Actions.refresh({ key: 'drawer', open: value => !value })}
+        />
         <Scene
           sceneStyle={{ paddingTop: 60 }}
 					key='home'

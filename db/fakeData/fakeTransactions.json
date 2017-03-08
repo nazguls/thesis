@@ -1,169 +1,169 @@
 [
   {
     "id": 1,
-    "date": "2017-02-06 22:33:14",
-    "type": "buy",
-    "symbol": "aapl",
-    "numOfShares": 10,
-    "purchasePrice": 129.13
-  },
-  {
-    "id": 2,
-    "date": "2017-1-06 22:33:14",
-    "type": "buy",
-    "symbol": "ibm",
-    "numOfShares": 15,
-    "purchasePrice": 168.69
-  },
-  {
-    "id": 3,
-    "date": "2016-08-06 22:33:14",
-    "type": "buy",
-    "symbol": "atvi",
-    "numOfShares": 20,
-    "purchasePrice": 42.25
-  },
-  {
-    "id": 4,
     "date": "2016-03-07 22:33:14",
     "type": "buy",
-    "symbol": "afl",
+    "symbol": "AFL",
     "numOfShares": 30,
     "purchasePrice": 60.58
   },
   {
-    "id": 5,
-    "date": "2017-01-06 22:33:14",
+    "id": 2,
+    "date": "2016-08-06 22:33:14",
     "type": "buy",
-    "symbol": "amzn",
-    "numOfShares": 5,
-    "purchasePrice": 782.36
+    "symbol": "ATVI",
+    "numOfShares": 20,
+    "purchasePrice": 42.25
+  },
+  {
+    "id": 3,
+    "date": "2017-1-06 22:33:14",
+    "type": "buy",
+    "symbol": "IBM",
+    "numOfShares": 15,
+    "purchasePrice": 168.69
+  },
+  {
+    "id": 4,
+    "date": "2017-02-06 22:33:14",
+    "type": "buy",
+    "symbol": "AAPL",
+    "numOfShares": 10,
+    "purchasePrice": 129.13
+  },
+  {
+    "id": 5,
+    "date": "2016-03-07 22:33:14",
+    "type": "buy",
+    "symbol": "CMA",
+    "numOfShares": 40,
+    "purchasePrice": 37.79
   },
   {
     "id": 6,
     "date": "2016-06-06 22:33:14",
     "type": "buy",
-    "symbol": "bac",
+    "symbol": "BAC",
     "numOfShares": 30,
     "purchasePrice": 14.44
   },
   {
     "id": 7,
-    "date": "2016-03-07 22:33:14",
+    "date": "2017-01-06 22:33:14",
     "type": "buy",
-    "symbol": "cma",
-    "numOfShares": 40,
-    "purchasePrice": 37.79
+    "symbol": "AMZN",
+    "numOfShares": 5,
+    "purchasePrice": 782.36
   },
   {
     "id": 8,
-    "date": "2017-03-06 22:33:14",
-    "type": "buy",
-    "symbol": "cat",
-    "numOfShares": 10,
-    "purchasePrice": 82.23
-  },
-  {
-    "id": 9,
     "date": "2017-01-06 22:33:14",
     "type": "buy",
-    "symbol": "cvx",
+    "symbol": "CVX",
     "numOfShares": 5,
     "purchasePrice": 117.45
   },
   {
+    "id": 9,
+    "date": "2017-03-06 22:33:14",
+    "type": "buy",
+    "symbol": "CAT",
+    "numOfShares": 10,
+    "purchasePrice": 82.23
+  },
+  {
     "id": 10,
-    "date": "2016-08-06 22:33:14",
-    "type": "buy",
-    "symbol": "ebay",
-    "numOfShares": 60,
-    "purchasePrice": 31.15
-  },
-  {
-    "id": 11,
-    "date": "2016-05-06 22:33:14",
-    "type": "buy",
-    "symbol": "nflx",
-    "numOfShares": 20,
-    "purchasePrice": 88.83
-  },
-  {
-    "id": 12,
-    "date": "2016-03-04 22:33:14",
-    "type": "buy",
-    "symbol": "ame",
-    "numOfShares": 20,
-    "purchasePrice": 48.15
-  },
-  {
-    "id": 13,
     "date": "2016-02-05 22:33:14",
     "type": "buy",
-    "symbol": "bbby",
+    "symbol": "BBBY",
     "numOfShares": 20,
     "purchasePrice": 43.03
   },
   {
-    "id": 14,
-    "date": "2017-05-06 22:33:14",
+    "id": 11,
+    "date": "2016-03-04 22:33:14",
     "type": "buy",
-    "symbol": "cmg",
+    "symbol": "AME",
+    "numOfShares": 20,
+    "purchasePrice": 48.15
+  },
+  {
+    "id": 12,
+    "date": "2016-05-06 22:33:14",
+    "type": "buy",
+    "symbol": "NFLX",
+    "numOfShares": 20,
+    "purchasePrice": 88.83
+  },
+  {
+    "id": 13,
+    "date": "2016-05-06 22:33:14",
+    "type": "buy",
+    "symbol": "CMG",
     "numOfShares": 10,
     "purchasePrice": 434
   },
   {
-    "id": 15,
-    "date": "2017-01-06 22:33:14",
+    "id": 14,
+    "date": "2016-08-06 22:33:14",
     "type": "buy",
-    "symbol": "mar",
-    "numOfShares": 18,
-    "purchasePrice": 81.79
+    "symbol": "EBAY",
+    "numOfShares": 60,
+    "purchasePrice": 31.15
+  },
+  {
+    "id": 15,
+    "date": "2016-02-05 22:33:14",
+    "type": "buy",
+    "symbol": "WBA",
+    "numOfShares": 10,
+    "purchasePrice": 76.59
   },
   {
     "id": 16,
-    "date": "2016-02-05 22:33:14",
+    "date": "2016-03-07 22:33:14",
     "type": "buy",
-    "symbol": "wba",
-    "numOfShares": 10,
-    "purchasePrice": 76.59
+    "symbol": "MAT",
+    "numOfShares": 40,
+    "purchasePrice": 32.1
   },
   {
     "id": 17,
     "date": "2016-07-06 22:33:14",
     "type": "buy",
-    "symbol": "antm",
+    "symbol": "ANTM",
     "numOfShares": 20,
     "purchasePrice": 130.27
   },
   {
     "id": 18,
-    "date": "2017-09-06 22:33:14",
+    "date": "2016-09-06 22:33:14",
     "type": "buy",
-    "symbol": "mmm",
+    "symbol": "MMM",
     "numOfShares": 15,
     "purchasePrice": 180.56
   },
   {
     "id": 19,
-    "date": "2016-03-07 22:33:14",
+    "date": "2017-01-06 22:33:14",
     "type": "buy",
-    "symbol": "mat",
-    "numOfShares": 40,
-    "purchasePrice": 32.1
+    "symbol": "MAR",
+    "numOfShares": 18,
+    "purchasePrice": 81.79
   },
   {
     "id": 20,
-    "date": "2016-07-06 22:33:14",
+    "date": "2016-05-16 22:33:14",
     "type": "buy",
-    "symbol": "vz",
-    "numOfShares": 20,
-    "purchasePrice": 56.21
+    "symbol": "C",
+    "numOfShares": 40,
+    "purchasePrice": 43.11
   },
-    {
+  {
     "id": 21,
     "date": "2016-06-06 22:33:14",
     "type": "buy",
-    "symbol": "t",
+    "symbol": "T",
     "numOfShares": 50,
     "purchasePrice": 38.73
   },
@@ -171,16 +171,16 @@
     "id": 22,
     "date": "2016-06-06 22:33:14",
     "type": "buy",
-    "symbol": "hrb",
+    "symbol": "HRB",
     "numOfShares": 30,
     "purchasePrice": 22.15
   },
   {
     "id": 23,
-    "date": "2015-05-16 22:33:14",
+    "date": "2016-07-06 22:33:14",
     "type": "buy",
-    "symbol": "c",
-    "numOfShares": 40,
-    "purchasePrice": 43.11
+    "symbol": "VZ",
+    "numOfShares": 20,
+    "purchasePrice": 56.21
   }
 ]

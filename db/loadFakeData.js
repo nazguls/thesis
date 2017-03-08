@@ -6,8 +6,17 @@ const fakeTransactions = require('./fakeData/fakeTransactions.json');
 const fakeUserTransactionData = require('./fakeData/fakeUserTransactionData.json');
 const fakeUserStocksData = require('./fakeData/fakeUserStocksData.json');
 const SPY = require('./fakeData/spyData.json');
+const fakePortfolioData = require('./fakeData/fakePortfolioData.json');
+const fakeUserPortfolioData = require('./fakeData/fakeUserPortfolioData.json');
+
 
 Models.User.bulkCreate(fakeUserData, { individualHooks: true })
+.then(() => Models.User.findAll());
+
+Models.Portfolio.bulkCreate(fakePortfolioData, { individualHooks: true })
+.then(() => Models.User.findAll());
+
+Models.UserPortfolio.bulkCreate(fakeUserPortfolioData, { individualHooks: true })
 .then(() => Models.User.findAll());
 
 Models.Stock.bulkCreate(fakeStockData, { individualHooks: true })

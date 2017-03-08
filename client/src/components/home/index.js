@@ -7,6 +7,7 @@ import PortfolioValue from './portfolioValue';
 import Chart from './chart';
 import Periodic from './periodic';
 import Holdings from './holdings';
+import Modal from './performanceModal'
 /////////////////////////////////////////////////////////////
 
 
@@ -20,6 +21,7 @@ class Index extends Component {
 		// const { textStyle, viewStyle } = styles;
 		return (
 			<Background>
+				<Modal />
 				<PortfolioValue />
 				<Chart />
 				<Periodic />

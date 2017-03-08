@@ -8,12 +8,12 @@ import {
 	Text
 } from 'react-native';
 import { connect } from 'react-redux';
-import { 
-	updateMarketValue, 
-	updateCashValue, 
-	updateFirstName, 
-	usernameChanged, 
-	emailChanged 
+import {
+	updateMarketValue,
+	updateCashValue,
+	updateFirstName,
+	usernameChanged,
+	emailChanged
 } from '../../actions';
 
 
@@ -81,7 +81,7 @@ class UserProfile extends Component {
 					$ {this.props.user.cashValue}
         </Text>
         <Text style={styles.navItems} onPress={() => Actions.verses()}>
-					<Icon name='account-balance' size={20} />  YOU VS. THEM
+					<Icon name='trending-up' size={20} />  PERFORMANCE
         </Text>
         <Text style={styles.navItems} onPress={() => Actions.deposit()}>
 					<Icon name='account-balance' size={20} />  ACCOUNT
@@ -105,7 +105,7 @@ class UserProfile extends Component {
 }
 
 const mapStateToProps = (state) => {
-	return { 
+	return {
 		user: state.user,
 		auth: state.auth
   };

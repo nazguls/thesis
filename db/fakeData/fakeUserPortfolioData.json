@@ -1,0 +1,94 @@
+[
+  {
+    "UserId": 1,
+    "PortfolioId": 1
+  },
+  {
+    "UserId": 1,
+    "PortfolioId": 2
+  },
+  {
+    "UserId": 1,
+    "PortfolioId": 3
+  },
+  {
+    "UserId": 1,
+    "PortfolioId": 4
+  },
+  {
+    "UserId": 2,
+    "PortfolioId": 5
+  },
+  {
+    "UserId": 2,
+    "PortfolioId": 6
+  },
+  {
+    "UserId": 2,
+    "PortfolioId": 7
+  },
+  {
+    "UserId": 2,
+    "PortfolioId": 8
+  },
+  {
+    "UserId": 2,
+    "PortfolioId": 9
+  },
+  {
+    "UserId": 3,
+    "PortfolioId": 10
+  },
+  {
+    "UserId": 3,
+    "PortfolioId": 11
+  },
+  {
+    "UserId": 3,
+    "PortfolioId": 12
+  },
+  {
+    "UserId": 3,
+    "PortfolioId": 13
+  },
+  {
+    "UserId": 3,
+    "PortfolioId": 14
+  },
+  {
+    "UserId": 4,
+    "PortfolioId": 15
+  },
+  {
+    "UserId": 4,
+    "PortfolioId": 16
+  },
+  {
+    "UserId": 4,
+    "PortfolioId": 17
+  },
+  {
+    "UserId": 4,
+    "PortfolioId": 18
+  },
+  {
+    "UserId": 5,
+    "PortfolioId": 19
+  },
+  {
+    "UserId": 5,
+    "PortfolioId": 20
+  },
+  {
+    "UserId": 5,
+    "PortfolioId": 21
+  },
+  {
+    "UserId": 5,
+    "PortfolioId": 22
+  },
+  {
+    "UserId": 5,
+    "PortfolioId": 23
+  }
+]
