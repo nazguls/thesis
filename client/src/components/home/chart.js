@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
+=======
+import { Text, View, Image, ART, Dimensions, StyleSheet, Color } from 'react-native';
+import * as makeChart from '../../chartUtils/graphUtil.js';
+import * as scale from 'd3-scale';
+import * as shape from 'd3-shape';
+import * as d3Array from 'd3-array';
+
+>>>>>>> 49312b53157a54bf1435c4b7fccea534511b8641
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { View, ART } from 'react-native';
-import * as makeChart from '../../chartUtils/graphUtil.js';
+
 
 const { Surface, Group, Shape, } = ART;
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 49312b53157a54bf1435c4b7fccea534511b8641
 const xAccessor = (d) => { return d.date; };
 const yAccessor = (d) => { return d.value; };
 
@@ -15,12 +27,22 @@ class Chart extends Component {
 
   constructor(props) {
 		super(props);
+<<<<<<< HEAD
     this.state = { lineGraph: '' };
   };
 
     componentWillMount() {
       var context = this;
       console.log(this.props.email);
+=======
+
+    this.state = { lineGraph: '', ticks: '', scale: ''};
+        console.log('28');
+
+    }
+
+    componentWillMount() {
+>>>>>>> 49312b53157a54bf1435c4b7fccea534511b8641
       axios.get(`http://localhost:3000/api/portfolio/${this.props.email}?period=historical`).then(response => {
         const data = response.data.map(dataObj => {
           return {
@@ -32,9 +54,33 @@ class Chart extends Component {
         data, xAccessor, yAccessor, width: 300, height: 200 });
         context.setState({lineGraph: line.path, ticks: line.ticks, scale: line.scale }, () => {console.log('41' )});
         });
+<<<<<<< HEAD
     }
 
     render() {
+=======
+
+
+    }
+
+
+
+
+  render() {
+    let tickXFormat;
+    // const {
+    //   x: scaleX,
+    // } = this.state.scale;
+    // if(this.state.scale !== undefined) {console.log('46', this.state.scale.x.formatTicks(null, '%b %d')); }
+    console.log('55', this.state.lineGraph);
+
+    //let tickXFormat = console.log('56', this.state.scale.x(new Date())); //.scale(4,5);
+    console.log('58', this.state.ticks);
+    if(this.state.lineGraph !== '') {
+      tickXFormat = this.state.scale.x.tickFormat(null, '%b %d');
+    }
+    //console.log(tickXFormat.x);
+>>>>>>> 49312b53157a54bf1435c4b7fccea534511b8641
     return (
       <View style={{ backgroundColor: 'transparent' }}>
         <Surface width={500} height={200}>
@@ -47,10 +93,76 @@ class Chart extends Component {
           </Group>
         </Surface>
         </View>
+<<<<<<< HEAD
+=======
+        <View key={'ticksY'} style={styles.ticksYContainer}>
+          {this.state.ticks.map((tick, index) => {
+            const value = yAccessor(tick.datum);
+
+            const tickStyles = {};
+            tickStyles.width = TickWidth;
+            tickStyles.left = -25;
+            //tickStyles.top = tick.x - Math.round(TickWidth * 0.5);
+
+             tickStyles.top = (tick.y - 340)
+             - Math.round(TickWidth * 0.65);
+
+            return (
+              <View key={index} style={[styles.tickLabelY, tickStyles]}>
+                <Text style={styles.tickLabelYText}>
+                  {value}
+                </Text>
+              </View>
+            );
+          })}
+        </View>
+        </View>
+        ) : <View></View>}
+        </View>
+>>>>>>> 49312b53157a54bf1435c4b7fccea534511b8641
     );
   }
 }
 
+<<<<<<< HEAD
+=======
+const styles = StyleSheet.create({
+  container: {
+  },
+
+  tickLabelX: {
+    position: 'absolute',
+    bottom: 0,
+    fontSize: 12,
+    textAlign: 'center',
+  },
+
+  ticksYContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+
+  tickLabelY: {
+    position: 'absolute',
+    left: 0,
+    backgroundColor: 'transparent',
+  },
+
+  tickLabelYText: {
+    fontSize: 12,
+    textAlign: 'center',
+  },
+
+  ticksYDot: {
+    position: 'absolute',
+    width: 2,
+    height: 2,
+    backgroundColor: '#000000',
+    borderRadius: 100,
+  },
+});
+>>>>>>> 49312b53157a54bf1435c4b7fccea534511b8641
 
 
 const mapStateToProps = (state) => {
