@@ -22,7 +22,7 @@ class PerformanceModal extends Component {
 						<View style={styles.header}>
 						<Icon name="close" color={"white"} size={20} onPress={() => this.setState({ modalVisible: false })} />
 							<Text style={styles.userName}>Hi, Isaac!</Text>
-							<Text style={styles.textStyle}> Here is your Summary </Text>
+							<Text style={styles.textStyle}> HERE IS YOUR SUMMARY </Text>
 						</View>
 						<View style={styles.boxSection}>
 							<Text style={styles.subTitle}> RETURNS </Text>
@@ -94,7 +94,7 @@ const styles = {
 	},
 	textStyle2: {
 		color: 'orange',
-		fontSize: 15,
+		fontSize: 17,
 	},
 	textStyle3: {
 		color: '#42f4c2',
@@ -105,7 +105,7 @@ const styles = {
 	buttonStyle: {
 		borderWidth: 1,
 		padding: 5,
-		fontSize: 15,
+		fontSize: 17,
 		color: 'orange',
 		borderRadius: 10,
     borderColor: 'orange'
