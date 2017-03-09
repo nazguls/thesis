@@ -9,18 +9,26 @@ import { rankings } from '../../actions';
 class PerformanceModal extends Component {
 
 	state = {
-		modalVisible: true
+		modalVisible: true,
+		spyData: null
 	}
 
 	componentDidMount() {
 		// var sortedRanking = ''
 		const context = this;
-		axios.post('http://127.0.0.1:3000/api/portfolio/' + this.props.user.email)
+
+		axios.post('http://127.0.0.1:3000/api/index/SPY?period=historical')
+		.then(result => {
+			console.log(result.data);
+			context.setState({ spyData: result.data });
+		});
+
+		axios.post(`http://127.0.0.1:3000/api/portfolio/${this.props.user.email}`)
 		.then(result => {
 			const sortedResult = result.data.sort((x, y) => (y.portfolioValue - x.portfolioValue));
 			context.props.rankings(sortedResult);
 		});
-	}
+  }
 
 	userReturn(input) {
 
