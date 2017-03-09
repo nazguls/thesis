@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Modal, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { CardSection } from '../common';
 
 class PerformanceModal extends Component {
 
@@ -131,4 +131,10 @@ const styles = {
 	}
 };
 
-export default PerformanceModal;
+const mapStateToProps = (state) => {
+	return {
+
+  };
+};
+
+export default connect(mapStateToProps, {})(PerformanceModal);
