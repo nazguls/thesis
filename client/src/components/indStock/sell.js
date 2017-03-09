@@ -57,6 +57,7 @@ class Sell extends Component {
 	errorMessage() {
 		console.log('inerrorMessage', this.props.stockShare)
 		console.log('this.currentSahre', this.currentShares());
+
 		if (!this.currentShares() || this.props.stockShare > parseInt(this.currentShares())) {
 			return (
 				<Text style={{ color: 'red' }}> You are trying to sell more than your current holding </Text>
@@ -76,6 +77,7 @@ class Sell extends Component {
 				<CardSection>
 					<Input
 						label="Current Shares"
+
 						placeholder={this.currentShares() || '0'}
 					/>
 				</CardSection>

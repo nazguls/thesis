@@ -15,14 +15,15 @@ import compare from './components/Compare';
 
 const RouterComponent = () => {
 	return (
-		<Router >
+
+		<Router>
 			<Scene key="auth" initial>
 				<Scene
           key="login"
           component={LoginForm}
           title="Please Login"
           hideNavBar='false'
-        />
+    />
         <Scene
           key="signup"
           component={SignUp}
@@ -36,7 +37,6 @@ const RouterComponent = () => {
         key="drawer"
         component={drawer}
         open={false}
-        
       >
 
 			<Scene key="main" >

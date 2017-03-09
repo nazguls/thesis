@@ -36,7 +36,6 @@ exports.transact = (tradeData) => {
               stock[0].updateAttributes({ numOfShares: currentShares
               });
          } else {
-          console.log('37 -------------');
            Stock.create({
           stockSymbol: symbol,
           type: 'hold',
@@ -56,8 +55,7 @@ exports.transact = (tradeData) => {
              const cash = portfolios[portfolios.length - 1].cash;
              const buyAmount = tradeData.price * shs;
              const newCashBal = cash - buyAmount;
-             const newMV = portfolios[portfolios.length - 1].portfolioValue
-               + buyAmount;
+             const newMV = portfolios[portfolios.length - 1].portfolioValue+ buyAmount;
              portfolios[portfolios.length - 1]
              .updateAttributes({ cash: newCashBal, portfolioValue: newMV });
               })
@@ -116,7 +114,8 @@ exports.getCash = (username) =>
     .then(portfolios => portfolios)
     .catch(err => console.log(err));
 
-exports.fetchPortfolioHistory = (email) => 
+
+exports.fetchPortfolioHistory = (email) =>
   User.findOne({ where: { email } })
     .then(user => user.getPortfolios({ order: 'date' }))
     .then(portfolios => portfolios)

@@ -5,11 +5,18 @@ exports.get = (req, res) => {
   const stock = req.params.stock;
   const options = req.query;
   const period = req.query.period;
-  console.log('query', req.query);
   if (period === 'historical') {
     console.log(stock);
     apiHelper.getHistoricalPrices(stock, options)
-      .then(data => { res.send(data.data); })
+      .then(data => {
+        if(data.data.ExceptionType === 'Exception') {
+           req.query['numperiods'] = parseInt(req.query['numperiods']) + 1; //= parseInt(req.query['numperiods']) + 1;
+          //console.log('15', req.query);
+           return exports.get(req, res);
+          //options['numPeriods'] = options['numPeriods'] + 1;
+          //exports.get
+        }
+        res.send(data.data); })
       .catch(err => res.status(404).send(err));
   }
   if (period === 'current') {

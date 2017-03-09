@@ -107,7 +107,6 @@ Models.UserStock.build({
   StockId: 2
 }).save();
 
-
 Models.UserPortfolio.build({
   UserId: 1,
   PortfolioId: 1

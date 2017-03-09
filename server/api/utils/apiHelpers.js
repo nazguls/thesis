@@ -22,10 +22,7 @@ const getHistoricalPrices = (ticker, options) => {
   { parameters: { "Normalized": false, "StartDate":
     formattedStart , "EndDate": formattedCurrentDate,
     "DataPeriod": period, "Elements":[ {"Symbol": ticker, "Type": options.attributes, "Params": options.attributes === 'price' ? ["c"] : null}]}}};
-
    if (ticker === 'SPX') {
-      console.log('27');
-      console.log(startDate);
       return connection.query('SELECT * FROM indexData where date >=  :startDate AND date <= :currentDate', { replacements: {
           startDate: formattedStart,
           currentDate: formattedCurrentDate
@@ -38,8 +35,9 @@ const getHistoricalPrices = (ticker, options) => {
 
       else {
     return axios.get('http://dev.markitondemand.com/MODApis/Api/v2/InteractiveChart/json', inputOptions)
-    .catch(err => console.log('20 error'));
-    }
+    .catch(err => {
+    });
+   }
 };
 
  const formatDate = (date) => {
@@ -89,7 +87,6 @@ const getHistoricalPrices = (ticker, options) => {
       }
       return getStockPrice(port[increment].symbol)
         .then(stock => {
-          console.log('from lastprice' , stock);
           port[increment].currentPrice = stock.LastPrice;
           port[increment].marketValue = stock.LastPrice *
           port[increment].numOfShares;
