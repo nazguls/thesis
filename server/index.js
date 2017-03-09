@@ -9,7 +9,7 @@ const db = require('../db/dbModels');
 require('./middleware/middleware')(app);
 
 //Adam's docker-testing endpoint
-app.use('/adam', (req, res) => res.send('Hi Adam. Michael Comes is an amazing genius'));
+app.use('/adam', (req, res) => res.send('Hi Adam. Michael Comes is an amazing genius. just kidding - but Isaac is really sexy!'));
 
 app.use('/api', api);
 

@@ -18,15 +18,23 @@ import {
 	CHART_VIEW,
 	RECOMMENDATIONS,
 	NOCASH,
-	NUMSHARES
+	NUMSHARES,
+	RANK
 } from './types';
+
+export const rankings = (obj) => {
+	return {
+		type: RANK,
+		payload: obj
+	};
+};
 
 export const numShares = (obj) => {
 	return {
 		type: NUMSHARES,
 		payload: obj
-	}
-}
+	};
+};
 
 export const notEnoughFunds = (text) => {
 	return {

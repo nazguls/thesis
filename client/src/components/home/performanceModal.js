@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Modal, Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { CardSection } from '../common';
+import axios from 'axios';
+import { rankings } from '../../actions';
+
 
 class PerformanceModal extends Component {
 
@@ -9,11 +12,44 @@ class PerformanceModal extends Component {
 		modalVisible: true
 	}
 
+	componentDidMount() {
+		// var sortedRanking = ''
+		const context = this;
+		axios.post('http://127.0.0.1:3000/api/portfolio/' + this.props.user.email)
+		.then(result => {
+			const sortedResult = result.data.sort((x, y) => (y.portfolioValue - x.portfolioValue));
+			context.props.rankings(sortedResult);
+		});
+	}
+
+	userReturn() {
+		for (let i = 0; i < this.props.user.rank.length; i++) {
+			if (this.props.user.rank[i].username === this.props.user.username) {
+				return Math.round(((this.props.user.rank[i].portfolioValue / 10000) - 1 ) * 100 * 100) / 100;
+			}
+		}
+	}
+
+	ranking() {
+		const rankingArray = [];
+		console.log('rank', this.props.user.rank);
+		this.props.user.rank.map(obj => {
+			if (rankingArray.indexOf(obj.username) === -1) {
+						rankingArray.push(obj.username);
+					}
+			});
+		for (let i = 0; i < rankingArray; i++) {
+			if (rankingArray[i] === this.props.user.username) {
+				return i + 1;
+			}
+		}
+	}
+
 	render() {
 		return (
 			<View >
 				<Modal
-					animation={"fade"}
+					animation={'fade'}
 					transparent
 					visible={this.state.modalVisible}
 					onRequestClose={() => { console.log('Modal has been closed'); }}
@@ -21,8 +57,8 @@ class PerformanceModal extends Component {
 					<View style={styles.viewStyle}>
 						<View style={styles.header}>
 						<Icon name="close" color={"white"} size={20} onPress={() => this.setState({ modalVisible: false })} />
-							<Text style={styles.userName}>Hi, Isaac!</Text>
-							<Text style={styles.textStyle}> Here is your Summary </Text>
+							<Text style={styles.userName}>Hi, {this.props.user.firstName}</Text>
+							<Text style={styles.textStyle}> HERE IS YOUR SUMMARY! </Text>
 						</View>
 						<View style={styles.boxSection}>
 							<Text style={styles.subTitle}> RETURNS </Text>
@@ -35,7 +71,7 @@ class PerformanceModal extends Component {
 						</View>
 
 						<View style={styles.containerStyle}>
-							<Text style={styles.buttonStyle}> 0.34% </Text>
+							<Text style={styles.buttonStyle}> {this.userReturn()}% </Text>
 							<Text> </Text>
 							<Text style={styles.buttonStyle}>  0.34%</Text>
 						</View>
@@ -45,7 +81,7 @@ class PerformanceModal extends Component {
 						</View>
 
 						<View style={styles.boxSection2}>
-							<Text style={styles.textStyle3}> 6th PLACE </Text>
+							<Text style={styles.textStyle3}> th PLACE </Text>
 						</View>
 						</View>
 				</Modal>
@@ -94,7 +130,7 @@ const styles = {
 	},
 	textStyle2: {
 		color: 'orange',
-		fontSize: 15,
+		fontSize: 17,
 	},
 	textStyle3: {
 		color: '#42f4c2',
@@ -105,7 +141,7 @@ const styles = {
 	buttonStyle: {
 		borderWidth: 1,
 		padding: 5,
-		fontSize: 15,
+		fontSize: 17,
 		color: 'orange',
 		borderRadius: 10,
     borderColor: 'orange'
@@ -131,4 +167,11 @@ const styles = {
 	}
 };
 
-export default PerformanceModal;
+const mapStateToProps = (state) => {
+	console.log('state' , state)
+	return {
+		user: state.user
+  };
+};
+
+export default connect(mapStateToProps, { rankings })(PerformanceModal);

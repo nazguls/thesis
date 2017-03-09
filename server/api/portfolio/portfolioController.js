@@ -15,3 +15,12 @@ exports.get = (req, res) => {
       ).then(portfolio => res.send(portfolio));
   }
 };
+
+exports.post = (req, res) => {
+  console.log('entered in portfolio Get DATA');
+  console.log('email', req.params.email);
+  const email = req.params.email;
+
+  dbHelper.fetchAllPortfolioHistory(email)
+  .then(portfolioData => res.send(portfolioData));
+};
