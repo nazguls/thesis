@@ -25,7 +25,7 @@ class PerformanceModal extends Component {
 	userReturn() {
 		for (let i = 0; i < this.props.user.rank.length; i++) {
 			if (this.props.user.rank[i].username === this.props.user.username) {
-				return Math.round((this.props.user.rank[i].portfolioValue / 10000) * 100) / 100;
+				return Math.round(((this.props.user.rank[i].portfolioValue / 10000) - 1 ) * 100 * 100) / 100;
 			}
 		}
 	}
@@ -46,7 +46,6 @@ class PerformanceModal extends Component {
 	}
 
 	render() {
-
 		return (
 			<View >
 				<Modal
@@ -59,7 +58,7 @@ class PerformanceModal extends Component {
 						<View style={styles.header}>
 						<Icon name="close" color={"white"} size={20} onPress={() => this.setState({ modalVisible: false })} />
 							<Text style={styles.userName}>Hi, {this.props.user.firstName}</Text>
-							<Text style={styles.textStyle}> HERE IS YOUR SUMMARY </Text>
+							<Text style={styles.textStyle}> HERE IS YOUR SUMMARY! </Text>
 						</View>
 						<View style={styles.boxSection}>
 							<Text style={styles.subTitle}> RETURNS </Text>
