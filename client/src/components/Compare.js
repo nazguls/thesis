@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Background, CardSection, Input } from './common';
 import axios from 'axios';
-import { Actions } from 'react-native-router-flux';
 import { Text, View, ScrollView, Image } from 'react-native';
+import { rankings } from '../actions';
+
 
 class Compare extends Component {
 	constructor() {
@@ -17,16 +19,13 @@ class Compare extends Component {
 		// var sortedRanking = ''
 		const context = this;
 		const rankingArray = [];
-		axios.post('http://127.0.0.1:3000/api/portfolio/iyoon@gmail.com')
-		.then(result => {
-				const sortedResult = result.data.sort((x, y) => (y.portfolioValue - x.portfolioValue));
-				sortedResult.map(obj => {
-					if (rankingArray.indexOf(obj.username) === -1) {
-						rankingArray.push(obj.username);
-					}
-				});
-				context.setState({ ranking: rankingArray });
+		const sortedResult = this.props.user.rank.sort((x, y) => (y.portfolioValue - x.portfolioValue));
+		sortedResult.map(obj => {
+			if (rankingArray.indexOf(obj.username) === -1) {
+				rankingArray.push(obj.username);
+			}
 		});
+		context.setState({ ranking: rankingArray });
 	}
 
 	render() {
@@ -84,4 +83,11 @@ const styles = {
 	}
 };
 
-export default Compare;
+const mapStateToProps = (state) => {
+	return {
+		user: state.user,
+		auth: state.auth
+  };
+};
+
+export default connect(mapStateToProps, { rankings })(Compare);
