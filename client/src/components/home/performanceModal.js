@@ -22,10 +22,15 @@ class PerformanceModal extends Component {
 		});
 	}
 
-	userReturn() {
+	userReturn(input) {
+
 		for (let i = 0; i < this.props.user.rank.length; i++) {
 			if (this.props.user.rank[i].username === this.props.user.username) {
-				return Math.round(((this.props.user.rank[i].portfolioValue / 10000) - 1 ) * 100 * 100) / 100;
+				if(input === 'return') {
+					return Math.round(((this.props.user.rank[i].portfolioValue / 10000) - 1 ) * 100 * 100) / 100;
+				} else if (input === 'ranking') {
+					return i + 1;
+				}
 			}
 		}
 	}
@@ -71,7 +76,7 @@ class PerformanceModal extends Component {
 						</View>
 
 						<View style={styles.containerStyle}>
-							<Text style={styles.buttonStyle}> {this.userReturn()}% </Text>
+							<Text style={styles.buttonStyle}> {this.userReturn('return')}% </Text>
 							<Text> </Text>
 							<Text style={styles.buttonStyle}>  0.34%</Text>
 						</View>
@@ -81,7 +86,7 @@ class PerformanceModal extends Component {
 						</View>
 
 						<View style={styles.boxSection2}>
-							<Text style={styles.textStyle3}> th PLACE </Text>
+							<Text style={styles.textStyle3}> {this.userReturn('ranking')} th PLACE </Text>
 						</View>
 						</View>
 				</Modal>
