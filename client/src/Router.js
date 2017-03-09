@@ -16,9 +16,8 @@ import compare from './components/Compare';
 const RouterComponent = () => {
 	return (
 
-		<Router >
-
-			<Scene key="auth" initial >
+		<Router>
+			<Scene key="auth" initial>
 				<Scene
           key="login"
           component={LoginForm}
