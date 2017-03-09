@@ -43,7 +43,7 @@ class Compare extends Component {
 	render() {
 		const rankingArray = this.state.ranking.map((result, key) =>
 
-			<View style={styles.columnStyle}>
+			<View key={key} style={styles.columnStyle}>
 				<Text style={styles.textStyle}> {key + 1} </Text>
 				<Text style={styles.textStyle}> {result.username}</Text>
 				{(this.calculateReturn(result.portfolioValue))}
