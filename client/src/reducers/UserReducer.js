@@ -5,7 +5,8 @@ import {
   MARKET_VALUE,
   CASH_VALUE,
   NOCASH,
-  NUMSHARES
+  NUMSHARES,
+  RANK
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,12 +16,16 @@ const INITIAL_STATE = {
 	mktValue: 0,
 	cashValue: 0,
 	noCash: false,
-	numShares: 0
+	numShares: 0,
+	rank: ''
 
 };
 
 export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
+		case RANK:
+			console.log('userReducer', action);
+			return { ...state, rank: action.payload };
 		case NUMSHARES:
 			return { ...state, numShares: action.payload };
 		case USERNAME_CHANGED:
