@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Background, CardSection, Input } from './common';
 import axios from 'axios';
 import { Actions } from 'react-native-router-flux';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 
 class Compare extends Component {
 	constructor() {
@@ -33,13 +33,15 @@ class Compare extends Component {
 		const rankingArray = this.state.ranking.map((result, key) =>
 
 			<View style={styles.columnStyle}>
-				<Text style={styles.textStyle}> {key} </Text>
+				<Text style={styles.textStyle}> {key+1} </Text>
 				<Text style={styles.textStyle}> {result}</Text>
 			</View>
 		);
 		console.log('ranking', this.state.ranking);
 		return (
 			<Background>
+				<Image source={require('./assets/crown.png')} style={styles.img}/>
+				<Text style={styles.header}> Rankings </Text>
 				<ScrollView>
 					{ rankingArray }
 				</ScrollView>
@@ -49,27 +51,35 @@ class Compare extends Component {
 }
 
 const styles = {
-	viewStyle: {
-		marginLeft: 20,
-		marginRight: 20,
-		backgroundColor: 'transparent',
-		flexDirection: 'row',
-		position: 'relative',
-		alignItems: 'center',
+	img: {
+		marginTop: 30,
+		width: 100,
+		height: 100,
+		tintColor: 'orange',
+		marginRight: 40
 	},
 	columnStyle: {
+		justifyContent: 'space-between',
+		alignSelf: 'stretch',
 		marginLeft: 5,
 		marginRight: 5,
 		flexDirection: 'row',
-		alignItems: 'center',
 		borderBottomWidth: 1,
-		justifyContent: 'space-between',
-		flex: 1,
 		borderColor: 'grey'
+	},
+	header: {
+		backgroundColor: 'transparent',
+		fontSize: 40,
+		color: '#42f4c2',
+		fontWeight: '100',
+		marginBottom: 20
+
 	},
 	textStyle: {
 		backgroundColor: 'transparent',
-		fontSize: 20,
+		alignItems: 'stretch',
+		fontSize: 25,
+		fontWeight: '200',
 		color: '#42f4c2'
 	}
 };
