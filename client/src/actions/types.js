@@ -16,3 +16,4 @@ export const CHART_VIEW = 'chart_view';
 export const RECOMMENDATIONS = 'recommendations';
 export const NOCASH = 'nocash';
 export const NUMSHARES = 'numshares';
+export const RANK = 'rank';
