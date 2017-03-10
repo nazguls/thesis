@@ -9,18 +9,32 @@ import { rankings } from '../../actions';
 class PerformanceModal extends Component {
 
 	state = {
-		modalVisible: true
+		modalVisible: true,
+		spyPerformance: 0
 	}
 
 	componentDidMount() {
 		// var sortedRanking = ''
 		const context = this;
-		axios.post('http://127.0.0.1:3000/api/portfolio/' + this.props.user.email)
+
+		axios.get('http://127.0.0.1:3000/api/index/SPY?period=historical')
+		.then(result => {
+			console.log(result.data);
+			const length = result.data.length;
+			const firstValue = result.data[0].close;
+			const lastValue = result.data[length - 1].close;
+			console.log(lastValue);
+			console.log(firstValue);
+			const spyPerformance = (Math.round(((lastValue / firstValue) - 1) * 100) * 100) / 100;
+			context.setState({ spyPerformance });
+		});
+
+		axios.post(`http://127.0.0.1:3000/api/portfolio/${this.props.user.email}`)
 		.then(result => {
 			const sortedResult = result.data.sort((x, y) => (y.portfolioValue - x.portfolioValue));
 			context.props.rankings(sortedResult);
 		});
-	}
+  }
 
 	userReturn(input) {
 
@@ -78,7 +92,7 @@ class PerformanceModal extends Component {
 						<View style={styles.containerStyle}>
 							<Text style={styles.buttonStyle}> {this.userReturn('return')}% </Text>
 							<Text> </Text>
-							<Text style={styles.buttonStyle}>  0.34%</Text>
+							<Text style={styles.buttonStyle}>{this.state.spyPerformance} %</Text>
 						</View>
 
 						<View style={styles.boxSection}>
@@ -173,7 +187,6 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-	console.log('state' , state)
 	return {
 		user: state.user
   };

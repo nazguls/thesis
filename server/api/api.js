@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const stocks = require('./stocks/stocksRoutes');
 const portfolio = require('./portfolio/portfolioRoutes');
+const index = require('./index/indexRoutes');
 const users = require('./users/usersRoutes');
 const money = require('./money/moneyRoutes');
 const news = require('./news/newsRoutes');
@@ -9,6 +10,7 @@ const transaction = require('./transact/transactionRoutes');
 // const test = require('./test');
 
 router.use('/portfolio', portfolio);
+router.use('/index', index);
 router.use('/stocks', stocks);
 router.use('/users', users);
 router.use('/money', money);

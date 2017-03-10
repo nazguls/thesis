@@ -1,13 +1,10 @@
 const User = require('../../../db/dbModels').User;
 const Stock = require('../../../db/dbModels').Stock;
-const Portfolio = require('../../../db/dbModels').Portfolio;
-const UserStock = require('../../../db/dbModels');
 const Transactions = require('../../../db/dbModels').Transaction;
 const UserStocks = require('../../../db/dbModels').UserStock;
 const UserTransactions = require('../../../db/dbModels').UserTransaction;
 const sequelize = require('sequelize');
 const Models = require('../../../db/dbModels');
-
 
 
 //sending price and shares
@@ -130,9 +127,13 @@ exports.fetchTransactionsHistory = (email) =>
     .then(transactions => transactions)
     .catch(err => console.log(err));
 
+exports.getSPYHistorical = () => 
+  Models.Spy.findAll()
+    .then(spyData => spyData)
+    .catch(err => console.log(err));   
+
 exports.fetchAllPortfolioHistory = () =>
   Models.connection.query('SELECT u.username, p.portfolioValue, md.date FROM portfolios AS p INNER JOIN userportfolios  AS up ON up.PortfolioId = p.id INNER JOIN (SELECT up.UserId, MAX(p.date) AS date FROM portfolios AS p INNER JOIN userportfolios as up ON up.PortfolioId = p.id GROUP BY up.UserId) AS md ON p.date = md.date AND up.UserId = md.UserId INNER JOIN users AS u ON u.id = up.UserId;', { bind: ['active'], type: sequelize.QueryTypes.SELECT })
   .then(result => result)
   .catch(err => console.log(err));
-
 
