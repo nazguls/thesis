@@ -24,5 +24,6 @@ module.exports = {
   UserStock,
   UserPortfolio,
   UserTransaction,
-  Spy
+  Spy,
+  connection
 };
