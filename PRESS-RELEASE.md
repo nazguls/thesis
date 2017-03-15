@@ -26,7 +26,7 @@ We're aiming to improve financial literacy using gamification. Financial literac
 We have developed an application that removes the complexity from security analysis. Abstract away number-crunching by using our proprietary sentiment analysis algorithm, and track your performance over time.
 
 ## Problem ##
-Financial literacy is at an all-time low. Our simple user interface displays price and volume data, current news, and buy, sell, hold recommendations on one screen, greatly simplifying investment decision-making.
+Our simple user interface displays price and volume data, current news, and buy, sell, hold recommendations on one screen, greatly simplifying investment decision-making.
 
 ## Quote ##
 'Our decision to design an application that can make investing easier came from our desire to make a task typically reserved for investment professionals, open to the general public.' -The LimeRock Team
