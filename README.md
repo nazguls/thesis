@@ -71,11 +71,6 @@ react-native run-ios
 ```
 
 
-### Roadmap
-
-View the project roadmap [here](https://github.com/brandybucks/brandybucks/issues)
-
-
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/brandybucks/brandybucks/blob/master/_CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](https://github.com/) for contribution guidelines.
